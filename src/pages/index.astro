@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const featuredTools = [
+  {
+    name: 'Lovable',
+    description: 'Build full-stack web apps from plain-English prompts. Best for SaaS MVPs and apps that need a real backend.',
+    price: 'From $25/mo',
+    badge: "Editor's Pick",
+    rating: 5,
+    reviewHref: '/tools/lovable',
+    affiliateHref: 'https://lovable.dev',          // ← Replace with your affiliate link
+  },
+  {
+    name: 'Bolt.new',
+    description: 'Instant web apps in the browser, no setup needed. Best for quick prototypes and landing pages.',
+    price: 'Free + paid plans',
+    badge: 'Best for Beginners',
+    rating: 4,
+    reviewHref: '/tools/bolt',
+    affiliateHref: 'https://bolt.new',             // ← Replace with your affiliate link
+  },
+  {
+    name: 'Cursor',
+    description: 'AI-first code editor for power users. Understands your whole codebase and writes code in context.',
+    price: 'From $20/mo',
+    badge: 'Best for Devs',
+    rating: 5,
+    reviewHref: '/tools/cursor',
+    affiliateHref: 'https://cursor.sh',            // ← Replace with your affiliate link
+  },
+];
+---
+
+<BaseLayout title="Home">
+
+  <!-- Hero -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm mb-6"
+         style="background: rgba(var(--color-accent-rgb), 0.10); border: 1px solid rgba(var(--color-accent-rgb), 0.20); color: var(--color-accent-light);">
+      <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: var(--color-success);"></span>
+      Updated weekly with new tool reviews
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-5" style="color: var(--color-text);">
+      Build real products with AI.<br />
+      <span style="color: var(--color-accent);">Tested by builders, for builders.</span>
+    </h1>
+
+    <p class="text-lg max-w-2xl mx-auto mb-10" style="color: var(--color-muted);">
+      Honest comparisons and step-by-step tutorials for AI app builders, no-code tools,
+      and vibe coding platforms. No paid placements. No fluff.
+    </p>
+
+    <!-- Newsletter form -->
+    <div id="newsletter" class="max-w-md mx-auto">
+      <form
+        id="hero-newsletter-form"
+        class="flex gap-2"
+        onsubmit="handleSubscribe(event, 'hero-newsletter-form')"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="input flex-1"
+        />
+        <button type="submit" class="btn-primary whitespace-nowrap">
+          Get weekly digest
+        </button>
+      </form>
+      <p class="text-xs mt-2" style="color: var(--color-muted);">Every Tuesday. No spam. Unsubscribe anytime.</p>
+      <p id="hero-msg" class="text-xs mt-2 hidden" style="color: var(--color-success);"></p>
+    </div>
+  </section>
+
+  <!-- Featured Tools -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-semibold" style="color: var(--color-text);">Top AI Builders Right Now</h2>
+      <a href="/tools" class="text-sm transition-colors hover:underline" style="color: var(--color-accent-light);">View all tools →</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {featuredTools.map(tool => <ToolCard {...tool} />)}
+    </div>
+    <p class="text-xs mt-3 text-center" style="color: var(--color-muted);">
+      * "Try free" buttons are affiliate links –
+      <a href="/disclosure" class="hover:underline" style="color: var(--color-accent-light);">full disclosure</a>
+    </p>
+  </section>
+
+  <!-- Latest Posts -->
+  {latestPosts.length > 0 && (
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold" style="color: var(--color-text);">Latest Reviews & Guides</h2>
+        <a href="/blog" class="text-sm transition-colors hover:underline" style="color: var(--color-accent-light);">View all →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {latestPosts.map(post => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            slug={post.slug}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Trust signals -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12 divider" style="border-top: 1px solid var(--color-border);">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+      <div>
+        <div class="text-3xl font-bold mb-1" style="color: var(--color-accent);">100%</div>
+        <div class="text-sm" style="color: var(--color-muted);">Tools personally tested before any review</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold mb-1" style="color: var(--color-accent);">0</div>
+        <div class="text-sm" style="color: var(--color-muted);">Paid placements or sponsored rankings</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold mb-1" style="color: var(--color-accent);">Weekly</div>
+        <div class="text-sm" style="color: var(--color-muted);">New comparisons and tutorials published</div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script is:inline>
+  function handleSubscribe(e, formId) {
+    e.preventDefault();
+    const form = document.getElementById(formId);
+    const email = form.querySelector('[name="email"]').value;
+    const msgId = formId === 'hero-newsletter-form' ? 'hero-msg' : 'post-msg';
+    const msg = document.getElementById(msgId);
+
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        form.innerHTML = '<p style="color: var(--color-success); font-size: 0.875rem; padding: 0.75rem 0;">✓ You\'re subscribed! Check your inbox.</p>';
+      } else {
+        if (msg) { msg.textContent = data.error || 'Something went wrong.'; msg.classList.remove('hidden'); }
+      }
+    })
+    .catch(() => {
+      if (msg) { msg.textContent = 'Network error. Please try again.'; msg.classList.remove('hidden'); }
+    });
+  }
+</script>

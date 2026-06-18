@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const updated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="AIBuilderHub privacy policy - how we collect, use and protect your data."
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <h1 class="text-3xl font-bold mb-2">Privacy Policy</h1>
+    <p class="text-muted text-sm mb-8">Last updated: {updated}</p>
+
+    <div class="prose max-w-none">
+
+      <h2>What data we collect</h2>
+      <p><strong>Newsletter subscribers:</strong> email address only, collected via Brevo when you subscribe. Used exclusively to send the weekly digest you signed up for. You can unsubscribe at any time via the link in any email.</p>
+      <p><strong>Analytics:</strong> We use Google Analytics 4 to understand how visitors use the site. This collects anonymized data about pages visited, time on page, and general location (country level). No personally identifiable information is collected.</p>
+      <p><strong>Affiliate links:</strong> When you click affiliate links, the destination service may set their own cookies. We have no control over this.</p>
+
+      <h2>Cookies</h2>
+      <p>This site uses minimal cookies: Google Analytics (analytics) and affiliate tracking cookies (when you click affiliate links). We do not use advertising cookies.</p>
+
+      <h2>Your rights (GDPR)</h2>
+      <p>If you are located in the European Union, you have the right to access, correct, or delete any personal data we hold about you. Contact us at hello@aibuilderhub.app to exercise these rights.</p>
+
+      <h2>Data retention</h2>
+      <p>Newsletter subscriber data is retained until you unsubscribe. Analytics data is retained for 26 months per Google Analytics default settings.</p>
+
+      <h2>Contact</h2>
+      <p>Privacy questions: <strong>hello@aibuilderhub.app</strong></p>
+    </div>
+  </div>
+</BaseLayout>

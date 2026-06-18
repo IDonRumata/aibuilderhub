@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const updated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Affiliate Disclosure"
+  description="AIBuilderHub affiliate disclosure and editorial independence policy."
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <h1 class="text-3xl font-bold mb-2">Affiliate Disclosure</h1>
+    <p class="text-muted text-sm mb-8">Last updated: {updated}</p>
+
+    <div class="prose max-w-none">
+
+      <p>AIBuilderHub participates in affiliate marketing programs. This means we may earn a commission when you click certain links on this site and subsequently make a purchase or sign up for a paid service - at no additional cost to you.</p>
+
+      <h2>Editorial independence</h2>
+      <p>Affiliate relationships do not influence our reviews, rankings, or recommendations. We test every tool we cover. If a tool is bad, we say so - even if it pays a high commission. If a great free tool exists, we'll recommend it even if there's no affiliate program.</p>
+
+      <h2>How to identify affiliate links</h2>
+      <p>Affiliate links are typically labeled "Try free →" or similar call-to-action buttons on tool cards and within articles. They carry a <code>rel="nofollow sponsored"</code> attribute. We also include a disclosure notice at the top of every article that contains affiliate links.</p>
+
+      <h2>Which programs we participate in</h2>
+      <p>We may earn commissions from: Lovable, Bolt.new (StackBlitz), Cursor, Framer, Webflow, Replit, Vercel, and other AI/SaaS tools we review. Commission rates range from 20-40% of the subscription price for as long as the customer remains active.</p>
+
+      <h2>FTC compliance</h2>
+      <p>This disclosure complies with the United States Federal Trade Commission (FTC) guidelines on endorsements and testimonials (16 CFR Part 255), the UK's ASA guidelines, and EU consumer protection regulations.</p>
+
+      <h2>Questions</h2>
+      <p>If you have questions about this policy, contact us at <strong>hello@aibuilderhub.app</strong></p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+
+const tools = [
+  {
+    name: 'Lovable',
+    description: 'Build full-stack web apps from plain-English prompts. Best for SaaS MVPs with real backend needs.',
+    price: 'From $25/mo',
+    badge: "Editor's Pick",
+    rating: 5,
+    reviewHref: '/tools/lovable',
+    affiliateHref: 'https://lovable.dev',
+  },
+  {
+    name: 'Bolt.new',
+    description: 'Instant web apps in the browser, no account needed to start. Best for quick prototypes.',
+    price: 'Free + paid plans',
+    badge: 'Best for Beginners',
+    rating: 4,
+    reviewHref: '/tools/bolt',
+    affiliateHref: 'https://bolt.new',
+  },
+  {
+    name: 'Cursor',
+    description: 'AI-first code editor. Understands your codebase context. Best for developers going faster.',
+    price: 'From $20/mo',
+    badge: 'Best for Devs',
+    rating: 5,
+    reviewHref: '/tools/cursor',
+    affiliateHref: 'https://cursor.sh',
+  },
+  {
+    name: 'v0 by Vercel',
+    description: 'Generate React UI components from descriptions. Best for frontend prototyping and design-to-code.',
+    price: 'Free + paid plans',
+    badge: 'Best for UI',
+    rating: 4,
+    reviewHref: '/tools/v0',
+    affiliateHref: 'https://v0.dev',
+  },
+  {
+    name: 'Framer',
+    description: 'Build and publish responsive websites visually. Best for marketing sites and landing pages.',
+    price: 'Free + $15/mo',
+    badge: 'Best for Design',
+    rating: 4,
+    reviewHref: '/tools/framer',
+    affiliateHref: 'https://framer.com',
+  },
+  {
+    name: 'Replit',
+    description: 'Cloud IDE with AI assistance. Build, run, and deploy apps from the browser.',
+    price: 'Free + $25/mo',
+    badge: 'Best in Browser',
+    rating: 4,
+    reviewHref: '/tools/replit',
+    affiliateHref: 'https://replit.com',
+  },
+];
+---
+
+<BaseLayout
+  title="Best AI App Builder Tools in 2026"
+  description="Compared and ranked: the best AI app builders, vibe coding tools, and no-code platforms in 2026. All personally tested."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">AI Builder Tools</h1>
+      <p class="text-muted">All tools personally tested. Ranked by real-world usability, not commission rates.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {tools.map(tool => <ToolCard {...tool} />)}
+    </div>
+
+    <p class="text-xs text-muted mt-6 text-center">
+      "Try free" buttons are affiliate links.
+      <a href="/disclosure" class="text-accent-light hover:underline">Full disclosure →</a>
+    </p>
+  </div>
+</BaseLayout>

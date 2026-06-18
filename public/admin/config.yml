@@ -1,0 +1,79 @@
+# Decap CMS configuration for AIBuilderHub
+# Editor interface: https://aibuilderhub.app/admin/
+
+backend:
+  name: github
+  repo: IDonRumata/aibuilderhub
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Where uploaded images go
+media_folder: public/images
+public_folder: /images
+
+# Locale for the CMS interface
+locale: en
+
+# Site URL for preview links
+site_url: https://aibuilderhub.app
+
+# Collections = content types the editor can manage
+collections:
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    folder: src/content/blog
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: /blog/{{slug}}
+    summary: "{{title}} — {{pubDate}}"
+    sortable_fields: [pubDate, title]
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: "Main headline. Keep under 70 characters for SEO."
+
+      - label: Description
+        name: description
+        widget: text
+        hint: "One-sentence summary shown in search results and post cards. 120-160 characters."
+
+      - label: Publish Date
+        name: pubDate
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        default: "{{now}}"
+
+      - label: Updated Date
+        name: updatedDate
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        required: false
+        hint: "Fill this when updating an old post. Shows 'Updated' badge on the article."
+
+      - label: Tags
+        name: tags
+        widget: list
+        hint: "E.g. comparison, guide, lovable, bolt, vibe-coding"
+        default: []
+
+      - label: Author
+        name: author
+        widget: string
+        default: AIBuilderHub
+
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        hint: "Toggle ON to hide this post from the live site."
+
+      - label: Body
+        name: body
+        widget: markdown
+        hint: "Write your article here. Markdown supported."

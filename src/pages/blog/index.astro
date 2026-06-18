@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get unique tags for filter
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+---
+
+<BaseLayout
+  title="AI Builder Reviews & Guides"
+  description="Honest reviews and step-by-step tutorials for AI app builders, vibe coding tools, and no-code platforms. All tools personally tested."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">Reviews & Guides</h1>
+      <p class="text-muted">All articles based on real testing. No paid placements.</p>
+    </div>
+
+    <!-- Tag filters -->
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        <span class="text-xs text-muted self-center">Filter:</span>
+        {allTags.map(tag => (
+          <span class="tag cursor-default">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    <!-- Posts grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {sorted.map(post => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          slug={post.slug}
+          pubDate={post.data.pubDate}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+
+    {sorted.length === 0 && (
+      <p class="text-muted text-center py-12">First articles coming soon...</p>
+    )}
+  </div>
+</BaseLayout>

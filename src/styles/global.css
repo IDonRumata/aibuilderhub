@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — Theme Variables
+   Dark theme is default. Light theme applied via html.light class.
+   ============================================================ */
+
+:root {
+  /* Dark theme */
+  --color-bg:           #0A0A0B;
+  --color-surface:      #111113;
+  --color-surface-2:    #1C1C1F;
+  --color-accent:       #6366F1;
+  --color-accent-light: #818CF8;
+  --color-text:         #F8FAFC;
+  --color-muted:        #94A3B8;
+  --color-prose-body:   #CBD5E1;
+  --color-border:       #27272A;
+  --color-success:      #10B981;
+
+  /* For opacity-aware utilities (header backdrop etc.) */
+  --color-bg-rgb: 10, 10, 11;
+  --color-accent-rgb: 99, 102, 241;
+}
+
+html.light {
+  /* Light theme */
+  --color-bg:           #FFFFFF;
+  --color-surface:      #F8FAFC;
+  --color-surface-2:    #F1F5F9;
+  --color-accent:       #4F46E5;
+  --color-accent-light: #6366F1;
+  --color-text:         #0F172A;
+  --color-muted:        #64748B;
+  --color-prose-body:   #374151;
+  --color-border:       #E2E8F0;
+  --color-success:      #059669;
+
+  --color-bg-rgb: 255, 255, 255;
+  --color-accent-rgb: 79, 70, 229;
+}
+
+/* ============================================================
+   BASE RESETS
+   ============================================================ */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+}
+
+/* ============================================================
+   COMPONENT UTILITIES
+   These @apply classes auto-respond to theme via CSS vars.
+   ============================================================ */
+
+@layer components {
+  .btn-primary {
+    @apply font-medium px-5 py-2.5 rounded-lg transition-colors text-sm;
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.1);
+  }
+
+  .btn-secondary {
+    @apply font-medium px-5 py-2.5 rounded-lg transition-all text-sm;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-muted);
+    color: var(--color-text);
+  }
+
+  .card {
+    @apply rounded-xl p-6 transition-all;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+  }
+  .card:hover {
+    border-color: rgba(var(--color-accent-rgb), 0.35);
+  }
+
+  .tag {
+    @apply text-xs font-medium px-2.5 py-1 rounded-md;
+    background-color: rgba(var(--color-accent-rgb), 0.10);
+    color: var(--color-accent-light);
+  }
+
+  /* Header backdrop using RGB variable for opacity support */
+  .header-bg {
+    background-color: rgba(var(--color-bg-rgb), 0.95);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* Theme toggle button */
+  .theme-toggle {
+    @apply w-9 h-9 flex items-center justify-center rounded-lg transition-all text-lg;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+  }
+  .theme-toggle:hover {
+    border-color: var(--color-muted);
+    color: var(--color-text);
+  }
+
+  /* Form inputs */
+  .input {
+    @apply w-full px-4 py-3 text-sm rounded-lg transition-colors outline-none;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+  .input::placeholder {
+    color: var(--color-muted);
+  }
+  .input:focus {
+    border-color: var(--color-accent);
+  }
+
+  /* Disclosure notice in posts */
+  .disclosure-notice {
+    @apply flex items-start gap-2 rounded-lg p-3 mb-8 text-xs;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+  }
+
+  /* Dividers */
+  .divider {
+    border-top: 1px solid var(--color-border);
+  }
+}

@@ -1,0 +1,36 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="divider mt-20">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+
+      <div>
+        <div class="flex items-center gap-1 mb-1 font-bold">
+          <span style="color: var(--color-accent);">AI</span>
+          <span style="color: var(--color-text);">BuilderHub</span>
+        </div>
+        <p class="text-xs max-w-xs" style="color: var(--color-muted);">
+          Honest reviews of AI app builders, vibe coding tools, and no-code platforms.
+        </p>
+      </div>
+
+      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm" style="color: var(--color-muted);">
+        <a href="/blog"        class="hover:opacity-100 transition-opacity opacity-80 hover:underline">Reviews</a>
+        <a href="/tools"       class="hover:opacity-100 transition-opacity opacity-80 hover:underline">Tools</a>
+        <a href="/about"       class="hover:opacity-100 transition-opacity opacity-80 hover:underline">About</a>
+        <a href="/disclosure"  class="hover:opacity-100 transition-opacity opacity-80 hover:underline">Disclosure</a>
+        <a href="/privacy"     class="hover:opacity-100 transition-opacity opacity-80 hover:underline">Privacy</a>
+      </nav>
+    </div>
+
+    <div class="mt-8 pt-6 divider flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="color: var(--color-muted);">
+      <span>© {year} AIBuilderHub. All rights reserved.</span>
+      <span>
+        Contains affiliate links –
+        <a href="/disclosure" style="color: var(--color-accent-light);" class="hover:underline">full disclosure</a>
+      </span>
+    </div>
+  </div>
+</footer>

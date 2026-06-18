@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  pubDate: Date;
+  tags?: string[];
+}
+
+const { title, description, slug, pubDate, tags = [] } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'short', day: 'numeric',
+});
+---
+
+<article class="card flex flex-col group cursor-pointer">
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {tags.slice(0, 2).map(tag => <span class="tag">{tag}</span>)}
+    </div>
+  )}
+
+  <a href={`/blog/${slug}`}>
+    <h3 class="font-semibold text-base leading-snug mb-2 transition-colors"
+        style="color: var(--color-text);"
+        onmouseover="this.style.color='var(--color-accent-light)'"
+        onmouseout="this.style.color='var(--color-text)'">
+      {title}
+    </h3>
+  </a>
+
+  <p class="text-sm leading-relaxed flex-1 mb-4" style="color: var(--color-muted);">{description}</p>
+
+  <div class="flex items-center justify-between pt-3 divider">
+    <time class="text-xs" style="color: var(--color-muted);">{formattedDate}</time>
+    <a href={`/blog/${slug}`} class="text-xs font-medium transition-colors"
+       style="color: var(--color-accent-light);"
+       onmouseover="this.style.color='var(--color-text)'"
+       onmouseout="this.style.color='var(--color-accent-light)'">
+      Read →
+    </a>
+  </div>
+</article>

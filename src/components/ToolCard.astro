@@ -1,0 +1,49 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  price: string;
+  badge?: string;
+  reviewHref: string;
+  affiliateHref?: string;
+  rating?: number;
+}
+
+const { name, description, price, badge, reviewHref, affiliateHref, rating } = Astro.props;
+const stars = rating ? Array.from({ length: 5 }, (_, i) => i < rating) : null;
+---
+
+<div class="card flex flex-col">
+  <div class="flex items-start justify-between mb-3">
+    <div>
+      <h3 class="font-semibold text-base" style="color: var(--color-text);">{name}</h3>
+      {stars && (
+        <div class="flex gap-0.5 mt-1">
+          {stars.map(filled => (
+            <span style={filled ? 'color: #FBBF24;' : 'color: var(--color-border);'} aria-hidden="true">★</span>
+          ))}
+        </div>
+      )}
+    </div>
+    {badge && <span class="tag shrink-0">{badge}</span>}
+  </div>
+
+  <p class="text-sm leading-relaxed flex-1 mb-4" style="color: var(--color-muted);">{description}</p>
+
+  <div class="flex items-center justify-between pt-3 divider">
+    <span class="text-xs" style="color: var(--color-muted);">{price}</span>
+    <div class="flex gap-2">
+      <a href={reviewHref} class="btn-secondary py-1.5 px-3 text-xs">Review</a>
+      {affiliateHref && (
+        <a
+          href={affiliateHref}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          class="btn-primary py-1.5 px-3 text-xs"
+        >
+          Try free →
+        </a>
+      )}
+    </div>
+  </div>
+</div>

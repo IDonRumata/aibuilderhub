@@ -1,0 +1,109 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, tags = [], author } = Astro.props;
+
+const formattedPub = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} type="article">
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Affiliate disclosure notice -->
+    <div class="disclosure-notice">
+      <span class="font-bold shrink-0 mt-0.5" style="color: var(--color-accent);">ℹ</span>
+      <span>
+        This article may contain affiliate links. We only recommend tools we have personally tested.
+        <a href="/disclosure" class="hover:underline ml-1" style="color: var(--color-accent-light);">Full disclosure →</a>
+      </span>
+    </div>
+
+    <!-- Tags -->
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.map((tag: string) => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+
+    <!-- Title -->
+    <h1 class="text-3xl sm:text-4xl font-bold leading-tight mb-4" style="color: var(--color-text);">{title}</h1>
+
+    <!-- Meta bar -->
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm mb-8 pb-8 divider" style="color: var(--color-muted);">
+      <span>By {author}</span>
+      <span class="hidden sm:inline">·</span>
+      <time datetime={pubDate.toISOString()}>Published {formattedPub}</time>
+      {updatedDate && (
+        <>
+          <span class="hidden sm:inline">·</span>
+          <span class="font-medium" style="color: var(--color-success);">Updated {formattedUpdated}</span>
+        </>
+      )}
+    </div>
+
+    <!-- Article content -->
+    <div class="prose prose-lg max-w-none">
+      <slot />
+    </div>
+
+    <!-- Post-article CTA -->
+    <div class="mt-12 pt-8 divider">
+      <div class="card p-6 text-center">
+        <h3 class="font-semibold text-lg mb-1" style="color: var(--color-text);">Get our weekly AI builder digest</h3>
+        <p class="text-sm mb-4" style="color: var(--color-muted);">New reviews, comparison updates, and builder tips every Tuesday.</p>
+        <form
+          id="post-newsletter-form"
+          class="flex gap-2 max-w-sm mx-auto"
+          onsubmit="handleSubscribe(event, 'post-newsletter-form')"
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+            class="input flex-1"
+          />
+          <button type="submit" class="btn-primary whitespace-nowrap">Subscribe</button>
+        </form>
+        <p class="text-xs mt-2" style="color: var(--color-muted);">No spam. Unsubscribe anytime.</p>
+        <p id="post-msg" class="text-xs mt-2 hidden" style="color: var(--color-success);"></p>
+      </div>
+    </div>
+
+  </article>
+</BaseLayout>
+
+<script is:inline>
+  function handleSubscribe(e, formId) {
+    e.preventDefault();
+    const form = document.getElementById(formId);
+    const email = form.querySelector('[name="email"]').value;
+    const msg = document.getElementById(formId.replace('-form', '-msg'))
+             || document.getElementById('post-msg');
+
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        form.innerHTML = '<p style="color: var(--color-success); font-size: 0.875rem;">✓ You\'re subscribed! Check your inbox.</p>';
+      } else {
+        if (msg) { msg.textContent = data.error || 'Something went wrong. Try again.'; msg.classList.remove('hidden'); }
+      }
+    })
+    .catch(() => {
+      if (msg) { msg.textContent = 'Network error. Please try again.'; msg.classList.remove('hidden'); }
+    });
+  }
+</script>

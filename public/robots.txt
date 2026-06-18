@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aibuilderhub.app/sitemap-index.xml
