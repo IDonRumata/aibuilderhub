@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="This page doesn't exist. Check out our latest AI builder reviews instead."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
+    <p class="text-7xl font-bold mb-4" style="color: var(--color-accent);">404</p>
+    <h1 class="text-3xl font-bold mb-3">This page doesn't exist</h1>
+    <p class="text-lg mb-8" style="color: var(--color-muted);">
+      The link may be outdated, or the page has moved. Here's where to go instead:
+    </p>
+    <div class="flex flex-wrap justify-center gap-3 mb-14">
+      <a href="/" class="btn-primary">Home</a>
+      <a href="/blog" class="btn-secondary">All Reviews &amp; Guides</a>
+      <a href="/tools" class="btn-secondary">AI Builder Tools</a>
+    </div>
+
+    <h2 class="text-xl font-semibold mb-6 text-left">Latest reviews</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+      {latestPosts.map(post => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          slug={post.slug}
+          pubDate={post.data.pubDate}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
