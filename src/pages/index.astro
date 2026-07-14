@@ -43,25 +43,27 @@ const featuredTools = [
 <BaseLayout title="Home">
 
   <!-- Hero -->
-  <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-12 text-center">
-    <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm mb-6"
-         style="background: rgba(var(--color-accent-rgb), 0.10); border: 1px solid rgba(var(--color-accent-rgb), 0.20); color: var(--color-accent-light);">
+  <section class="relative max-w-5xl mx-auto px-4 sm:px-6 pt-20 pb-14 text-center">
+    <div class="hero-glow"></div>
+
+    <div class="animate-rise inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm mb-7"
+         style="background: rgba(var(--color-accent-rgb), 0.10); border: 1px solid rgba(var(--color-accent-rgb), 0.25); color: var(--color-accent-light);">
       <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: var(--color-success);"></span>
       Updated weekly with new tool reviews
     </div>
 
-    <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-5" style="color: var(--color-text);">
+    <h1 class="animate-rise-1 text-5xl sm:text-6xl font-extrabold leading-[1.05] tracking-tight mb-6" style="color: var(--color-text);">
       Build real products with AI.<br />
-      <span style="color: var(--color-accent);">Tested by builders, for builders.</span>
+      <span class="text-gradient">Tested by builders, for builders.</span>
     </h1>
 
-    <p class="text-lg max-w-2xl mx-auto mb-10" style="color: var(--color-muted);">
+    <p class="animate-rise-2 text-lg max-w-2xl mx-auto mb-10" style="color: var(--color-muted);">
       Honest comparisons and step-by-step tutorials for AI app builders, no-code tools,
       and vibe coding platforms. No paid placements. No fluff.
     </p>
 
     <!-- Newsletter form -->
-    <div id="newsletter" class="max-w-md mx-auto">
+    <div id="newsletter" class="animate-rise-3 max-w-md mx-auto">
       <form
         id="hero-newsletter-form"
         class="flex gap-2"
@@ -86,7 +88,7 @@ const featuredTools = [
   <!-- Featured Tools -->
   <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-xl font-semibold" style="color: var(--color-text);">Top AI Builders Right Now</h2>
+      <h2 class="text-2xl font-bold tracking-tight" style="color: var(--color-text);">Top AI Builders Right Now</h2>
       <a href="/tools" class="text-sm transition-colors hover:underline" style="color: var(--color-accent-light);">View all tools →</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -102,7 +104,7 @@ const featuredTools = [
   {latestPosts.length > 0 && (
     <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold" style="color: var(--color-text);">Latest Reviews & Guides</h2>
+        <h2 class="text-2xl font-bold tracking-tight" style="color: var(--color-text);">Latest Reviews & Guides</h2>
         <a href="/blog" class="text-sm transition-colors hover:underline" style="color: var(--color-accent-light);">View all →</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -8,21 +8,27 @@
    ============================================================ */
 
 :root {
-  /* Dark theme */
-  --color-bg:           #0A0A0B;
-  --color-surface:      #111113;
-  --color-surface-2:    #1C1C1F;
+  /* Dark theme — deep, premium */
+  --color-bg:           #09090B;
+  --color-surface:      #101013;
+  --color-surface-2:    #1A1A1F;
   --color-accent:       #6366F1;
   --color-accent-light: #818CF8;
+  --color-accent-2:     #A78BFA;
   --color-text:         #F8FAFC;
   --color-muted:        #94A3B8;
   --color-prose-body:   #CBD5E1;
-  --color-border:       #27272A;
+  --color-border:       #26262B;
   --color-success:      #10B981;
 
   /* For opacity-aware utilities (header backdrop etc.) */
-  --color-bg-rgb: 10, 10, 11;
+  --color-bg-rgb: 9, 9, 11;
   --color-accent-rgb: 99, 102, 241;
+  --color-accent-2-rgb: 167, 139, 250;
+
+  --shadow-glow: 0 0 0 1px rgba(var(--color-accent-rgb), 0.25),
+                 0 8px 30px -6px rgba(var(--color-accent-rgb), 0.25);
+  --card-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0) 40%);
 }
 
 html.light {
@@ -32,6 +38,7 @@ html.light {
   --color-surface-2:    #F1F5F9;
   --color-accent:       #4F46E5;
   --color-accent-light: #6366F1;
+  --color-accent-2:     #8B5CF6;
   --color-text:         #0F172A;
   --color-muted:        #64748B;
   --color-prose-body:   #374151;
@@ -40,6 +47,11 @@ html.light {
 
   --color-bg-rgb: 255, 255, 255;
   --color-accent-rgb: 79, 70, 229;
+  --color-accent-2-rgb: 139, 92, 246;
+
+  --shadow-glow: 0 0 0 1px rgba(var(--color-accent-rgb), 0.15),
+                 0 10px 30px -8px rgba(15, 23, 42, 0.18);
+  --card-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 40%);
 }
 
 /* ============================================================
@@ -57,6 +69,10 @@ html.light {
     background-color: var(--color-bg);
     color: var(--color-text);
     transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
   }
 
   ::selection {
@@ -78,42 +94,61 @@ html.light {
 
 @layer components {
   .btn-primary {
-    @apply font-medium px-5 py-2.5 rounded-lg transition-colors text-sm;
-    background-color: var(--color-accent);
+    @apply font-medium px-5 py-2.5 rounded-lg text-sm;
+    background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
     color: #ffffff;
+    box-shadow: 0 4px 16px -4px rgba(var(--color-accent-rgb), 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
   .btn-primary:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -6px rgba(var(--color-accent-rgb), 0.6);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
   }
 
   .btn-secondary {
     @apply font-medium px-5 py-2.5 rounded-lg transition-all text-sm;
     border: 1px solid var(--color-border);
     color: var(--color-muted);
+    background-color: rgba(var(--color-accent-rgb), 0.03);
   }
   .btn-secondary:hover {
-    border-color: var(--color-muted);
+    border-color: rgba(var(--color-accent-rgb), 0.5);
     color: var(--color-text);
+    background-color: rgba(var(--color-accent-rgb), 0.08);
   }
 
   .card {
-    @apply rounded-xl p-6 transition-all;
+    @apply rounded-xl p-6;
+    position: relative;
     border: 1px solid var(--color-border);
     background-color: var(--color-surface);
+    background-image: var(--card-sheen);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
   }
   .card:hover {
-    border-color: rgba(var(--color-accent-rgb), 0.35);
+    border-color: rgba(var(--color-accent-rgb), 0.45);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
   }
 
   .tag {
     @apply text-xs font-medium px-2.5 py-1 rounded-md;
     background-color: rgba(var(--color-accent-rgb), 0.10);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.18);
     color: var(--color-accent-light);
   }
 
   /* Header backdrop using RGB variable for opacity support */
   .header-bg {
-    background-color: rgba(var(--color-bg-rgb), 0.95);
+    background-color: rgba(var(--color-bg-rgb), 0.75);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
   }
 
@@ -130,16 +165,18 @@ html.light {
 
   /* Form inputs */
   .input {
-    @apply w-full px-4 py-3 text-sm rounded-lg transition-colors outline-none;
+    @apply w-full px-4 py-3 text-sm rounded-lg outline-none;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     color: var(--color-text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .input::placeholder {
     color: var(--color-muted);
   }
   .input:focus {
     border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.18);
   }
 
   /* Disclosure notice in posts */
@@ -153,5 +190,74 @@ html.light {
   /* Dividers */
   .divider {
     border-top: 1px solid var(--color-border);
+  }
+
+  /* ---- Premium visual utilities ---- */
+
+  /* Gradient headline text */
+  .text-gradient {
+    background-image: linear-gradient(90deg, var(--color-accent-light), var(--color-accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Soft radial glow behind hero sections */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hero-glow::before {
+    content: '';
+    position: absolute;
+    top: -240px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 560px;
+    background:
+      radial-gradient(ellipse at center,
+        rgba(var(--color-accent-rgb), 0.22),
+        rgba(var(--color-accent-2-rgb), 0.08) 45%,
+        transparent 70%);
+    filter: blur(20px);
+  }
+
+  /* Reading progress bar (article pages) */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    z-index: 60;
+    background-image: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+    transition: width 0.1s linear;
+  }
+}
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-rise   { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-rise-1 { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both; }
+.animate-rise-2 { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both; }
+.animate-rise-3 { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise, .animate-rise-1, .animate-rise-2, .animate-rise-3 {
+    animation: none;
+  }
+  .card, .btn-primary {
+    transition: none;
   }
 }

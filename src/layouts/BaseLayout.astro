@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -64,7 +65,10 @@ const fullTitle = title === 'Home'
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Smooth page transitions (View Transitions API) -->
+    <ViewTransitions />
 
     <!--
       Theme init script — runs BEFORE paint to prevent flash of wrong theme.
@@ -88,6 +92,21 @@ const fullTitle = title === 'Home'
       <slot />
     </main>
     <Footer />
+
+    <!-- Keep theme + analytics correct across View Transitions -->
+    <script is:inline>
+      document.addEventListener('astro:after-swap', function () {
+        // Re-apply theme class after soft navigation
+        const saved = localStorage.getItem('aibh-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved ?? (prefersDark ? 'dark' : 'light');
+        document.documentElement.classList.toggle('light', theme === 'light');
+        // Track SPA-style page view in GA4
+        if (typeof gtag === 'function') {
+          gtag('event', 'page_view', { page_location: location.href, page_title: document.title });
+        }
+      });
+    </script>
 
     <!-- Theme toggle logic (runs after DOM is ready) -->
     <script is:inline>
