@@ -70,6 +70,27 @@ const fullTitle = title === 'Home'
     <!-- Smooth page transitions (View Transitions API) -->
     <ViewTransitions />
 
+    <!-- Structured data: WebSite + Organization (GEO / rich results) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': `${siteUrl}/#website`,
+          url: siteUrl,
+          name: 'AIBuilderHub',
+          description: 'Honest reviews of AI app builders, vibe coding tools, and no-code platforms.',
+          publisher: { '@id': `${siteUrl}/#organization` },
+        },
+        {
+          '@type': 'Organization',
+          '@id': `${siteUrl}/#organization`,
+          name: 'AIBuilderHub',
+          url: siteUrl,
+        },
+      ],
+    })} />
+
     <!--
       Theme init script — runs BEFORE paint to prevent flash of wrong theme.
       Reads saved preference from localStorage; defaults to dark if none set.

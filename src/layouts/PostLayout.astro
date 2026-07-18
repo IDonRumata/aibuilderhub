@@ -12,9 +12,28 @@ const formattedPub = pubDate.toLocaleDateString('en-US', {
 const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric',
 });
+
+const siteUrl = 'https://aibuilderhub.app';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  url: canonicalURL,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
+  author: { '@type': 'Organization', name: author, url: siteUrl },
+  publisher: { '@id': `${siteUrl}/#organization` },
+  keywords: tags.join(', '),
+};
 ---
 
 <BaseLayout title={title} description={description} type="article">
+  <!-- Structured data: BlogPosting -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
   <!-- Reading progress bar -->
   <div id="reading-progress" class="progress-bar" aria-hidden="true"></div>
 
