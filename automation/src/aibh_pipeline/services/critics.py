@@ -16,6 +16,7 @@ from ..clients.http import url_is_alive
 from ..logging_setup import get_logger
 from ..models import CritiqueIssue, CritiqueReport, DraftPost, ScoredTopic, Verdict
 from ..settings import Settings
+from .humanizer import load_rules, scan_metadata
 
 log = get_logger(__name__)
 
@@ -191,9 +192,21 @@ def mechanical_issues(
     known_slugs: set[str],
     dead_links: list[str],
     allowed_urls: set[str],
+    settings: Settings | None = None,
 ) -> list[CritiqueIssue]:
     """Deterministic checks. The model is not asked to count characters."""
     issues: list[CritiqueIssue] = []
+
+    if settings is not None:
+        rules = load_rules(settings.banned_patterns_file)
+        for violation in scan_metadata(draft.title, draft.description, rules):
+            issues.append(
+                CritiqueIssue(
+                    quote=violation.excerpt,
+                    requirement=violation.message,
+                    severity="blocking",
+                )
+            )
 
     if len(draft.title) > TITLE_MAX:
         issues.append(
@@ -442,6 +455,7 @@ async def review(
         known_slugs=known_slugs,
         dead_links=dead,
         allowed_urls=set(topic.source_urls),
+        settings=settings,
     )
 
     briefs: list[tuple[str, str, str]] = [

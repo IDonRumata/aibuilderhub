@@ -185,3 +185,32 @@ def test_a_wildly_long_title_still_blocks():
     assert any(
         "Title is" in i.requirement and i.severity == "blocking" for i in issues
     )
+
+
+def test_an_em_dash_in_the_description_is_blocking(settings):
+    """The humaniser only rewrites the body; metadata bypassed the gate."""
+    draft = make_draft(
+        description=(
+            "Meta released a 30B open-weights model tuned for agentic tasks "
+            "under Apache 2.0 \u2014 what it means for solo builders running local AI."
+        )
+    )
+    issues = critics.mechanical_issues(
+        draft,
+        known_slugs=set(),
+        dead_links=[],
+        allowed_urls=set(),
+        settings=settings,
+    )
+    assert any(i.severity == "blocking" and "Em dash" in i.requirement for i in issues)
+
+
+def test_a_clean_description_passes_the_metadata_gate(settings):
+    issues = critics.mechanical_issues(
+        make_draft(),
+        known_slugs=set(),
+        dead_links=[],
+        allowed_urls=set(),
+        settings=settings,
+    )
+    assert not any("Em dash" in i.requirement for i in issues)

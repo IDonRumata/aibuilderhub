@@ -1,6 +1,6 @@
 ---
 title: 'Meta''s Muse Glimmer: a local model built for agents'
-description: Meta released a 30B open-weights model tuned for agentic tasks under Apache 2.0 — what it means for solo builders running local AI.
+description: Meta released a 30B open-weights model tuned for agentic tasks under Apache 2.0. What it means for solo builders running local AI.
 pubDate: '2026-08-11'
 tags:
 - news

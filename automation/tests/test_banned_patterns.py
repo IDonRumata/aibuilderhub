@@ -92,7 +92,11 @@ def test_no_published_post_contains_banned_patterns(rules, settings):
     for post in existing_posts(settings.content_dir):
         if "news" not in post.tags:
             continue
-        violations = scan(post.body, rules)
+        from aibh_pipeline.services.humanizer import scan_metadata
+
+        violations = scan(post.body, rules) + scan_metadata(
+            post.title, post.description, rules
+        )
         if violations:
             offenders[post.slug] = sorted({v.rule for v in violations})
     assert not offenders, f"banned patterns in generated posts: {offenders}"

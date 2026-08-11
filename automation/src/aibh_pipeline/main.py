@@ -88,7 +88,11 @@ async def _critique_loop(
     # knows, and their verdicts then drown out the actual defect.
     dead = await critics.check_links(critics.MD_LINK_RE.findall(current.body), settings)
     upfront = critics.mechanical_issues(
-        current, known_slugs=known_slugs, dead_links=dead, allowed_urls=set(topic.source_urls)
+        current,
+        known_slugs=known_slugs,
+        dead_links=dead,
+        allowed_urls=set(topic.source_urls),
+        settings=settings,
     )
     if any(issue.severity == "blocking" for issue in upfront):
         log.info(
@@ -286,6 +290,7 @@ async def run(*, as_draft: bool, dry_run: bool) -> int:
             known_slugs=known_slugs,
             dead_links=dead,
             allowed_urls=set(topic.source_urls),
+            settings=settings,
         )
         blocking = [i for i in mechanical if i.severity == "blocking"]
         if blocking:

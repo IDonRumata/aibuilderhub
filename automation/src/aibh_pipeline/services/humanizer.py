@@ -191,6 +191,39 @@ def scan(body: str, rules: dict[str, Any]) -> list[Violation]:
     return violations
 
 
+def scan_metadata(title: str, description: str, rules: dict[str, Any]) -> list[Violation]:
+    """Apply the hard style rules to the title and description.
+
+    These never reach the humaniser, which only rewrites the body, so without
+    this an em dash in the description ships straight to the site's search
+    result and social card.
+    """
+    violations: list[Violation] = []
+    for field, text in (("title", title), ("description", description)):
+        for rule in rules.get("typography") or []:
+            for match in re.finditer(rule["pattern"], text):
+                excerpt = text[max(0, match.start() - 30) : match.end() + 30]
+                violations.append(
+                    Violation(f"{field}:{rule['id']}", rule["message"], excerpt)
+                )
+        for word in rules.get("words") or []:
+            if re.search(rf"{re.escape(word)}", text, re.IGNORECASE):
+                violations.append(
+                    Violation(f"{field}:word:{word}", f"Banned word in the {field}: {word}.", text)
+                )
+        for phrase in rules.get("phrases") or []:
+            pattern = r"\s+".join(re.escape(part) for part in phrase.split())
+            if re.search(pattern, text, re.IGNORECASE):
+                violations.append(
+                    Violation(
+                        f"{field}:phrase:{phrase}",
+                        f"Banned phrase in the {field}: {phrase}.",
+                        text,
+                    )
+                )
+    return violations
+
+
 def _structure_violations(body: str, limits: dict[str, Any]) -> list[Violation]:
     out: list[Violation] = []
     paragraphs, bullets = _prose_blocks(body)
