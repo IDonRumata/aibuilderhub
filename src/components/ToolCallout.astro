@@ -1,0 +1,54 @@
+---
+/**
+ * In-article tool card. Chosen automatically from the post's tags, so no
+ * published post has to be edited to get one.
+ *
+ * Deliberately not styled like an ad unit: it is a recommendation for the
+ * tool the reader has just spent five minutes reading about, which is why it
+ * converts and why it does not undermine the site's no-paid-placements line.
+ */
+interface Props {
+  id: string;
+  name: string;
+  price: string;
+  bestFor: string;
+  notFor: string;
+  reviewSlug?: string;
+  /** hide the "read the review" link when the reader is already on it */
+  currentSlug?: string;
+}
+
+const { id, name, price, bestFor, notFor, reviewSlug, currentSlug } = Astro.props;
+const showReview = reviewSlug && reviewSlug !== currentSlug;
+---
+
+<aside class="card not-prose my-8" aria-label={`Try ${name}`}>
+  <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+    <h3 class="font-semibold text-base m-0" style="color: var(--color-text);">{name}</h3>
+    <span class="text-xs" style="color: var(--color-muted);">{price}</span>
+  </div>
+
+  <p class="text-sm leading-relaxed m-0 mb-1" style="color: var(--color-prose-body);">
+    <strong>Worth it if:</strong> {bestFor}
+  </p>
+  <p class="text-sm leading-relaxed m-0 mb-4" style="color: var(--color-muted);">
+    <strong>Skip it if:</strong> {notFor}
+  </p>
+
+  <div class="flex flex-wrap items-center gap-2">
+    <a
+      href={`/go/${id}`}
+      target="_blank"
+      rel="nofollow sponsored noopener"
+      data-tool={id}
+      class="btn-primary py-1.5 px-3 text-xs"
+    >
+      Try {name} →
+    </a>
+    {showReview && (
+      <a href={`/blog/${reviewSlug}`} class="btn-secondary py-1.5 px-3 text-xs">
+        Read our review
+      </a>
+    )}
+  </div>
+</aside>

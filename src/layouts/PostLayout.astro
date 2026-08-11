@@ -1,10 +1,18 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import ToolCallout from '../components/ToolCallout.astro';
 import type { CollectionEntry } from 'astro:content';
+import { tools } from '../data/tools.json';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & { slug?: string };
 
-const { title, description, pubDate, updatedDate, tags = [], author } = Astro.props;
+const { title, description, pubDate, updatedDate, tags = [], author, slug } = Astro.props;
+
+// Pick the tools this post is actually about from its tags. Every review and
+// comparison already tags the tool by name, so 20 of the 24 posts get a
+// relevant card without anyone editing a single markdown file.
+const tagSet = new Set(tags.map((t: string) => t.toLowerCase()));
+const mentioned = tools.filter(tool => tagSet.has(tool.id)).slice(0, 2);
 
 // pubDate / updatedDate are deliberately NOT rendered anywhere in the UI.
 // They stay in the frontmatter for sorting, the sitemap and structured data only.
@@ -62,6 +70,37 @@ const articleSchema = {
     <div class="prose prose-lg max-w-none">
       <slot />
     </div>
+
+    <!-- Tools this post is about -->
+    {mentioned.length === 0 && (
+      <aside class="card not-prose mt-10 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm m-0" style="color: var(--color-prose-body);">
+          Comparing what these tools cost before you commit?
+        </p>
+        <a href="/pricing" class="btn-secondary py-1.5 px-3 text-xs whitespace-nowrap">
+          See the pricing table →
+        </a>
+      </aside>
+    )}
+
+    {mentioned.length > 0 && (
+      <section class="mt-10" aria-label="Tools mentioned in this post">
+        <h2 class="text-sm font-semibold uppercase tracking-wide mb-3" style="color: var(--color-muted);">
+          Tools in this post
+        </h2>
+        {mentioned.map(tool => (
+          <ToolCallout
+            id={tool.id}
+            name={tool.name}
+            price={tool.price}
+            bestFor={tool.bestFor}
+            notFor={tool.notFor}
+            reviewSlug={tool.reviewSlug}
+            currentSlug={slug}
+          />
+        ))}
+      </section>
+    )}
 
     <!-- Post-article CTA -->
     <div class="mt-12 pt-8 divider">
