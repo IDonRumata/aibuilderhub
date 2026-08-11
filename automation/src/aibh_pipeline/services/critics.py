@@ -292,14 +292,40 @@ def mechanical_issues(
                 )
             )
 
+    # A body that stops mid-sentence is a truncated generation, not a style
+    # opinion. Catch it here rather than hoping a reviewer notices.
+    tail = draft.body.rstrip()
+    if tail and tail[-1] not in ".!?\"')]`*":
+        issues.append(
+            CritiqueIssue(
+                quote=tail[-120:],
+                requirement=(
+                    "The post ends mid-sentence. Finish it with a complete "
+                    "closing thought."
+                ),
+                severity="blocking",
+            )
+        )
+
     word_count = draft.word_count
-    if word_count < 450:
+    if word_count < 400:
         issues.append(
             CritiqueIssue(
                 quote=f"{word_count} words",
                 requirement=(
-                    "The post is too short. Expand it to at least 500 words, "
-                    "but only with material the sources actually support."
+                    "The post is far too short to publish. Write at least 500 "
+                    "words, using analysis rather than invented facts."
+                ),
+                severity="blocking",
+            )
+        )
+    elif word_count < 500:
+        issues.append(
+            CritiqueIssue(
+                quote=f"{word_count} words",
+                requirement=(
+                    "The post is a little short. Expand it towards 600 words "
+                    "with analysis, not with claims the sources do not make."
                 ),
                 severity="major",
             )

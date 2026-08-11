@@ -102,6 +102,7 @@ def test_mechanical_issues_accepts_a_well_formed_post():
             "It's a small change, per [the announcement](https://example.com/cursor). "
             "We covered the editor in our [Cursor review](/blog/cursor-review-2026). "
             + "word " * 600
+            + "and that is the end of it."
         ),
     )
     issues = critics.mechanical_issues(
@@ -117,7 +118,9 @@ def test_external_link_outside_the_supplied_sources_is_blocking():
     draft = make_draft(
         body=(
             "Per [some blog](https://random.example/post) it changed. "
-            "See our [review](/blog/cursor-review-2026). " + "word " * 600
+            "See our [review](/blog/cursor-review-2026). "
+            + "word " * 600
+            + "and that is the end of it."
         )
     )
     issues = critics.mechanical_issues(
@@ -127,3 +130,38 @@ def test_external_link_outside_the_supplied_sources_is_blocking():
         allowed_urls={"https://example.com/cursor"},
     )
     assert any("not among the supplied sources" in i.requirement for i in issues)
+
+
+def test_a_truncated_body_is_blocking():
+    draft = make_draft(
+        body=(
+            "It's a small change, per [the announcement](https://example.com/cursor). "
+            "See our [review](/blog/cursor-review-2026). " + "word " * 600
+            + "and the part that really matters is"
+        )
+    )
+    issues = critics.mechanical_issues(
+        draft,
+        known_slugs={"cursor-review-2026"},
+        dead_links=[],
+        allowed_urls={"https://example.com/cursor"},
+    )
+    assert any(
+        i.severity == "blocking" and "mid-sentence" in i.requirement for i in issues
+    )
+
+
+def test_a_very_short_body_is_blocking():
+    draft = make_draft(
+        body=(
+            "Short. Per [the announcement](https://example.com/cursor) it shipped. "
+            "See our [review](/blog/cursor-review-2026)."
+        )
+    )
+    issues = critics.mechanical_issues(
+        draft,
+        known_slugs={"cursor-review-2026"},
+        dead_links=[],
+        allowed_urls={"https://example.com/cursor"},
+    )
+    assert any(i.severity == "blocking" and "too short" in i.requirement for i in issues)

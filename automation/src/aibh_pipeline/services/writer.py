@@ -70,10 +70,14 @@ Hard rules:
     plain statement of fact. "Local models tend to fail at X" is a fact claim
     and needs a source; "I'd expect this to struggle with X, though nothing
     here shows it either way" is an opinion and is fine.
-12. Thin sources mean a shorter post, not a padded one. If the material only
-    supports 500 words of honest writing, write 500. A short post that is
-    entirely defensible beats a long one carrying three invented claims,
-    which is what gets a draft rejected.
+12. Thin sources mean the shorter end of the range, not an unfinished piece.
+    500 words is the floor and it is not negotiable; if the sources are thin,
+    spend the words on your own analysis of what this means for a solo
+    builder, which needs no source, rather than on invented facts.
+13. Finish the post. It ends on a complete sentence, after a closing thought
+    that tells the reader what to do or why to ignore this. A draft that
+    trails off mid-sentence is rejected outright, and so is one that stops
+    without an ending.
 
 Output fields:
 - title: under 60 characters, no clickbait, no "You Won't Believe", no colon
