@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  // Drafts must never get a public URL — the content pipeline publishes
+  // with draft: true while it is being evaluated by a human.
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map(post => ({
     params: { slug: post.slug },
     props: post,

@@ -1,0 +1,34 @@
+# Cloudflare Pages security headers.
+# Syntax: https://developers.cloudflare.com/pages/configuration/headers/
+# Verify after deploy with:  curl -sI https://aibuilderhub.app | sort
+
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), usb=(), xr-spatial-tracking=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Robots-Tag: index, follow
+  # script-src still carries 'unsafe-inline': the theme bootstrap has to run
+  # before first paint (otherwise the page flashes the wrong theme) and the GA4
+  # snippet is inline, so neither can move to an external bundle. All inline
+  # event-handler attributes (onclick/onsubmit/onmouseover) were removed from
+  # the templates, so tightening this to hashes later is a template-only change.
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; manifest-src 'self'; media-src 'self'; worker-src 'self'; upgrade-insecure-requests
+
+# Decap CMS admin panel. It loads its bundle from unpkg and talks to the GitHub
+# API, so it cannot live under the site-wide policy. It is also noindex +
+# Disallow in robots.txt. See SECURITY-AUDIT.md — recommended action is to
+# delete public/admin/ entirely now that publishing is automated.
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://*.githubusercontent.com; connect-src 'self' https://api.github.com https://unpkg.com; upgrade-insecure-requests
+
+# Fingerprinted build assets are immutable.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

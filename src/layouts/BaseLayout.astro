@@ -49,6 +49,7 @@ const fullTitle = title === 'Home'
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title="AIBuilderHub" href={`${siteUrl}/rss.xml`} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={type} />
@@ -127,6 +128,56 @@ const fullTitle = title === 'Home'
           gtag('event', 'page_view', { page_location: location.href, page_title: document.title });
         }
       });
+    </script>
+
+    <!--
+      Newsletter subscription — one delegated listener for every
+      [data-newsletter-form] on the site. Kept out of inline `onsubmit`
+      attributes so the CSP in public/_headers does not need 'unsafe-hashes'.
+    -->
+    <script is:inline>
+      (function () {
+        function showError(form, text) {
+          var msg = form.parentElement && form.parentElement.querySelector('[data-newsletter-msg]');
+          if (!msg) return;
+          msg.textContent = text;
+          msg.style.color = 'var(--color-muted)';
+          msg.classList.remove('hidden');
+        }
+
+        document.addEventListener('submit', function (e) {
+          var form = e.target;
+          if (!form || !form.matches || !form.matches('[data-newsletter-form]')) return;
+          e.preventDefault();
+
+          var field = form.querySelector('[name="email"]');
+          if (!field) return;
+          var honeypot = form.querySelector('[name="website"]');
+
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: field.value,
+              website: honeypot ? honeypot.value : '',
+            }),
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              if (data && data.success) {
+                var ok = document.createElement('p');
+                ok.style.cssText = 'color: var(--color-success); font-size: 0.875rem; padding: 0.75rem 0;';
+                ok.textContent = "✓ You're subscribed! Check your inbox.";
+                form.replaceChildren(ok);
+              } else {
+                showError(form, (data && data.error) || 'Something went wrong. Try again.');
+              }
+            })
+            .catch(function () {
+              showError(form, 'Network error. Please try again.');
+            });
+        });
+      })();
     </script>
 
     <!-- Theme toggle logic (runs after DOM is ready) -->

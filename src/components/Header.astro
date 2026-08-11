@@ -22,18 +22,7 @@ const currentPath = Astro.url.pathname;
       {navLinks.map(link => (
         <a
           href={link.href}
-          class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
-          style={
-            currentPath.startsWith(link.href)
-              ? `color: var(--color-text); background-color: var(--color-surface-2);`
-              : `color: var(--color-muted);`
-          }
-          onmouseover="this.style.color='var(--color-text)'; this.style.backgroundColor='var(--color-surface-2)'"
-          onmouseout={
-            currentPath.startsWith(link.href)
-              ? "this.style.color='var(--color-text)'"
-              : "this.style.color='var(--color-muted)'; this.style.backgroundColor='transparent'"
-          }
+          class:list={['nav-link', { 'nav-link-active': currentPath.startsWith(link.href) }]}
         >
           {link.label}
         </a>
@@ -46,7 +35,6 @@ const currentPath = Astro.url.pathname;
         id="theme-toggle"
         class="theme-toggle"
         aria-label="Toggle light/dark theme"
-        onclick="window.__toggleTheme()"
         title="Switch theme"
       >
         <span id="theme-icon">🌙</span>
@@ -60,12 +48,19 @@ const currentPath = Astro.url.pathname;
   </div>
 </header>
 
-<!-- Sync icon to current theme on page load -->
+<!-- Sync icon to current theme and wire the toggle (no inline onclick, for CSP) -->
 <script is:inline>
   (function () {
     const icon = document.getElementById('theme-icon');
     if (icon) {
       icon.textContent = document.documentElement.classList.contains('light') ? '☀️' : '🌙';
+    }
+    const btn = document.getElementById('theme-toggle');
+    if (btn && !btn.dataset.bound) {
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', function () {
+        if (typeof window.__toggleTheme === 'function') window.__toggleTheme();
+      });
     }
   })();
 </script>

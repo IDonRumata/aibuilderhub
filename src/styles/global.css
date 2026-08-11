@@ -179,6 +179,17 @@ html.light {
     box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.18);
   }
 
+  /* Honeypot field — off-screen rather than display:none, which some bots
+     specifically skip. Never focusable, never announced. */
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
   /* Disclosure notice in posts */
   .disclosure-notice {
     @apply flex items-start gap-2 rounded-lg p-3 mb-8 text-xs;
@@ -190,6 +201,40 @@ html.light {
   /* Dividers */
   .divider {
     border-top: 1px solid var(--color-border);
+  }
+
+  /* Hover states as plain CSS — no inline event handlers, so the
+     Content-Security-Policy in public/_headers can stay strict. */
+  .card-title-link h3 {
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  .card-title-link:hover h3 {
+    color: var(--color-accent-light);
+  }
+
+  .link-accent {
+    color: var(--color-accent-light);
+    transition: color 0.2s ease;
+  }
+  .link-accent:hover {
+    color: var(--color-text);
+  }
+
+  /* Header navigation links */
+  .nav-link {
+    @apply px-3 py-1.5 rounded-lg text-sm font-medium;
+    color: var(--color-muted);
+    background-color: transparent;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .nav-link:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface-2);
+  }
+  .nav-link-active {
+    color: var(--color-text);
+    background-color: var(--color-surface-2);
   }
 
   /* ---- Premium visual utilities ---- */
