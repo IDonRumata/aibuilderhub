@@ -104,7 +104,7 @@ class Settings(BaseSettings):
     trigram_dupe_threshold: float = 0.40
 
     # --- writing ----------------------------------------------------------
-    target_words_min: int = 600
+    target_words_min: int = 500
     target_words_max: int = 1000
 
     # --- paths ------------------------------------------------------------

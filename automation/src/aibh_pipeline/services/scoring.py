@@ -43,7 +43,13 @@ WEIGHTS = {
     "corroboration": 2.5,
     "niche": 4.0,
     "source": 1.0,
+    "writability": 2.0,
 }
+
+# A topic whose sources are all bare headlines gives the writer nothing to
+# work from, and the fact-checker then rejects the invented filler. Roughly
+# this many characters of summary across the cluster is enough to write from.
+WRITABLE_SUMMARY_CHARS = 900
 
 
 def cluster(items: list[SourceItem]) -> list[list[SourceItem]]:
@@ -138,6 +144,18 @@ def _source_score(items: list[SourceItem]) -> float:
     return min(1.0, max(item.weight for item in items) / 1.5)
 
 
+def _writability_score(items: list[SourceItem]) -> float:
+    """How much material the writer actually has, in [0, 1].
+
+    Hacker News hands over a headline and nothing else. A post written from
+    that is either three sentences long or padded with claims no source
+    supports, and the fact-checker rejects the second kind. Prefer stories
+    that came with something to read.
+    """
+    total = sum(len(item.summary) for item in items)
+    return min(1.0, total / WRITABLE_SUMMARY_CHARS)
+
+
 def score_topics(
     items: list[SourceItem],
     config: dict[str, Any],
@@ -172,6 +190,7 @@ def score_topics(
             "corroboration": _corroboration_score(ordered),
             "niche": niche_score,
             "source": _source_score(ordered),
+            "writability": _writability_score(ordered),
         }
         total = sum(WEIGHTS[key] * value for key, value in components.items())
 

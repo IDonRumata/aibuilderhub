@@ -290,11 +290,14 @@ def mechanical_issues(
             )
 
     word_count = draft.word_count
-    if word_count < 500:
+    if word_count < 450:
         issues.append(
             CritiqueIssue(
                 quote=f"{word_count} words",
-                requirement="The post is too short. Expand it to at least 600 words of substance.",
+                requirement=(
+                    "The post is too short. Expand it to at least 500 words, "
+                    "but only with material the sources actually support."
+                ),
                 severity="major",
             )
         )

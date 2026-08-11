@@ -63,6 +63,17 @@ Hard rules:
    very short sentences. Prose over bullets.
 10. Give at least one clear subjective judgement with a reason behind it, and
     name at least one limitation or reason for scepticism.
+11. There is a hard line between what the sources say and what you think. If a
+    statement is not in the sources, it may still appear - but only in the
+    first person, as your own read: "I'd expect", "my guess is", "the part I
+    can't tell from here is". Never write an unsourced generalisation as a
+    plain statement of fact. "Local models tend to fail at X" is a fact claim
+    and needs a source; "I'd expect this to struggle with X, though nothing
+    here shows it either way" is an opinion and is fine.
+12. Thin sources mean a shorter post, not a padded one. If the material only
+    supports 500 words of honest writing, write 500. A short post that is
+    entirely defensible beats a long one carrying three invented claims,
+    which is what gets a draft rejected.
 
 Output fields:
 - title: under 60 characters, no clickbait, no "You Won't Believe", no colon
@@ -70,8 +81,9 @@ Output fields:
 - description: 140 to 160 characters, a real summary, not a teaser.
 - slug: lowercase kebab-case, no dates, no year, 3 to 7 words.
 - tags: 3 to 5 lowercase tags. The first tag is always "news".
-- body: markdown, 600 to 1000 words. Do not repeat the title as an H1; start
-  with a short verdict paragraph or a "## TL;DR" section.
+- body: markdown, 500 to 1000 words, at the shorter end when the sources are
+  thin. Do not repeat the title as an H1; start with a short verdict paragraph
+  or a "## TL;DR" section.
 """
 
 REVISION_SYSTEM = """\

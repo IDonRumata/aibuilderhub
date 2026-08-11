@@ -103,3 +103,20 @@ def test_blank_env_values_fall_back_to_defaults(monkeypatch):
     assert blank.model == "claude-sonnet-5"
     assert blank.voyage_api_key is None
     assert blank.anthropic_api_key is None
+
+
+def test_topics_with_readable_sources_outrank_bare_headlines(sources_config, settings):
+    """A headline-only story gives the writer nothing but filler to invent."""
+    bare = make_item(
+        "Someone ships an ai agent for no-code builders",
+        url="https://example.com/bare",
+        score=300,
+    )
+    readable = make_item(
+        "Cursor ships an ai agent for no-code builders",
+        url="https://example.com/readable",
+        score=300,
+        summary="x" * 1200,
+    )
+    topics = score_topics([bare, readable], sources_config, settings)
+    assert topics[0].title.startswith("Cursor")
