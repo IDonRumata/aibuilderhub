@@ -95,6 +95,25 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
 
+      # A skipped day still changes state: the topic that failed review is
+      # recorded so tomorrow does not pick it again. Without this the failure
+      # registry only ever persisted on days that published, which is exactly
+      # the days it has nothing to say.
+      - name: Persist state after a skipped day
+        if: always() && steps.pipeline.outputs.published != 'true'
+        working-directory: .
+        run: |
+          if git diff --quiet -- automation/state; then
+            echo "no state change to commit"
+            exit 0
+          fi
+          git config user.name  "aibuilderhub-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/state
+          git commit -m "chore(state): record skipped run"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
       - name: Upload run artefacts
         if: always()
         uses: actions/upload-artifact@v4
