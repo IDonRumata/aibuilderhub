@@ -36,6 +36,9 @@ packages = ["src/aibh_pipeline"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# `uv run pytest` does not put the working directory on sys.path, so the
+# tests.conftest helpers would not import in CI without this.
+pythonpath = ["."]
 asyncio_mode = "auto"
 filterwarnings = ["error::DeprecationWarning:aibh_pipeline.*"]
 

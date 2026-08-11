@@ -61,4 +61,5 @@ jobs:
       - name: TruffleHog
         uses: trufflesecurity/trufflehog@main
         with:
-          extra_args: --results=verified,unknown --fail
+          # The action already passes --fail; repeating it is a parse error.
+          extra_args: --results=verified,unknown
