@@ -48,8 +48,11 @@ jobs:
           ANTHROPIC_API_KEY: not-used-by-the-test-suite
         run: uv run pytest -q
       - name: pip-audit (fail on any known vulnerability)
-        # --skip-editable: the local package itself is not on PyPI.
-        run: uv run pip-audit --strict --skip-editable --progress-spinner off
+        # Audit the exported lock rather than the installed environment: the
+        # local package is editable and has no PyPI release to check against.
+        run: |
+          uv export --format requirements-txt --no-emit-project --no-hashes -o /tmp/reqs.txt
+          uv run pip-audit -r /tmp/reqs.txt --strict --progress-spinner off
 
   secrets:
     name: Secret scan over the full history
