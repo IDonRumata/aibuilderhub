@@ -1,0 +1,11 @@
+# Secrets never live in the repo. Use automation/.env locally and GitHub
+# Actions secrets in CI.
+.env
+.env.*
+!.env.example
+
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/

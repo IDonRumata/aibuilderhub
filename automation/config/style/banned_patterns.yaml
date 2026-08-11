@@ -1,0 +1,207 @@
+# Anti-AI-tell block list.
+#
+# Checked by services/humanizer.py with regexes, before AND after the LLM
+# rewrite pass, and again by the test suite in CI. Every rule here is a hard
+# block: a post that still matches after the rewrite is not published.
+#
+# Honest caveat: no rule set defeats an AI detector, and that is not the goal.
+# The goal is prose a person is not embarrassed to read.
+
+version: 1
+
+# Proper nouns that may legitimately appear capitalised inside a heading.
+# Used by the Title-Case check so "Lovable vs Bolt" is not a false positive.
+proper_nouns:
+  - AI
+  - API
+  - APIs
+  - AWS
+  - Bolt
+  - Bubble
+  - ChatGPT
+  - Claude
+  - Cloudflare
+  - Codex
+  - Copilot
+  - Cursor
+  - Figma
+  - Framer
+  - GitHub
+  - Google
+  - Lovable
+  - MCP
+  - Microsoft
+  - Netlify
+  - Next
+  - OpenAI
+  - Replit
+  - SaaS
+  - Supabase
+  - TL
+  - Vercel
+  - Webflow
+  - Windsurf
+  - I
+
+typography:
+  - id: em-dash
+    pattern: "—"
+    message: "Em dash is banned. Use a hyphen, a comma, or two sentences."
+  - id: en-dash
+    pattern: "–"
+    message: "En dash is banned. Use a hyphen."
+  - id: guillemets
+    pattern: "[«»]"
+    message: "Guillemets do not belong in English copy. Use straight quotes."
+  - id: curly-quotes
+    pattern: "[“”‘’]"
+    message: "Use straight quotes and apostrophes."
+  - id: ellipsis-char
+    pattern: "…"
+    message: "Use three periods, not the ellipsis character."
+  # Arrows (→) are deliberately NOT banned - the existing posts use them.
+  - id: emoji
+    pattern: "[\U0001F300-\U0001FAFF☀-⛿✅❌⭐️]"
+    message: "No emoji in post bodies."
+
+# Single words. Matched case-insensitively on word boundaries.
+words:
+  - delve
+  - moreover
+  - furthermore
+  - additionally
+  - notably
+  - arguably
+  - seamless
+  - seamlessly
+  - robust
+  - comprehensive
+  - game-changer
+  - gamechanger
+  - revolutionize
+  - revolutionise
+  - revolutionary
+  - landscape
+  - realm
+  - tapestry
+  - unlock
+  - unlocks
+  - unlocking
+  - unleash
+  - unleashes
+  - elevate
+  - elevates
+  - embark
+  - crucial
+  - crucially
+  - pivotal
+  - foster
+  - fosters
+  - harness
+  - harnessing
+  - myriad
+  - plethora
+  - paradigm
+  - underscores
+  - testament
+  - meticulous
+  - meticulously
+  - navigating
+  - leveraging
+
+# Phrases. Matched case-insensitively, whitespace-flexible.
+phrases:
+  - "in today's fast-paced world"
+  - "in today's world"
+  - "at the end of the day"
+  - "it's worth noting"
+  - "it is worth noting"
+  - "let's dive in"
+  - "let's dive into"
+  - "dive deeper"
+  - "in conclusion"
+  - "in summary"
+  - "to sum up"
+  - "the bottom line is"
+  - "when it comes to"
+  - "needless to say"
+  - "that being said"
+  - "ever-evolving"
+  - "rapidly evolving"
+  - "cutting-edge"
+  - "state-of-the-art"
+  - "a wide range of"
+  - "a variety of"
+  - "one of the most"
+  - "look no further"
+  - "the world of"
+  - "in the realm of"
+  - "is set to"
+  - "stands out as"
+  - "not only that"
+  - "as we've seen"
+  - "as mentioned earlier"
+  - "first and foremost"
+
+# Constructions, as regular expressions (case-insensitive, DOTALL off).
+constructions:
+  - id: leverage-as-verb
+    pattern: "\\bleverag(?:e|es|ed|ing)\\b(?!\\s+(?:ratio|point))"
+    message: "Do not use leverage as a verb. Say use."
+  - id: not-just-x-its-y
+    pattern: "\\b(?:it|this|that)(?:'s| is)\\s+not\\s+just\\s+[^.,;]{2,40}[,;]?\\s+(?:it|this|that)(?:'s| is)\\b"
+    message: "The 'It's not just X, it's Y' construction is a machine tell."
+  - id: whether-youre-a-or-b
+    pattern: "\\bwhether\\s+you(?:'re| are)\\s+[^.,]{2,40},?\\s+or\\s+"
+    message: "The 'Whether you're A or B' opener is a machine tell."
+  - id: isnt-just-about
+    pattern: "\\b(?:is|are)n'?t\\s+just\\s+about\\b"
+    message: "The 'isn't just about X' construction is a machine tell."
+  - id: more-than-just
+    pattern: "\\bmore\\s+than\\s+just\\s+(?:a|an|another)\\b"
+    message: "The 'more than just a' construction is a machine tell."
+  - id: heres-the-thing
+    pattern: "\\bhere(?:'s| is)\\s+the\\s+(?:thing|kicker|catch)\\b"
+    message: "Overused blog filler."
+  - id: rhetorical-question-answer
+    pattern: "\\?\\s*(?:The\\s+answer\\s+is|Short\\s+answer|Yes\\.|No\\.)"
+    message: "Question-then-immediate-answer is allowed at most once per post."
+    max_occurrences: 1
+  - id: vague-quantifier
+    pattern: "\\b(?:many|several|numerous|countless)\\s+(?:users|developers|builders|companies|teams|people|studies|reports)\\b"
+    message: "Use a real number from the sources, or drop the claim."
+  - id: unsourced-research
+    pattern: "\\b(?:studies|research|reports|experts)\\s+(?:show|shows|suggest|suggests|say|says|indicate)\\b"
+    message: "Unsourced appeal to authority. Cite the source or cut it."
+  - id: dated-language
+    pattern: "\\b(?:today|yesterday|this\\s+week|last\\s+week|this\\s+month|last\\s+month|recently|just\\s+announced|as\\s+of\\s+(?:writing|now)|currently)\\b"
+    message: "Posts must read the same in six months. No time-relative wording."
+  - id: month-name
+    pattern: "\\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{4}\\b"
+    message: "No calendar dates in the body."
+
+# Headings that are never allowed, as whole-line regexes.
+headings:
+  - id: introduction-heading
+    pattern: "^#{1,6}\\s*(?:Introduction|Intro)\\s*$"
+    message: "Never use an Introduction heading."
+  - id: conclusion-heading
+    pattern: "^#{1,6}\\s*(?:Conclusion|Final\\s+Thoughts|Wrapping\\s+Up|Summary)\\s*$"
+    message: "Never use a Conclusion heading."
+
+# Structural rhythm rules, enforced in code (see services/humanizer.py).
+structure:
+  # Every paragraph within this fraction of the mean length reads as machine
+  # rhythm. Human paragraphs vary.
+  paragraph_length_cv_min: 0.35
+  # Sentence lengths must vary too.
+  sentence_length_cv_min: 0.30
+  # A post that is mostly bullets is a listicle, not writing.
+  max_bullet_fraction: 0.30
+  # Triple comma lists ("fast, cheap, and reliable") in more than this share
+  # of paragraphs is a tell.
+  max_triplet_paragraph_fraction: 0.25
+  # At least this many contractions must appear.
+  min_contractions: 4
+  # At least this many concrete figures (numbers, prices, versions).
+  min_concrete_numbers: 3
