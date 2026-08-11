@@ -19,7 +19,7 @@ from typing import Any
 from .clients.anthropic_client import AnthropicClient, BudgetExceededError, RefusalError
 from .clients.embeddings import EmbeddingProvider
 from .logging_setup import configure_logging, get_logger
-from .models import DraftPost, ScoredTopic, Verdict
+from .models import CritiqueReport, DraftPost, ScoredTopic, Verdict
 from .services import critics, dedup, humanizer, publisher, writer
 from .services.ingest import ingest, load_sources
 from .services.scoring import score_topics
@@ -82,6 +82,30 @@ async def _critique_loop(
     known_slugs: set[str],
 ) -> tuple[DraftPost, int, Verdict]:
     current = draft
+
+    # Deterministic checks first. Sending a draft that stops mid-sentence to
+    # four reviewers spends four calls establishing what a regex already
+    # knows, and their verdicts then drown out the actual defect.
+    dead = await critics.check_links(critics.MD_LINK_RE.findall(current.body), settings)
+    upfront = critics.mechanical_issues(
+        current, known_slugs=known_slugs, dead_links=dead, allowed_urls=set(topic.source_urls)
+    )
+    if any(issue.severity == "blocking" for issue in upfront):
+        log.info(
+            "repairing_draft_before_review",
+            issues=[i.requirement[:120] for i in upfront if i.severity == "blocking"],
+        )
+        current = await writer.revise_draft(
+            current,
+            [CritiqueReport(critic="mechanical", verdict=Verdict.REVISE, issues=upfront)],
+            topic,
+            client=client,
+            settings=settings,
+            voice=voice,
+            internal_links=internal_links,
+            round_index=-1,
+        )
+
     for round_index in range(settings.max_critic_rounds):
         reports = await critics.review(
             current,

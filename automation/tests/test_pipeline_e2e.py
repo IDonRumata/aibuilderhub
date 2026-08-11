@@ -321,3 +321,24 @@ async def test_style_findings_never_block_publication(wired, monkeypatch):
     monkeypatch.setattr(main, "AnthropicClient", StyleVeto)
     assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
     assert (content / "cursor-adds-agent-mode.md").exists()
+
+
+async def test_a_truncated_draft_is_repaired_before_the_reviewers_see_it(wired, monkeypatch):
+    _settings, content, _state = wired
+    seen: list[str] = []
+
+    class Truncating(StubClient):
+        async def complete_json(self, *, label: str, **kwargs) -> dict:
+            payload = await StubClient.complete_json(self, label=label, **kwargs)
+            seen.append(label)
+            if label == "writer-draft":
+                # ends mid-sentence, exactly the live failure mode
+                payload = {**payload, "body": GOOD_BODY.rstrip()[:-40] + " and then"}
+            return payload
+
+    monkeypatch.setattr(main, "AnthropicClient", Truncating)
+    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
+    # The repair pass runs before any critic call.
+    assert seen[1] == "writer-revision--1"
+    assert seen.index("writer-revision--1") < seen.index("critic-fact-checker")
+    assert (content / "cursor-adds-agent-mode.md").exists()

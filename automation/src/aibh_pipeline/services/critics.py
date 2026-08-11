@@ -55,7 +55,16 @@ CRITIQUE_SCHEMA: dict[str, Any] = {
     "additionalProperties": False,
 }
 
-VERDICT_RULES = """\
+SOURCES_ARE_REAL = """\
+The sources you are shown were fetched from live feeds minutes ago. They
+exist. A product, model or company you do not recognise is not evidence of
+fabrication, only of your training cutoff. Never claim a source is invented,
+and never reject a post on that basis. Your question is whether the post's
+claims match what the sources say, not whether the news itself is real.
+"""
+
+VERDICT_RULES = f"""\
+{SOURCES_ARE_REAL}
 Return one of three verdicts:
 - PASS: the post is publishable as it stands for your area. You do not have to
   think it is perfect. If the only things left are improvements you would make
@@ -381,9 +390,17 @@ async def _run_critic(
         json_schema=CRITIQUE_SCHEMA,
         effort="medium",
     )
+    verdict = Verdict(payload["verdict"])
+    if name == "ai-pattern" and verdict is Verdict.REJECT:
+        # The style reviewer keeps straying into factual territory and
+        # rejecting posts over sources it does not recognise. It has no
+        # authority there: the fact-checker owns that question.
+        log.warning("style_critic_reject_downgraded", notes=payload.get("notes", "")[:300])
+        verdict = Verdict.REVISE
+
     report = CritiqueReport(
         critic=name,
-        verdict=Verdict(payload["verdict"]),
+        verdict=verdict,
         issues=[CritiqueIssue(**issue) for issue in payload.get("issues", [])],
         notes=payload.get("notes", ""),
     )
