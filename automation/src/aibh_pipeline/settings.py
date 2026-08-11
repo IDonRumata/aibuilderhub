@@ -94,6 +94,8 @@ class Settings(BaseSettings):
     # Minimum niche relevance a topic must clear to be publishable at all.
     # Anything at or below zero is off-topic for this audience.
     min_niche_score: float = 0.15
+    # Days a topic that failed review is left alone before being retried.
+    failed_topic_cooloff_days: int = 7
 
     # --- dedup ------------------------------------------------------------
     # Cosine similarity above which a topic counts as already covered.
@@ -142,6 +144,10 @@ class Settings(BaseSettings):
     @property
     def embeddings_file(self) -> Path:
         return self.state_dir / "embeddings.json"
+
+    @property
+    def failed_topics_file(self) -> Path:
+        return self.state_dir / "failed_topics.json"
 
     @field_validator("semantic_dupe_threshold", "lexical_dupe_threshold", "trigram_dupe_threshold")
     @classmethod

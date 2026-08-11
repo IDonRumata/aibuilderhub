@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from tests.conftest import make_item, make_topic
@@ -113,3 +113,36 @@ async def test_slug_collision_on_disk_is_a_duplicate(settings, store, tmp_path, 
 def test_vectors_from_different_providers_are_never_compared(store):
     store.vectors["foreign"] = {"provider": "voyage:x", "title": "t", "vector": [1.0, 0.0]}
     assert store.vectors["foreign"]["provider"] != "lexical"
+
+
+def test_a_failed_topic_is_remembered_and_skipped(settings, store):
+    topic = make_topic("Cursor ships an agent mode")
+    assert store.recently_failed(topic, cooloff_days=7) is None
+
+    store.record_failure(topic, "critics returned REJECT after 3 rounds")
+    assert "REJECT" in (store.recently_failed(topic, cooloff_days=7) or "")
+
+    # Same story arriving from a different headline is caught by URL overlap.
+    same_story = make_topic("Cursor agent mode ships", url=topic.items[0].url)
+    assert store.recently_failed(same_story, cooloff_days=7) is not None
+
+    # An unrelated topic is unaffected.
+    other = make_topic("Bubble redesigns its editor", url="https://example.com/bubble")
+    assert store.recently_failed(other, cooloff_days=7) is None
+
+
+def test_a_failure_expires_after_the_cooloff(settings, store):
+    topic = make_topic("Cursor ships an agent mode")
+    store.record_failure(topic, "thin sources")
+    # Age the entry rather than relying on clock resolution.
+    store.failures[0]["failed_at"] = (datetime.now(UTC) - timedelta(days=30)).isoformat()
+    assert store.recently_failed(topic, cooloff_days=7) is None
+
+
+def test_failures_survive_a_reload(settings, store):
+    topic = make_topic("Cursor ships an agent mode")
+    store.record_failure(topic, "thin sources")
+    store.save()
+
+    reloaded = dedup.StateStore(settings)
+    assert reloaded.recently_failed(topic, cooloff_days=7) is not None

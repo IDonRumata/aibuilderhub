@@ -43,6 +43,18 @@ async def _select_topic(
     """Walk the ranked topics in batches until one survives dedup."""
     considered = settings.topics_per_batch * settings.max_topic_batches
     for index, topic in enumerate(topics[:considered]):
+        failure = store.recently_failed(
+            topic, cooloff_days=settings.failed_topic_cooloff_days
+        )
+        if failure:
+            log.info(
+                "topic_recently_failed",
+                rank=index,
+                title=topic.title[:90],
+                reason=failure[:160],
+            )
+            continue
+
         verdict = await dedup.is_duplicate_topic(topic, store, provider, settings)
         if verdict.is_duplicate:
             log.info(
@@ -338,6 +350,9 @@ def _result_dict(result: Any) -> dict[str, Any]:
 def _abort(settings: Settings, store: dedup.StateStore, *, reason: str, topic: ScoredTopic) -> int:
     """Skip the day loudly. Nothing is written to the content collection."""
     log.error("day_skipped", reason=reason, topic=topic.title[:120])
+    # Remember the failure, or tomorrow's run picks the same top-scoring
+    # story and burns its whole budget failing on it again.
+    store.record_failure(topic, reason)
     publisher.write_run_summary(
         settings, {"published": False, "reason": reason, "topic": topic.title}
     )

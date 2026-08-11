@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from ..clients.embeddings import EmbeddingProvider, cosine
@@ -44,6 +44,7 @@ class StateStore:
         self._settings = settings
         self.topics: list[PublishedTopic] = []
         self.vectors: dict[str, dict[str, object]] = {}
+        self.failures: list[dict[str, object]] = []
         self._load()
 
     # ------------------------------------------------------------------ #
@@ -66,7 +67,21 @@ class StateStore:
                 log.error("state_vectors_unreadable", error=str(exc))
                 self.vectors = {}
 
-        log.info("state_loaded", topics=len(self.topics), vectors=len(self.vectors))
+        failures_path = self._settings.failed_topics_file
+        if failures_path.exists():
+            try:
+                loaded = json.loads(failures_path.read_text(encoding="utf-8"))
+                self.failures = loaded if isinstance(loaded, list) else []
+            except json.JSONDecodeError as exc:
+                log.error("state_failures_unreadable", error=str(exc))
+                self.failures = []
+
+        log.info(
+            "state_loaded",
+            topics=len(self.topics),
+            vectors=len(self.vectors),
+            failures=len(self.failures),
+        )
 
     def save(self) -> None:
         self._settings.state_dir.mkdir(parents=True, exist_ok=True)
@@ -83,13 +98,57 @@ class StateStore:
             json.dumps(self.vectors, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
-        log.info("state_saved", topics=len(self.topics), vectors=len(self.vectors))
+        self._settings.failed_topics_file.write_text(
+            json.dumps(self.failures[-100:], indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        log.info(
+            "state_saved",
+            topics=len(self.topics),
+            vectors=len(self.vectors),
+            failures=len(self.failures),
+        )
 
     # ------------------------------------------------------------------ #
 
     @property
     def seen_urls(self) -> set[str]:
         return {url for topic in self.topics for url in topic.source_urls}
+
+    # --- failed topics ------------------------------------------------- #
+
+    def record_failure(self, topic: ScoredTopic, reason: str) -> None:
+        """Remember a topic that could not be written to publishable quality.
+
+        Without this the highest-scoring story is re-selected every single
+        run, and the pipeline spends its whole budget failing on the same
+        piece day after day.
+        """
+        self.failures = [f for f in self.failures if f.get("key") != topic.key]
+        self.failures.append(
+            {
+                "key": topic.key,
+                "title": topic.title,
+                "source_urls": topic.source_urls,
+                "reason": reason[:300],
+                "failed_at": datetime.now(UTC).isoformat(),
+            }
+        )
+
+    def recently_failed(self, topic: ScoredTopic, *, cooloff_days: int) -> str | None:
+        """The reason this topic failed recently, if it did."""
+        cutoff = datetime.now(UTC) - timedelta(days=cooloff_days)
+        urls = set(topic.source_urls)
+        for entry in self.failures:
+            try:
+                failed_at = datetime.fromisoformat(str(entry.get("failed_at")))
+            except ValueError:
+                continue
+            if failed_at < cutoff:
+                continue
+            if entry.get("key") == topic.key or urls & set(entry.get("source_urls") or []):
+                return str(entry.get("reason", "previously failed"))
+        return None
 
     @property
     def known_slugs(self) -> set[str]:
