@@ -20,7 +20,7 @@ from .clients.anthropic_client import AnthropicClient, BudgetExceededError, Refu
 from .clients.embeddings import EmbeddingProvider
 from .logging_setup import configure_logging, get_logger
 from .models import CritiqueReport, DraftPost, ScoredTopic, Verdict
-from .services import critics, dedup, humanizer, publisher, writer
+from .services import budget, critics, dedup, humanizer, publisher, writer
 from .services.ingest import ingest, load_sources
 from .services.scoring import score_topics
 from .services.site import existing_posts, link_menu
@@ -207,6 +207,37 @@ async def run(*, as_draft: bool, dry_run: bool) -> int:
         publisher.set_output("published", "false")
         return EXIT_OK
 
+    spend = budget.MonthlyBudget(settings)
+    if spend.exceeded():
+        log.error(
+            "monthly_budget_exhausted",
+            spent_usd=round(spend.spent_this_month, 4),
+            budget_usd=settings.monthly_budget_usd,
+        )
+        publisher.write_run_summary(
+            settings,
+            {
+                "published": False,
+                "reason": (
+                    f"monthly budget of ${settings.monthly_budget_usd} reached "
+                    f"(${spend.spent_this_month:.2f} estimated so far)"
+                ),
+            },
+        )
+        publisher.append_step_summary(
+            [
+                "### Content pipeline",
+                "",
+                f"Stopped: the estimated spend for this month has reached "
+                f"${spend.spent_this_month:.2f} against a ceiling of "
+                f"${settings.monthly_budget_usd:.2f}.",
+                "",
+                "Raise `monthly_budget_usd` in automation settings to continue.",
+            ]
+        )
+        publisher.set_output("published", "false")
+        return EXIT_BUDGET
+
     config = load_sources(settings.sources_file)
     voice = settings.voice_file.read_text(encoding="utf-8")
     style_rules = settings.banned_patterns_file.read_text(encoding="utf-8")
@@ -374,7 +405,16 @@ async def run(*, as_draft: bool, dry_run: bool) -> int:
         publisher.set_output("published", "false")
         return EXIT_REJECTED
     finally:
-        log.info("usage", **client.usage.as_dict())
+        usage = client.usage.as_dict()
+        cost = spend.record(usage, budget.Prices.from_settings(settings))
+        spend.save()
+        log.info(
+            "usage",
+            **usage,
+            estimated_usd=round(cost, 5),
+            month_to_date_usd=round(spend.spent_this_month, 4),
+            budget_remaining_usd=round(spend.remaining, 4),
+        )
         await client.aclose()
 
 

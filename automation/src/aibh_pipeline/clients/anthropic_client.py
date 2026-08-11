@@ -159,9 +159,20 @@ class AnthropicClient:
     # ------------------------------------------------------------------ #
 
     def _charge(self, label: str) -> None:
-        if self.usage.calls >= self._settings.max_llm_calls:
+        settings = self._settings
+        if self.usage.calls >= settings.max_llm_calls:
             raise BudgetExceededError(
-                f"LLM call budget of {self._settings.max_llm_calls} exhausted at {label!r}"
+                f"LLM call budget of {settings.max_llm_calls} exhausted at {label!r}"
+            )
+        if self.usage.input_tokens >= settings.max_input_tokens_per_run:
+            raise BudgetExceededError(
+                f"input token budget of {settings.max_input_tokens_per_run} "
+                f"exhausted at {label!r} ({self.usage.input_tokens} used)"
+            )
+        if self.usage.output_tokens >= settings.max_output_tokens_per_run:
+            raise BudgetExceededError(
+                f"output token budget of {settings.max_output_tokens_per_run} "
+                f"exhausted at {label!r} ({self.usage.output_tokens} used)"
             )
         self.usage.calls += 1
 

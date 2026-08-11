@@ -79,6 +79,21 @@ class Settings(BaseSettings):
     max_llm_calls: int = 25
     max_critic_rounds: int = 3
 
+    # Token ceilings for a single run. A normal run uses roughly 60k input
+    # and 12k output, so these leave headroom while still stopping a loop.
+    max_input_tokens_per_run: int = 400_000
+    max_output_tokens_per_run: int = 80_000
+
+    # Hard monthly ceiling on estimated spend. Once the month's estimate
+    # reaches this, the pipeline refuses to start until the month rolls over.
+    # A normal day costs under a cent, so 5 dollars is roughly 20x headroom.
+    monthly_budget_usd: float = 5.0
+
+    # US dollars per million tokens, for the spend estimate only. Defaults are
+    # the standard claude-sonnet-5 rates; update if you change model.
+    price_input_per_mtok: float = 3.0
+    price_output_per_mtok: float = 15.0
+
     # --- ingest -----------------------------------------------------------
     lookback_hours: int = 36
     min_candidates: int = 20
@@ -148,6 +163,10 @@ class Settings(BaseSettings):
     @property
     def failed_topics_file(self) -> Path:
         return self.state_dir / "failed_topics.json"
+
+    @property
+    def usage_file(self) -> Path:
+        return self.state_dir / "usage.json"
 
     @field_validator("semantic_dupe_threshold", "lexical_dupe_threshold", "trigram_dupe_threshold")
     @classmethod
