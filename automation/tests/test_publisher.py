@@ -165,3 +165,23 @@ def test_a_very_short_body_is_blocking():
         allowed_urls={"https://example.com/cursor"},
     )
     assert any(i.severity == "blocking" and "too short" in i.requirement for i in issues)
+
+
+def test_a_title_one_character_over_target_does_not_block():
+    """60 is an SEO display guideline. Losing a day to 61 characters is not."""
+    draft = make_draft(title="x" * 61)
+    issues = critics.mechanical_issues(
+        draft, known_slugs=set(), dead_links=[], allowed_urls=set()
+    )
+    title_issues = [i for i in issues if "Title is" in i.requirement]
+    assert title_issues and title_issues[0].severity == "major"
+
+
+def test_a_wildly_long_title_still_blocks():
+    draft = make_draft(title="x" * 90)
+    issues = critics.mechanical_issues(
+        draft, known_slugs=set(), dead_links=[], allowed_urls=set()
+    )
+    assert any(
+        "Title is" in i.requirement and i.severity == "blocking" for i in issues
+    )

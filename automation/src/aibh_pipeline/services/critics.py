@@ -19,7 +19,11 @@ from ..settings import Settings
 
 log = get_logger(__name__)
 
+# 60 is the SEO target: past roughly this, Google truncates the title in the
+# results page. It is a display guideline, not a correctness rule, so a title
+# a few characters over is worth flagging and not worth killing a day for.
 TITLE_MAX = 60
+TITLE_HARD_MAX = 65
 # Google truncates a description around 160 characters. A tight 20
 # character window made this the most-failed rule in live runs for no
 # SEO benefit, so the band is wider and the ceiling is what matters.
@@ -199,7 +203,7 @@ def mechanical_issues(
                     f"Title is {len(draft.title)} characters. "
                     f"Cut it to {TITLE_MAX} or fewer."
                 ),
-                severity="blocking",
+                severity="blocking" if len(draft.title) > TITLE_HARD_MAX else "major",
             )
         )
     length = len(draft.description)
