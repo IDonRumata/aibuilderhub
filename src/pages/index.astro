@@ -98,7 +98,7 @@ const featuredTools = [
       {featuredTools.map(tool => <ToolCard {...tool} />)}
     </div>
     <p class="text-xs mt-3 text-center" style="color: var(--color-muted);">
-      * "Try free" buttons are affiliate links –
+      * "Try free" buttons are affiliate links –&#32;
       <a href="/disclosure" class="hover:underline" style="color: var(--color-accent-light);">full disclosure</a>
     </p>
   </section>
@@ -115,7 +115,7 @@ const featuredTools = [
           <PostCard
             title={post.data.title}
             description={post.data.description}
-            slug={post.slug}
+            slug={post.id}
             tags={post.data.tags}
           />
         ))}

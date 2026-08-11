@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -69,7 +69,7 @@ const fullTitle = title === 'Home'
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <!-- Smooth page transitions (View Transitions API) -->
-    <ViewTransitions />
+    <ClientRouter />
 
     <!-- Structured data: WebSite + Organization (GEO / rich results) -->
     <script type="application/ld+json" set:html={JSON.stringify({

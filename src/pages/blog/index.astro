@@ -37,7 +37,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
         <PostCard
           title={post.data.title}
           description={post.data.description}
-          slug={post.slug}
+          slug={post.id}
           tags={post.data.tags}
         />
       ))}
