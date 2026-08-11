@@ -7,6 +7,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+import httpx
 import yaml
 
 from ..clients.hackernews import fetch_hackernews
@@ -65,20 +66,13 @@ async def ingest(settings: Settings, config: dict[str, Any]) -> list[SourceItem]
                 )
             )
 
-        for sub in config.get("reddit") or []:
+        # Reddit is rate limited per client, and firing five subreddits at
+        # once earns a 429 on both the JSON and the RSS path. One task walks
+        # them in sequence with a pause; every other source still runs in
+        # parallel alongside it.
+        if config.get("reddit"):
             tasks.append(
-                asyncio.create_task(
-                    fetch_subreddit(
-                        client,
-                        settings,
-                        subreddit=sub["subreddit"],
-                        sort=sub.get("sort", "top"),
-                        period=sub.get("period", "day"),
-                        limit=int(sub.get("limit", 25)),
-                        min_upvotes=int(sub.get("min_upvotes", 25)),
-                        weight=float(sub.get("weight", 1.0)),
-                    )
-                )
+                asyncio.create_task(_fetch_reddit_serially(client, settings, config["reddit"]))
             )
 
         results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -104,6 +98,30 @@ async def ingest(settings: Settings, config: dict[str, Any]) -> list[SourceItem]
         deduped=len(deduped),
     )
     return deduped[: settings.max_candidates]
+
+
+async def _fetch_reddit_serially(
+    client: httpx.AsyncClient,
+    settings: Settings,
+    subs: list[dict[str, Any]],
+) -> list[SourceItem]:
+    items: list[SourceItem] = []
+    for index, sub in enumerate(subs):
+        if index:
+            await asyncio.sleep(settings.reddit_delay_seconds)
+        items.extend(
+            await fetch_subreddit(
+                client,
+                settings,
+                subreddit=sub["subreddit"],
+                sort=sub.get("sort", "top"),
+                period=sub.get("period", "day"),
+                limit=int(sub.get("limit", 25)),
+                min_upvotes=int(sub.get("min_upvotes", 25)),
+                weight=float(sub.get("weight", 1.0)),
+            )
+        )
+    return items
 
 
 def _within_window(items: list[SourceItem], hours: int) -> list[SourceItem]:

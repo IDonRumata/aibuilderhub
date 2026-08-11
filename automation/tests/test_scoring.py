@@ -90,3 +90,16 @@ def test_same_predicate_different_subject_is_not_one_story():
         make_item("Replit ships a no-code database builder", url="https://example.com/r"),
     ]
     assert len(cluster(items)) == 2
+
+
+def test_blank_env_values_fall_back_to_defaults(monkeypatch):
+    """GitHub Actions passes "" for an unset variable or secret."""
+    from aibh_pipeline.settings import Settings
+
+    monkeypatch.setenv("AIBH_MODEL", "")
+    monkeypatch.setenv("VOYAGE_API_KEY", "")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "")
+    blank = Settings()
+    assert blank.model == "claude-sonnet-5"
+    assert blank.voyage_api_key is None
+    assert blank.anthropic_api_key is None

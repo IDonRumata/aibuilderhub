@@ -6,6 +6,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from pydantic import Field, SecretStr, field_validator
+from pydantic_core.core_schema import ValidationInfo
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # automation/src/aibh_pipeline/settings.py -> automation/
@@ -34,6 +35,16 @@ class Settings(BaseSettings):
     anthropic_api_key: SecretStr | None = Field(default=None, alias="ANTHROPIC_API_KEY")
     voyage_api_key: SecretStr | None = Field(default=None, alias="VOYAGE_API_KEY")
 
+    @field_validator("anthropic_api_key", "voyage_api_key", mode="before")
+    @classmethod
+    def _blank_secret_is_unset(cls, value: object) -> object:
+        # GitHub Actions substitutes an empty string for a secret that was
+        # never created, which otherwise looks like a configured credential
+        # and produces `Illegal header value b'Bearer '`.
+        if isinstance(value, str) and not value.strip():
+            return None
+        return value
+
     def require_anthropic_key(self) -> SecretStr:
         if self.anthropic_api_key is None:
             raise RuntimeError("ANTHROPIC_API_KEY is not set")
@@ -45,6 +56,18 @@ class Settings(BaseSettings):
     # The spec named claude-sonnet-4-5; claude-sonnet-5 is the current Sonnet
     # and is what this defaults to. Override with AIBH_MODEL.
     model: str = Field(default="claude-sonnet-5", alias="AIBH_MODEL")
+
+    @field_validator("model", "voyage_model", mode="before")
+    @classmethod
+    def _blank_falls_back_to_default(cls, value: object, info: ValidationInfo) -> object:
+        # Same trap as above: an unset repository variable arrives as "",
+        # which the API rejects with "model: String should have at least 1
+        # character" rather than falling back to the default here.
+        if isinstance(value, str) and not value.strip():
+            field = cls.model_fields[str(info.field_name)]
+            return field.default
+        return value
+
     max_tokens_writer: int = 6000
     max_tokens_critic: int = 2000
     max_tokens_humanizer: int = 6000
@@ -61,6 +84,8 @@ class Settings(BaseSettings):
     min_candidates: int = 20
     max_candidates: int = 150
     http_timeout_seconds: float = 20.0
+    # Reddit rate limits per client; hitting five subreddits at once 429s.
+    reddit_delay_seconds: float = 3.0
     user_agent: str = "aibuilderhub-content-bot/1.0 (+https://aibuilderhub.app)"
 
     # --- selection --------------------------------------------------------
