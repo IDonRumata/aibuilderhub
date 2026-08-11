@@ -274,9 +274,20 @@ Rules you must respect while editing:
 - Never use an em dash or en dash. Hyphens, commas or two sentences instead.
 - Straight quotes and apostrophes only.
 - Contractions everywhere a person would use them.
-- Vary sentence and paragraph length. Some sentences should be very short.
 - No time-relative wording and no calendar dates anywhere in the body.
 - Headings stay in sentence case.
+
+If you are told the paragraphs or sentences are too uniform, this is a
+structural edit, not a wording one. Vague instructions to "vary the rhythm"
+will not move the measurement. Do this instead:
+- Split the two longest paragraphs at their natural break, so a long one
+  becomes a long one and a short one.
+- Merge two adjacent short paragraphs that make one point between them.
+- Add at least one paragraph of a single short sentence, standing alone, at
+  a moment that deserves emphasis.
+- Inside paragraphs, follow a long sentence with a four-word one.
+The target is paragraphs ranging from under 20 words to over 90, not all of
+them clustered around the average.
 
 Return the corrected markdown body and nothing else. No preamble, no
 explanation, no code fence around the whole post.
@@ -289,7 +300,7 @@ async def humanize(
     client: AnthropicClient,
     settings: Settings,
     voice: str,
-    max_rounds: int = 2,
+    max_rounds: int = 3,
 ) -> tuple[str, list[Violation]]:
     """Scan, ask the model to fix what was found, rescan.
 

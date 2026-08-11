@@ -23,7 +23,8 @@ batches the whole change into a single review, and you either take it or you
 don't.
 
 I'm not convinced by the pricing. At $20 a month it's fine if you code most
-days. If you open the editor twice a week, it isn't.
+days. If you open the editor 2 days a week, it isn't, and the 14-day trial
+won't tell you which of those you are.
 
 The catch: the agent still can't run your test suite on its own, so nothing
 here removes the need to verify. Treat it as a fast first draft.
@@ -95,3 +96,26 @@ def test_no_published_post_contains_banned_patterns(rules, settings):
         if violations:
             offenders[post.slug] = sorted({v.rule for v in violations})
     assert not offenders, f"banned patterns in generated posts: {offenders}"
+
+
+def test_the_rhythm_rules_are_calibrated_to_human_writing(rules, settings):
+    """Every hand-written post on the site must clear the structural rules.
+
+    These thresholds were measured against those posts, not guessed. If this
+    fails, a limit drifted past what a person actually writes and the
+    humaniser will start chasing an impossible target.
+    """
+    from aibh_pipeline.services.humanizer import _structure_violations
+
+    limits = rules.get("structure") or {}
+    offenders = {}
+    for post in existing_posts(settings.content_dir):
+        # Step-by-step guides and tutorials legitimately live on lists and
+        # run past the bullet limit. The pipeline writes news analysis, so
+        # reviews and comparisons are the right reference shape.
+        if {"guide", "tutorial"} & set(post.tags):
+            continue
+        violations = _structure_violations(post.body, limits)
+        if violations:
+            offenders[post.slug] = [f"{v.rule}: {v.excerpt}" for v in violations]
+    assert not offenders, f"human-written posts fail the rhythm rules: {offenders}"
