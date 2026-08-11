@@ -78,7 +78,8 @@ Hard rules:
 Output fields:
 - title: under 60 characters, no clickbait, no "You Won't Believe", no colon
   stuffing. Sentence case with proper nouns capitalised.
-- description: 140 to 160 characters, a real summary, not a teaser.
+- description: 120 to 165 characters, a real summary, not a teaser.
+  Count the characters before you answer; this is checked exactly.
 - slug: lowercase kebab-case, no dates, no year, 3 to 7 words.
 - tags: 3 to 5 lowercase tags. The first tag is always "news".
 - body: markdown, 500 to 1000 words, at the shorter end when the sources are

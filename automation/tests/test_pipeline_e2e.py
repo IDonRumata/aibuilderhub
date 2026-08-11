@@ -295,3 +295,29 @@ async def test_a_blocking_issue_still_stops_the_day(wired, monkeypatch):
     monkeypatch.setattr(main, "AnthropicClient", Blocking)
     assert await main.run(as_draft=True, dry_run=False) == main.EXIT_REJECTED
     assert [p.name for p in content.glob("*.md")] == ["cursor-review-2026.md"]
+
+
+async def test_style_findings_never_block_publication(wired, monkeypatch):
+    """The humaniser fixes typography; the style critic must not veto first."""
+    _settings, content, _state = wired
+
+    class StyleVeto(StubClient):
+        async def complete_json(self, *, label: str, **kwargs) -> dict:
+            payload = await StubClient.complete_json(self, label=label, **kwargs)
+            if label.startswith("critic-ai-pattern"):
+                return {
+                    "verdict": "REVISE",
+                    "notes": "typography",
+                    "issues": [
+                        {
+                            "quote": "a real saving",
+                            "requirement": "Em dash is banned",
+                            "severity": "blocking",
+                        }
+                    ],
+                }
+            return payload
+
+    monkeypatch.setattr(main, "AnthropicClient", StyleVeto)
+    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
+    assert (content / "cursor-adds-agent-mode.md").exists()

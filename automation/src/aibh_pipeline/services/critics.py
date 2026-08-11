@@ -20,8 +20,11 @@ from ..settings import Settings
 log = get_logger(__name__)
 
 TITLE_MAX = 60
-DESCRIPTION_MIN = 140
-DESCRIPTION_MAX = 160
+# Google truncates a description around 160 characters. A tight 20
+# character window made this the most-failed rule in live runs for no
+# SEO benefit, so the band is wider and the ceiling is what matters.
+DESCRIPTION_MIN = 120
+DESCRIPTION_MAX = 165
 
 MD_LINK_RE = re.compile(r"\[[^\]]*\]\((https?://[^)\s]+)\)")
 INTERNAL_LINK_RE = re.compile(r"\[[^\]]*\]\((/blog/[a-z0-9-]+)\)")

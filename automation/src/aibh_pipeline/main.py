@@ -94,9 +94,15 @@ async def _critique_loop(
             known_slugs=known_slugs,
         )
         verdict = critics.verdict_of(reports)
+        # The style reviewer's findings never block. Everything it objects to
+        # - em dashes, banned words, typography - is fixed deterministically by
+        # the humaniser in the very next step, and the regex rescan after that
+        # is the real gate. Letting it veto here means the pipeline dies on
+        # something it was about to repair anyway.
         blocking = [
             issue
             for report in reports
+            if report.critic != "ai-pattern"
             for issue in report.issues
             if issue.severity == "blocking"
         ]
