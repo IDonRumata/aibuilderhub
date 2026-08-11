@@ -9,7 +9,7 @@ tags:
 - ai-agents
 - coding-tools
 author: AIBuilderHub
-draft: true
+draft: false
 ---
 
 Meta is back with open weights, and this time the pitch isn't "a good chatbot you can run yourself." It's a model built specifically to complete agentic tasks end to end: writing code, using tools, and finishing multi-turn jobs without a human nudging it at every step.
