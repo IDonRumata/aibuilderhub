@@ -2,62 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 
-const tools = [
-  {
-    name: 'Lovable',
-    description: 'Build full-stack web apps from plain-English prompts. Best for SaaS MVPs with real backend needs.',
-    price: 'From $25/mo',
-    badge: "Editor's Pick",
-    rating: 5,
-    reviewHref: '/blog/lovable-review-2026',
-    affiliateHref: 'https://lovablelabs.pxf.io/jRQNrb',
-  },
-  {
-    name: 'Bolt.new',
-    description: 'Instant web apps in the browser, no account needed to start. Best for quick prototypes.',
-    price: 'Free + paid plans',
-    badge: 'Best for Beginners',
-    rating: 4,
-    reviewHref: '/blog/bolt-review-2026',
-    affiliateHref: 'https://bolt.new',
-  },
-  {
-    name: 'Cursor',
-    description: 'AI-first code editor. Understands your codebase context. Best for developers going faster.',
-    price: 'From $20/mo',
-    badge: 'Best for Devs',
-    rating: 5,
-    reviewHref: '/blog/cursor-review-2026',
-    affiliateHref: 'https://cursor.sh',
-  },
-  {
-    name: 'v0 by Vercel',
-    description: 'Generate React UI components from descriptions. Best for frontend prototyping and design-to-code.',
-    price: 'Free + paid plans',
-    badge: 'Best for UI',
-    rating: 4,
-    reviewHref: '/blog/v0-review-2026',
-    affiliateHref: 'https://v0.dev',
-  },
-  {
-    name: 'Framer',
-    description: 'Build and publish responsive websites visually. Best for marketing sites and landing pages.',
-    price: 'Free + $15/mo',
-    badge: 'Best for Design',
-    rating: 4,
-    reviewHref: '/blog/framer-review-2026',
-    affiliateHref: 'https://framer.com',
-  },
-  {
-    name: 'Replit',
-    description: 'Cloud IDE with AI assistance. Build, run, and deploy apps from the browser.',
-    price: 'Free + $25/mo',
-    badge: 'Best in Browser',
-    rating: 4,
-    reviewHref: '/blog/replit-review-2026',
-    affiliateHref: 'https://replit.com',
-  },
-];
+import { tools } from '../../data/tools.json';
 ---
 
 <BaseLayout
@@ -76,7 +21,7 @@ const tools = [
     </div>
 
     <p class="text-xs text-muted mt-6 text-center">
-      "Try free" buttons are affiliate links.&#32;
+      "Try free" buttons may be affiliate links.&#32;
       <a href="/disclosure" class="text-accent-light hover:underline">Full disclosure →</a>
     </p>
   </div>

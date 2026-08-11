@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { tools } from '../data/tools.json';
+
+// Cheapest paid entry point first; free-to-start tools sort by what the first
+// paid tier costs, because that is the number people actually compare.
+const rows = [...tools].sort((a, b) => a.priceFrom - b.priceFrom);
+
+const cheapestPaid = rows.filter(t => t.priceFrom > 0)[0];
+const freeToStart = rows.filter(t => t.freeTier);
+const lovable = tools.find(t => t.id === 'lovable');
+---
+
+<BaseLayout
+  title="AI App Builder Pricing Compared"
+  description="What every major AI app builder actually costs: entry price, free tier, and who each one is worth paying for. Lovable, Cursor, Bolt, Bubble, Webflow and more."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3" style="color: var(--color-text);">
+      What these tools actually cost
+    </h1>
+    <p class="text-lg mb-8" style="color: var(--color-muted);">
+      Entry prices for every builder we've reviewed, side by side. Vendors change
+      pricing often, so treat this as a starting point and check the current page
+      before you pay.
+    </p>
+
+    <div class="disclosure-notice">
+      <span class="font-bold shrink-0 mt-0.5" style="color: var(--color-accent);">ℹ</span>
+      <span>
+        Some links here are affiliate links. They never change the order of this
+        table, which is sorted by price.&#32;
+        <a href="/disclosure" class="hover:underline ml-1" style="color: var(--color-accent-light);">Full disclosure →</a>
+      </span>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="overflow-x-auto rounded-xl" style="border: 1px solid var(--color-border);">
+      <table class="w-full text-sm" style="border-collapse: collapse;">
+        <thead>
+          <tr style="background-color: var(--color-surface-2);">
+            <th class="text-left font-semibold px-4 py-3" style="color: var(--color-text);">Tool</th>
+            <th class="text-left font-semibold px-4 py-3 whitespace-nowrap" style="color: var(--color-text);">Starts at</th>
+            <th class="text-left font-semibold px-4 py-3 whitespace-nowrap" style="color: var(--color-text);">Free tier</th>
+            <th class="text-left font-semibold px-4 py-3" style="color: var(--color-text);">Worth paying for if</th>
+            {/* relative: sr-only is absolutely positioned, and without a
+                positioned ancestor it escapes the scroll container and widens
+                the whole document on mobile. */}
+            <th class="px-4 py-3 relative"><span class="sr-only">Links</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(tool => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="px-4 py-4 align-top">
+                <div class="font-semibold" style="color: var(--color-text);">{tool.name}</div>
+                <a href={`/blog/${tool.reviewSlug}`} class="link-accent text-xs">Read the review</a>
+              </td>
+              <td class="px-4 py-4 align-top whitespace-nowrap" style="color: var(--color-prose-body);">
+                {tool.priceFrom === 0 ? 'Free tier only' : `$${tool.priceFrom}/mo`}
+              </td>
+              <td class="px-4 py-4 align-top" style="color: var(--color-prose-body);">
+                {tool.freeTier ? 'Yes' : 'No'}
+              </td>
+              <td class="px-4 py-4 align-top" style="color: var(--color-prose-body);">
+                {tool.bestFor}
+                <div class="text-xs mt-1" style="color: var(--color-muted);">Skip it for: {tool.notFor}</div>
+              </td>
+              <td class="px-4 py-4 align-top">
+                <a
+                  href={`/go/${tool.id}`}
+                  target="_blank"
+                  rel="nofollow sponsored noopener"
+                  data-tool={tool.id}
+                  class="btn-primary py-1.5 px-3 text-xs whitespace-nowrap"
+                >
+                  Try it →
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Guidance -->
+    <div class="prose prose-lg max-w-none mt-12">
+      <h2>How to read this table</h2>
+
+      <p>
+        The entry price is the least useful number on it. Every one of these
+        tools bills against something that runs out, whether that's messages,
+        credits, or compute minutes, and the tier you actually end up on depends
+        on how much you build rather than which plan you picked on day one.
+      </p>
+
+      <p>
+        {freeToStart.length} of these {rows.length} let you start without a card.
+        Use that. Build the same small thing on two of them and you'll learn more
+        in an afternoon than any comparison table can tell you, including this one.
+      </p>
+
+      <h2>If you're picking one to pay for</h2>
+
+      <p>
+        <strong>You can already code.</strong> Cursor or GitHub Copilot. The
+        cheapest paid option in the table is {cheapestPaid.name} at ${cheapestPaid.priceFrom}/mo,
+        and it's the right first step if you mostly want faster autocomplete
+        rather than an agent rewriting files. Cursor costs twice that and earns
+        it once you're doing multi-file work.
+      </p>
+
+      <p>
+        <strong>You can't, and you want a real app.</strong> Lovable, at
+        ${lovable.priceFrom}/mo and the only tool here with no free tier. It costs
+        more than an editor because it hands you a database and auth without you
+        understanding either. That's the thing you're actually buying, and it's
+        also the thing that will bite you the first time something breaks.
+      </p>
+
+      <p>
+        <strong>You want a site, not an app.</strong> Framer or Webflow. Framer
+        gets you there faster, Webflow gives you more room to grow. Neither one
+        needs the AI builders at all.
+      </p>
+
+      <p>
+        <strong>You're not sure yet.</strong> Don't pay anyone. Start on Bolt's
+        free tier, get something ugly working, and let that tell you which of the
+        problems above you actually have.
+      </p>
+    </div>
+
+  </div>
+</BaseLayout>

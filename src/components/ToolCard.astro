@@ -1,16 +1,23 @@
 ---
 interface Props {
+  id: string;
   name: string;
   description: string;
   price: string;
   badge?: string;
-  reviewHref: string;
-  affiliateHref?: string;
+  reviewSlug?: string;
   rating?: number;
+  /** true when this card links to a paying partner rather than the vendor */
+  monetised?: boolean;
 }
 
-const { name, description, price, badge, reviewHref, affiliateHref, rating } = Astro.props;
+const { id, name, description, price, badge, reviewSlug, rating } = Astro.props;
 const stars = rating ? Array.from({ length: 5 }, (_, i) => i < rating) : null;
+
+// Outbound links always go through /go/<id>. The redirect target lives in
+// src/data/tools.json, so switching a tool to an affiliate programme never
+// touches a template or a published post.
+const outboundHref = `/go/${id}`;
 ---
 
 <div class="card flex flex-col">
@@ -33,17 +40,18 @@ const stars = rating ? Array.from({ length: 5 }, (_, i) => i < rating) : null;
   <div class="flex items-center justify-between pt-3 divider">
     <span class="text-xs" style="color: var(--color-muted);">{price}</span>
     <div class="flex gap-2">
-      <a href={reviewHref} class="btn-secondary py-1.5 px-3 text-xs">Review</a>
-      {affiliateHref && (
-        <a
-          href={affiliateHref}
-          target="_blank"
-          rel="nofollow sponsored noopener"
-          class="btn-primary py-1.5 px-3 text-xs"
-        >
-          Try free →
-        </a>
+      {reviewSlug && (
+        <a href={`/blog/${reviewSlug}`} class="btn-secondary py-1.5 px-3 text-xs">Review</a>
       )}
+      <a
+        href={outboundHref}
+        target="_blank"
+        rel="nofollow sponsored noopener"
+        data-tool={id}
+        class="btn-primary py-1.5 px-3 text-xs"
+      >
+        Try free →
+      </a>
     </div>
   </div>
 </div>

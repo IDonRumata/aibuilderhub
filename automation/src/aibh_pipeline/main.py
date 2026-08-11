@@ -82,7 +82,23 @@ async def _critique_loop(
             known_slugs=known_slugs,
         )
         verdict = critics.verdict_of(reports)
-        log.info("critique_round", round=round_index, verdict=verdict.value)
+        blocking = [
+            issue
+            for report in reports
+            for issue in report.issues
+            if issue.severity == "blocking"
+        ]
+        log.info(
+            "critique_round",
+            round=round_index,
+            verdict=verdict.value,
+            blocking=len(blocking),
+            issues=[
+                f"{report.critic}/{issue.severity}: {issue.requirement[:110]}"
+                for report in reports
+                for issue in report.issues
+            ][:12],
+        )
 
         if verdict is Verdict.PASS:
             return current, round_index + 1, verdict
@@ -93,7 +109,23 @@ async def _critique_loop(
             return current, round_index + 1, verdict
 
         if round_index == settings.max_critic_rounds - 1:
-            return current, round_index + 1, verdict
+            # Last round. A reviewer can always find one more thing to
+            # improve, so holding out for a unanimous PASS means never
+            # publishing. What must not survive is a *blocking* issue: an
+            # unsupported fact, a dead link, a broken frontmatter rule.
+            # Anything softer is logged and shipped.
+            if blocking:
+                log.error(
+                    "blocking_issues_survived",
+                    count=len(blocking),
+                    issues=[i.requirement[:140] for i in blocking[:5]],
+                )
+                return current, round_index + 1, Verdict.REJECT
+            log.warning(
+                "published_with_open_notes",
+                count=sum(len(r.issues) for r in reports),
+            )
+            return current, round_index + 1, Verdict.PASS
 
         current = await writer.revise_draft(
             current,

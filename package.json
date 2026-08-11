@@ -3,8 +3,9 @@
   "type": "module",
   "version": "0.1.0",
   "scripts": {
-    "dev": "astro dev --port 4322",
+    "dev": "node scripts/build-redirects.mjs && astro dev --port 4322",
     "start": "astro dev",
+    "prebuild": "node scripts/build-redirects.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

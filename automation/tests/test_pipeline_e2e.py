@@ -248,3 +248,50 @@ async def test_missing_api_key_skips_the_day_quietly(settings, monkeypatch, tmp_
     summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
     assert summary["published"] is False
     assert "ANTHROPIC_API_KEY" in summary["reason"]
+
+
+async def test_minor_issues_do_not_block_publication(wired, monkeypatch):
+    """A reviewer can always find one more nit; that must not stop the day."""
+    _settings, content, _state = wired
+
+    class Nitpicking(StubClient):
+        async def complete_json(self, *, label: str, **kwargs) -> dict:
+            payload = await StubClient.complete_json(self, label=label, **kwargs)
+            if label.startswith("critic-ai-pattern"):
+                return {
+                    "verdict": "REVISE",
+                    "notes": "could be tighter",
+                    "issues": [
+                        {"quote": "It is.", "requirement": "Vary this", "severity": "minor"}
+                    ],
+                }
+            return payload
+
+    monkeypatch.setattr(main, "AnthropicClient", Nitpicking)
+    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
+    assert (content / "cursor-adds-agent-mode.md").exists()
+
+
+async def test_a_blocking_issue_still_stops_the_day(wired, monkeypatch):
+    _settings, content, _state = wired
+
+    class Blocking(StubClient):
+        async def complete_json(self, *, label: str, **kwargs) -> dict:
+            payload = await StubClient.complete_json(self, label=label, **kwargs)
+            if label.startswith("critic-fact-checker"):
+                return {
+                    "verdict": "REVISE",
+                    "notes": "unsupported number",
+                    "issues": [
+                        {
+                            "quote": "80%",
+                            "requirement": "No source supports this figure",
+                            "severity": "blocking",
+                        }
+                    ],
+                }
+            return payload
+
+    monkeypatch.setattr(main, "AnthropicClient", Blocking)
+    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_REJECTED
+    assert [p.name for p in content.glob("*.md")] == ["cursor-review-2026.md"]

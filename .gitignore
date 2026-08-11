@@ -6,3 +6,6 @@ dist/
 .DS_Store
 *.log
 .astro/
+
+# Generated at build time from src/data/tools.json
+public/_redirects

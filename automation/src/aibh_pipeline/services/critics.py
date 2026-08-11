@@ -54,12 +54,26 @@ CRITIQUE_SCHEMA: dict[str, Any] = {
 
 VERDICT_RULES = """\
 Return one of three verdicts:
-- PASS: nothing needs to change for your area of responsibility.
-- REVISE: there are fixable problems. List each one as an issue with the exact
-  quote from the post and a concrete requirement for the fix.
+- PASS: the post is publishable as it stands for your area. You do not have to
+  think it is perfect. If the only things left are improvements you would make
+  given more time, that is a PASS.
+- REVISE: something is actually wrong and can be fixed. List each problem as an
+  issue with the exact quote and a concrete requirement.
 - REJECT: the post cannot be salvaged for your area - for example the central
   factual claim is unsupported, or the piece has nothing to say. Use this
   sparingly. It stops publication entirely.
+
+Set severity honestly, because it decides what happens:
+- blocking: the post must not be published while this is true. Invented facts,
+  a claim no source supports, a dead or wrong link, a broken rule you were
+  given as mandatory.
+- major: a real weakness worth fixing, but the post is still honest and useful
+  with it present.
+- minor: polish. Wording, rhythm, a better example.
+
+Do not inflate severity to force a rewrite. A post carrying only minor issues
+after the final round is published, and blocking issues stop it entirely, so
+mislabelling either way does real damage.
 
 Every issue must name the specific text and a specific fix. "Improve the flow"
 is not an issue. "Cut the second paragraph of the pricing section, it repeats
