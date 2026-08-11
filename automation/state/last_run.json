@@ -1,0 +1,22 @@
+{
+  "finished_at": "2026-08-11T17:22:18.450844+00:00",
+  "published": true,
+  "draft": true,
+  "path": "src/content/blog/meta-muse-glimmer-agentic-model.md",
+  "slug": "meta-muse-glimmer-agentic-model",
+  "title": "Meta's Muse Glimmer: a local model built for agents",
+  "word_count": 767,
+  "source_urls": [
+    "https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model",
+    "https://simonwillison.net/2026/Aug/10/introducing-muse-glimmer"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 16,
+  "usage": {
+    "calls": 16,
+    "input_tokens": 59926,
+    "output_tokens": 12093,
+    "cache_read_tokens": 29646,
+    "cache_write_tokens": 1581
+  }
+}

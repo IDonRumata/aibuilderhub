@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "slug": "meta-muse-glimmer-agentic-model",
+    "canonical_topic": "agents built glimmer local meta's model muse",
+    "title": "Meta's Muse Glimmer: a local model built for agents",
+    "source_urls": [
+      "https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model",
+      "https://simonwillison.net/2026/Aug/10/introducing-muse-glimmer"
+    ],
+    "content_hash": "9a19a947ee8c5d03dab0ebd11d8363d6",
+    "published_at": "2026-08-11T17:22:18.442681Z"
+  }
+]
