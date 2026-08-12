@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "key": "apis llm proprietary reasoning stealing traces",
+    "title": "Stealing Reasoning Traces from Proprietary LLM APIs",
+    "source_urls": [
+      "https://stolen-thoughts.com/",
+      "https://simonwillison.net/2026/Aug/11/stealing-reasoning-traces"
+    ],
+    "reason": "banned patterns survived the rewrite: too-vague",
+    "failed_at": "2026-08-12T08:04:44.550187+00:00"
+  }
+]
