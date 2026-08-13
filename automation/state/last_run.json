@@ -1,6 +1,6 @@
 {
-  "finished_at": "2026-08-12T08:04:44.550284+00:00",
+  "finished_at": "2026-08-13T08:05:24.644323+00:00",
   "published": false,
-  "reason": "banned patterns survived the rewrite: too-vague",
-  "topic": "Stealing Reasoning Traces from Proprietary LLM APIs"
+  "reason": "critics returned REJECT after 3 rounds",
+  "topic": "Grok 4.6"
 }

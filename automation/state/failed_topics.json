@@ -8,5 +8,17 @@
     ],
     "reason": "banned patterns survived the rewrite: too-vague",
     "failed_at": "2026-08-12T08:04:44.550187+00:00"
+  },
+  {
+    "key": "grok",
+    "title": "Grok 4.6",
+    "source_urls": [
+      "https://x.ai/news/grok-4-6",
+      "https://artificialanalysis.ai/articles/grok-4-6-benchmarks-and-analysis",
+      "https://theverge.com/ai-artificial-intelligence/978666/spacexai-grok-bot-ai-agent-beta-launch",
+      "https://vercel.com/changelog/grok-4-6-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-08-13T08:05:24.644204+00:00"
   }
 ]
