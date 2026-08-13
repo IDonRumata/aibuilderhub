@@ -9,3 +9,5 @@ dist/
 
 # Generated at build time from src/data/tools.json
 public/_redirects
+__pycache__/
+*.pyc
