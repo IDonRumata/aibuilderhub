@@ -18,6 +18,7 @@ import yaml
 from ..logging_setup import get_logger
 from ..models import DraftPost, PublishResult, ScoredTopic
 from ..settings import Settings
+from . import hygiene
 
 log = get_logger(__name__)
 
@@ -82,6 +83,11 @@ def publish(
         draft, publish_date=datetime.now(UTC), is_draft=as_draft
     )
     document = f"{frontmatter}\n{draft.body.strip()}\n"
+    # Scrub before validating, so the frontmatter that gets checked is byte for
+    # byte the one that lands on disk. Covers the body and the metadata alike:
+    # a non-breaking space inside a title reaches Astro otherwise.
+    scrubbed = hygiene.scrub(document, settings)
+    document = scrubbed.text
     validate_frontmatter(document)
     path.write_text(document, encoding="utf-8", newline="\n")
 
@@ -93,6 +99,9 @@ def publish(
         source_urls=draft.source_urls,
         critic_rounds=critic_rounds,
         llm_calls=llm_calls,
+        unicode_removed=scrubbed.removed_count,
+        unicode_replaced=scrubbed.replaced_count,
+        unicode_checked=scrubbed.ran,
     )
     log.info("post_published", **json.loads(result.model_dump_json()), draft=as_draft)
     return result

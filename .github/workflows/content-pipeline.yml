@@ -81,6 +81,15 @@ jobs:
         if: steps.pipeline.outputs.published == 'true'
         run: uv run pytest tests/test_banned_patterns.py -q
 
+      # The pipeline already scrubbed the post on its way to disk. This proves
+      # it, before the commit rather than after: if the cleaner was missing at
+      # run time it degrades to a pass-through, and that has to stop the push
+      # instead of showing up as a red CI run on main.
+      - name: Unicode hygiene gate on the new post
+        if: steps.pipeline.outputs.published == 'true'
+        working-directory: .
+        run: python3 scripts/check-content-hygiene.py "${{ steps.pipeline.outputs.path }}"
+
       - name: Commit and push
         if: steps.pipeline.outputs.published == 'true'
         working-directory: .

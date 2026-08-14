@@ -159,3 +159,8 @@ class PublishResult(BaseModel):
     source_urls: list[str]
     critic_rounds: int
     llm_calls: int
+    # Layer A scrub counts. unicode_checked is False when the cleaner could
+    # not run, which is not the same as a document that had nothing to strip.
+    unicode_removed: int = 0
+    unicode_replaced: int = 0
+    unicode_checked: bool = True

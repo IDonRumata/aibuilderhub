@@ -19,7 +19,7 @@ from typing import Any
 from .clients.anthropic_client import AnthropicClient, BudgetExceededError, RefusalError
 from .clients.embeddings import EmbeddingProvider
 from .logging_setup import configure_logging, get_logger
-from .models import CritiqueReport, DraftPost, ScoredTopic, Verdict
+from .models import CritiqueReport, DraftPost, PublishResult, ScoredTopic, Verdict
 from .services import budget, critics, dedup, humanizer, publisher, writer
 from .services.ingest import ingest, load_sources
 from .services.scoring import score_topics
@@ -386,6 +386,7 @@ async def run(*, as_draft: bool, dry_run: bool) -> int:
                 f"- words: {result.word_count}",
                 f"- critic rounds: {result.critic_rounds}",
                 f"- LLM calls: {result.llm_calls}",
+                f"- unicode scrub: {_scrub_summary(result)}",
                 f"- sources: {', '.join(result.source_urls)}",
             ]
         )
@@ -420,6 +421,15 @@ async def run(*, as_draft: bool, dry_run: bool) -> int:
 
 def _result_dict(result: Any) -> dict[str, Any]:
     return json.loads(result.model_dump_json())
+
+
+def _scrub_summary(result: PublishResult) -> str:
+    """One line about Layer A for the job summary."""
+    if not result.unicode_checked:
+        return "**not checked** (cleaner unavailable)"
+    if not (result.unicode_removed or result.unicode_replaced):
+        return "clean"
+    return f"removed {result.unicode_removed}, replaced {result.unicode_replaced}"
 
 
 def _abort(settings: Settings, store: dedup.StateStore, *, reason: str, topic: ScoredTopic) -> int:

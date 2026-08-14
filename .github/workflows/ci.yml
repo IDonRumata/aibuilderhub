@@ -54,6 +54,21 @@ jobs:
           uv export --format requirements-txt --no-emit-project --no-hashes -o /tmp/reqs.txt
           uv run pip-audit -r /tmp/reqs.txt --strict --progress-spinner off
 
+  content-hygiene:
+    name: Content hygiene (invisible Unicode)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # The remove-ai-marks skill is vendored and stdlib-only, so there is
+      # nothing to install. Fails only on Layer A findings; metadata keyword
+      # hits are printed as notes, because "AI" in a title is this site's
+      # subject matter, not a mark.
+      - name: Check published content
+        run: python3 scripts/check-content-hygiene.py
+
   secrets:
     name: Secret scan over the full history
     runs-on: ubuntu-latest
