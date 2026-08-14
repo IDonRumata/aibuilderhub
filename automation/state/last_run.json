@@ -1,6 +1,22 @@
 {
-  "finished_at": "2026-08-13T08:05:24.644323+00:00",
-  "published": false,
-  "reason": "critics returned REJECT after 3 rounds",
-  "topic": "Grok 4.6"
+  "finished_at": "2026-08-14T08:01:16.039237+00:00",
+  "published": true,
+  "draft": false,
+  "path": "src/content/blog/gemini-3-7-flash-coding-agents.md",
+  "slug": "gemini-3-7-flash-coding-agents",
+  "title": "Gemini 3.7 Flash lands, cheap where it counts",
+  "word_count": 759,
+  "source_urls": [
+    "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash",
+    "https://vercel.com/changelog/gemini-3-7-flash-now-available-on-ai-gateway-for-50-off"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 18,
+  "usage": {
+    "calls": 18,
+    "input_tokens": 62247,
+    "output_tokens": 14373,
+    "cache_read_tokens": 28932,
+    "cache_write_tokens": 5457
+  }
 }
