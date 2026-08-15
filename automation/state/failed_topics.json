@@ -20,5 +20,14 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-08-13T08:05:24.644204+00:00"
+  },
+  {
+    "key": "afford agent built coding enough evaluations harness know open real source works",
+    "title": "I built an open-source coding-agent harness, but I can’t afford enough real evaluations to know if it works",
+    "source_urls": [
+      "https://reddit.com/r/SideProject/comments/1voflt8/i_built_an_opensource_codingagent_harness_but_i"
+    ],
+    "reason": "critics returned REJECT after 1 rounds",
+    "failed_at": "2026-08-15T07:09:23.591041+00:00"
   }
 ]
