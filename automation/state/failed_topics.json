@@ -29,5 +29,14 @@
     ],
     "reason": "critics returned REJECT after 1 rounds",
     "failed_at": "2026-08-15T07:09:23.591041+00:00"
+  },
+  {
+    "key": "100 actually agent automates built folder local ongoing out private runs work",
+    "title": "I built a 100% local, private AI agent that runs out of a local folder and actually automates ongoing work",
+    "source_urls": [
+      "https://reddit.com/r/SideProject/comments/1vpgz1w/i_built_a_100_local_private_ai_agent_that_runs"
+    ],
+    "reason": "critics returned REJECT after 2 rounds",
+    "failed_at": "2026-08-16T07:11:53.889907+00:00"
   }
 ]

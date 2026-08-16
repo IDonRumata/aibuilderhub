@@ -1,6 +1,6 @@
 {
-  "finished_at": "2026-08-15T07:09:23.591130+00:00",
+  "finished_at": "2026-08-16T07:11:53.889994+00:00",
   "published": false,
-  "reason": "critics returned REJECT after 1 rounds",
-  "topic": "I built an open-source coding-agent harness, but I can’t afford enough real evaluations to know if it works"
+  "reason": "critics returned REJECT after 2 rounds",
+  "topic": "I built a 100% local, private AI agent that runs out of a local folder and actually automates ongoing work"
 }
