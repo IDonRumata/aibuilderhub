@@ -3,7 +3,7 @@ title: "Cursor vs Windsurf 2026: The Battle for the Best AI IDE"
 description: "Cursor vs Windsurf compared head-to-head in 2026. Composer vs Cascade, real pricing difference, and which AI IDE wins for your workflow."
 pubDate: 2026-08-06
 tags: [comparison, cursor, windsurf, ai-coding, developer-tools]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

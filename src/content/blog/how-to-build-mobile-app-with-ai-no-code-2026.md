@@ -3,7 +3,7 @@ title: "How to Build a Mobile App With AI in 2026 (No Code Required)"
 description: "Step-by-step guide to building a mobile app with AI tools in 2026. Which tool to use, PWA vs native, and exactly how to go from idea to app on someone's phone."
 pubDate: 2026-07-18
 tags: [guide, mobile-app, no-code, ai-app-builder, lovable, pwa]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

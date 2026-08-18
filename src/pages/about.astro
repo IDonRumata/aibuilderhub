@@ -1,31 +1,57 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { AUTHOR } from '../data/author.ts';
 ---
 
 <BaseLayout
-  title="About AIBuilderHub"
-  description="Who we are, why we built AIBuilderHub, and how we choose which tools to review."
+  title="About"
+  description="Who writes AIBuilderHub, what I've actually built with these tools, and how I make money from this site."
 >
   <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-    <h1 class="text-3xl font-bold mb-8">About AIBuilderHub</h1>
+    <div class="flex items-center gap-4 mb-8">
+      <img
+        src={AUTHOR.photo}
+        alt={AUTHOR.name}
+        width="80"
+        height="80"
+        class="rounded-full object-cover shrink-0"
+      />
+      <div>
+        <h1 class="text-3xl font-bold" style="color: var(--color-text);">{AUTHOR.name}</h1>
+        <p class="text-sm" style="color: var(--color-muted);">{AUTHOR.role}</p>
+      </div>
+    </div>
 
     <div class="prose max-w-none">
 
       <p>Most reviews of AI tools are useless. They're written by people who've never opened the product, padded with SEO keywords, and ranked based on commission rates rather than actual quality.</p>
 
-      <p>AIBuilderHub exists because solopreneurs, freelancers, and founders deserve better than that when deciding where to spend $20-100/month on tools.</p>
+      {AUTHOR.longBio.map(paragraph => <p>{paragraph}</p>)}
 
-      <h2>What we do</h2>
-      <p>We build real projects with every tool we review - landing pages, SaaS MVPs, automations - and report what actually happens. Including what breaks, what's confusing, and what the marketing page doesn't tell you.</p>
+      <h2>What I do</h2>
+      <p>I build real projects with every tool I review - landing pages, SaaS MVPs, automations - and report what actually happens. Including what breaks, what's confusing, and what the marketing page doesn't tell you.</p>
 
       <h2>Who this is for</h2>
-      <p>People who want to build digital products with AI but don't have time to test 30 different platforms. Specifically: solopreneurs launching their first product, freelancers adding AI capabilities to their services, and small business owners who want internal tools without IT budget.</p>
+      <p>People who want to build digital products with AI but don't have time to test 30 different platforms. Specifically: solopreneurs launching their first product, freelancers adding AI capabilities to their services, and small business owners who want internal tools without an IT budget.</p>
 
-      <h2>How we make money</h2>
-      <p>Through affiliate commissions when you click our links and sign up for tools. We disclose this on every article. It doesn't change our rankings - a tool we don't recommend stays off the list regardless of commission rate. See our <a href="/disclosure">full affiliate disclosure</a>.</p>
+      <h2>How I make money</h2>
+      <p>Through affiliate commissions when you click my links and sign up for tools. I disclose this on every article. It doesn't change my rankings - a tool I don't recommend stays off the list regardless of commission rate. See the <a href="/disclosure">full affiliate disclosure</a>.</p>
 
       <h2>Contact</h2>
-      <p>Questions, corrections, or want to suggest a tool to review: <strong>hello@aibuilderhub.app</strong></p>
+      <p>
+        Questions, corrections, or want to suggest a tool to review: <strong>{AUTHOR.email}</strong>
+        {AUTHOR.sameAs.length > 0 && (
+          <>
+            {' · '}
+            {AUTHOR.sameAs.map((link, i) => (
+              <>
+                {i > 0 && ' · '}
+                <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+              </>
+            ))}
+          </>
+        )}
+      </p>
     </div>
   </div>
 </BaseLayout>

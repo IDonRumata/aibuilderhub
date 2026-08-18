@@ -3,7 +3,7 @@ title: "How to Validate a Startup Idea With AI in 2026 (Before Writing a Line of
 description: "Step-by-step guide to validating a startup idea with AI tools in 2026. Build a landing page, collect signups, and find your first users in a weekend — before you build anything."
 pubDate: 2026-07-25
 tags: [guide, startup, validation, no-code, ai-app-builder, lovable]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "Bubble Review 2026: The Most Powerful No-Code Platform — and the Most 
 description: "Honest Bubble review for 2026. Who it's actually for, why it's not beginner-friendly, how it compares to Lovable and Webflow, and whether the price is justified."
 pubDate: 2026-08-11
 tags: [review, bubble, no-code, app-builder, saas]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

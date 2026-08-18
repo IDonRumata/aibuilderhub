@@ -3,7 +3,7 @@ title: "Best AI Tools for Freelancers in 2026: What Actually Saves Time and Mone
 description: "The AI tools freelancers actually use in 2026 to win more clients, deliver faster, and charge more. Tested by category — writing, coding, design, client work, and admin."
 pubDate: 2026-08-08
 tags: [guide, freelance, ai-tools, productivity, no-code]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

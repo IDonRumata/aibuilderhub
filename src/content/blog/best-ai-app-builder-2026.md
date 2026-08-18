@@ -3,6 +3,7 @@ title: "Best AI App Builder in 2026: I Tested 6 Tools So You Don't Have To"
 description: "Honest ranking of the best AI app builders in 2026 — Lovable, Bolt.new, Cursor, Framer, v0, and Replit. Tested with real projects, not marketing demos."
 pubDate: 2026-06-17
 tags: ["comparison", "roundup", "lovable", "bolt", "framer", "cursor"]
+author: Andrei Maroz
 ---
 
 ## TL;DR

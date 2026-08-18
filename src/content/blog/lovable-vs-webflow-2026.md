@@ -3,7 +3,7 @@ title: "Lovable vs Webflow 2026: Apps vs Websites — Which Do You Actually Need
 description: "Lovable vs Webflow compared for 2026. One builds apps, one builds websites. Here's how to know which you need and what happens when you pick the wrong one."
 pubDate: 2026-07-23
 tags: [comparison, lovable, webflow, no-code, ai-app-builder]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

@@ -11,7 +11,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
-    author: z.string().default('AIBuilderHub'),
+    author: z.string().default('Andrei Maroz'),
     draft: z.boolean().default(false),
   }),
 });

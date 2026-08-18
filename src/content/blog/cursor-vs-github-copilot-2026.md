@@ -3,7 +3,7 @@ title: "Cursor vs GitHub Copilot 2026: Which AI Coding Tool Is Actually Worth It
 description: "Cursor vs GitHub Copilot compared for 2026. Real pricing, which one codes better, and the one question that decides it for most developers."
 pubDate: 2026-07-16
 tags: [comparison, cursor, github-copilot, ai-coding, developer-tools]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "Bolt.new Review 2026: The Fastest Way to Prototype — With One Big Catc
 description: "Honest Bolt.new review for 2026. Token system explained, real performance on complex apps, how it compares to Lovable and Cursor, and who it's actually for."
 pubDate: 2026-06-30
 tags: [review, bolt, ai-app-builder, no-code, vibe-coding]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

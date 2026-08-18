@@ -3,7 +3,7 @@ title: "Vibe Coding for Non-Developers in 2026: The Complete Beginner's Guide"
 description: "Everything you need to start building real apps with AI in 2026. No coding experience required. Includes the 5 best tools, prompting techniques that actually work, and step-by-step first project walkthrough."
 pubDate: "2026-06-10"
 tags: ["guide", "vibe-coding", "beginners", "no-code"]
-author: "AIBuilderHub"
+author: "Andrei Maroz"
 ---
 
 ## What is vibe coding?

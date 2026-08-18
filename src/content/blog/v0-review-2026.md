@@ -3,7 +3,7 @@ title: "v0 by Vercel Review 2026: The Best UI Generator That Refuses to Be an Ap
 description: "Honest v0 review for 2026. Credit system explained, what the February platform update changed, where v0 beats Lovable and Bolt for UI work, and where it simply stops."
 pubDate: 2026-07-18
 tags: [review, v0, ai-coding, developer-tools, ai-app-builder]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

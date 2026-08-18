@@ -3,7 +3,7 @@ title: "Lovable Review 2026: Is It Actually Worth It?"
 description: "Honest Lovable review for 2026. Real use cases, actual pricing, credit system explained, and how it compares to Bolt and Cursor."
 pubDate: 2026-06-18
 tags: ["review", "lovable", "ai-app-builder", "no-code", "vibe-coding"]
-author: "AIBuilderHub"
+author: "Andrei Maroz"
 draft: false
 ---
 

@@ -8,7 +8,7 @@ tags:
 - local-models
 - ai-agents
 - coding-tools
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

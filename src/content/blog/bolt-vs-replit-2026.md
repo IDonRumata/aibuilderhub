@@ -3,7 +3,7 @@ title: "Bolt.new vs Replit 2026: Two Ways to Build Apps Fast — Which Is Right 
 description: "Bolt.new vs Replit compared for 2026. Browser-based prototyping vs full cloud IDE. Real pricing, agentic coding compared, and which one fits your workflow."
 pubDate: 2026-07-30
 tags: [comparison, bolt, replit, ai-app-builder, developer-tools, no-code]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

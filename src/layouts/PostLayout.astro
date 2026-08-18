@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import ToolCallout from '../components/ToolCallout.astro';
 import type { CollectionEntry } from 'astro:content';
 import { tools } from '../data/tools.json';
+import { AUTHOR } from '../data/author.ts';
 
 type Props = CollectionEntry<'blog'>['data'] & { slug?: string };
 
@@ -18,6 +19,10 @@ const mentioned = tools.filter(tool => tagSet.has(tool.id)).slice(0, 2);
 // They stay in the frontmatter for sorting, the sitemap and structured data only.
 const siteUrl = 'https://aibuilderhub.app';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+// If the post's author matches the site's Person entity (the normal case),
+// link the BlogPosting's author straight to that @id instead of duplicating
+// the name/url pair - one Person record for search engines to trust.
+const isSiteAuthor = author === AUTHOR.name;
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -27,7 +32,9 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
   datePublished: pubDate.toISOString(),
   ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
-  author: { '@type': 'Organization', name: author, url: siteUrl },
+  author: isSiteAuthor
+    ? { '@id': `${siteUrl}/#person-${AUTHOR.name.toLowerCase().replace(/\s+/g, '-')}` }
+    : { '@type': 'Person', name: author },
   publisher: { '@id': `${siteUrl}/#organization` },
   keywords: tags.join(', '),
 };
@@ -63,7 +70,21 @@ const articleSchema = {
 
     <!-- Meta bar (no dates by design — see comment in the frontmatter above) -->
     <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm mb-8 pb-8 divider" style="color: var(--color-muted);">
-      <span>By {author}</span>
+      {isSiteAuthor ? (
+        <a href="/about" class="flex items-center gap-2 hover:underline" style="color: var(--color-muted);">
+          <img
+            src={AUTHOR.photo}
+            alt={AUTHOR.name}
+            width="24"
+            height="24"
+            class="rounded-full object-cover"
+            loading="lazy"
+          />
+          <span>By {author}</span>
+        </a>
+      ) : (
+        <span>By {author}</span>
+      )}
     </div>
 
     <!-- Article content -->
@@ -100,6 +121,39 @@ const articleSchema = {
           />
         ))}
       </section>
+    )}
+
+    <!-- Author box -->
+    {isSiteAuthor && (
+      <div class="mt-12 pt-8 divider">
+        <div class="card p-5 flex items-start gap-4">
+          <img
+            src={AUTHOR.photo}
+            alt={AUTHOR.name}
+            width="56"
+            height="56"
+            class="rounded-full object-cover shrink-0"
+            loading="lazy"
+          />
+          <div>
+            <p class="font-semibold m-0" style="color: var(--color-text);">{AUTHOR.name}</p>
+            <p class="text-xs mb-2 m-0" style="color: var(--color-muted);">{AUTHOR.role}</p>
+            <p class="text-sm m-0" style="color: var(--color-prose-body);">{AUTHOR.shortBio}</p>
+            {AUTHOR.sameAs.length > 0 && (
+              <div class="flex flex-wrap gap-3 mt-2 text-xs">
+                {AUTHOR.sameAs.map(link => (
+                  <a href={link.url} class="hover:underline" style="color: var(--color-accent-light);" target="_blank" rel="noopener noreferrer">
+                    {link.label} →
+                  </a>
+                ))}
+                <a href={`mailto:${AUTHOR.email}`} class="hover:underline" style="color: var(--color-accent-light);">
+                  Email →
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     )}
 
     <!-- Post-article CTA -->

@@ -3,7 +3,7 @@ title: "Lovable vs Bolt.new in 2026: I Built the Same App on Both - Here's What 
 description: "Real comparison: I built a SaaS landing page with a waitlist on both Lovable and Bolt.new using the exact same prompt. Same time limit, different results. Honest breakdown with screenshots."
 pubDate: "2026-06-15"
 tags: ["comparison", "lovable", "bolt", "vibe-coding"]
-author: "AIBuilderHub"
+author: "Andrei Maroz"
 ---
 
 ## TL;DR

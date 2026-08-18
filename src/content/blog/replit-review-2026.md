@@ -3,7 +3,7 @@ title: "Replit Review 2026: The Most Complete AI Builder — With the Least Pred
 description: "Honest Replit review for 2026. Effort-based Agent pricing explained, real cost risks, the new Pro plan, and who should (and shouldn't) build on Replit."
 pubDate: 2026-07-18
 tags: [review, replit, ai-app-builder, ai-coding, vibe-coding]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

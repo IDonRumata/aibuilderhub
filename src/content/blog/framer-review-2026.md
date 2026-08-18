@@ -3,7 +3,7 @@ title: "Framer Review 2026: The Best-Looking Sites You Can Build Without Code"
 description: "Honest Framer review for 2026. Who it's actually for, where the AI genuinely helps, what it can't do, and whether $10–30/month is worth it for your use case."
 pubDate: 2026-07-13
 tags: [review, framer, no-code, ai-app-builder, website-builder]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

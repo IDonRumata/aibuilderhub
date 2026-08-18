@@ -3,7 +3,7 @@ title: "Windsurf Review 2026: The Cursor Challenger That Costs Less"
 description: "Honest Windsurf review for 2026. How Cascade compares to Cursor's Composer, real pricing, who should switch, and who should stay on Cursor."
 pubDate: 2026-07-28
 tags: [review, windsurf, ai-coding, cursor, developer-tools]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

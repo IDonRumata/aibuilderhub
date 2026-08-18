@@ -3,7 +3,7 @@ title: "Webflow Review 2026: The Professional's Choice for No-Code Web Developme
 description: "Honest Webflow review for 2026. Who it's actually for, where it beats Framer and Squarespace, pricing breakdown, and what the learning curve really looks like."
 pubDate: 2026-07-21
 tags: [review, webflow, no-code, website-builder, cms]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

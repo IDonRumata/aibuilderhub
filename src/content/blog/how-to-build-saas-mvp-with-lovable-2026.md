@@ -3,7 +3,7 @@ title: "How to Build a SaaS MVP With Lovable in 2026 (Step-by-Step)"
 description: "Build a real SaaS MVP using Lovable in 2026. The exact prompts, the order to build features, how to add Stripe payments, and what to ship first."
 pubDate: 2026-08-01
 tags: [guide, lovable, saas, mvp, no-code, ai-app-builder]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

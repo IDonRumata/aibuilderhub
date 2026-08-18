@@ -3,7 +3,7 @@ title: "Lovable vs Framer 2026: You're Probably Asking the Wrong Question"
 description: "Lovable vs Framer compared for 2026. Spoiler: they're not really competitors. Here's how to know which one you actually need — and what happens when you pick wrong."
 pubDate: 2026-07-07
 tags: [comparison, lovable, framer, ai-app-builder, no-code]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

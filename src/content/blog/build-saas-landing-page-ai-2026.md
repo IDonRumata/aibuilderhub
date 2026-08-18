@@ -3,6 +3,7 @@ title: "How to Build a SaaS Landing Page with AI in Under 1 Hour (2026 Guide)"
 description: "Step-by-step guide to building a complete SaaS landing page with waitlist using Lovable or Framer. No coding required. Includes real prompts that work."
 pubDate: 2026-06-14
 tags: ["tutorial", "lovable", "framer", "landing-page", "no-code"]
+author: Andrei Maroz
 ---
 
 ## What You'll Build

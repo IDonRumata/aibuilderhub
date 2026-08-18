@@ -3,7 +3,7 @@ title: "GitHub Copilot Review 2026: The AI Coding Tool That Works Everywhere"
 description: "Honest GitHub Copilot review for 2026. What's changed with Copilot Workspace, real pricing, how it compares to Cursor, and who should actually use it."
 pubDate: 2026-08-04
 tags: [review, github-copilot, ai-coding, developer-tools, cursor]
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

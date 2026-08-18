@@ -3,6 +3,7 @@ title: "Cursor Review 2026: Is It Worth $20/Month? (After 3 Months of Daily Use)
 description: "Honest Cursor review after 3 months of daily use. What it's actually good at, where it falls short, and whether the $20/month Pro plan is worth it for your workflow."
 pubDate: 2026-06-16
 tags: ["review", "cursor", "developer-tools", "ai-coding"]
+author: Andrei Maroz
 ---
 
 ## TL;DR
