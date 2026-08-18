@@ -7,7 +7,7 @@ tags:
 - gemini
 - ai-coding
 - vercel
-author: AIBuilderHub
+author: Andrei Maroz
 draft: false
 ---
 

@@ -23,6 +23,12 @@ log = get_logger(__name__)
 
 REQUIRED_FRONTMATTER = ("title", "description", "pubDate", "tags", "author", "draft")
 
+# Posts carry a real human byline, not the brand name. The site keeps the
+# matching identity (photo, bio, Person schema) in src/data/author.ts, and
+# PostLayout.astro only renders the author box when the byline equals
+# AUTHOR.name there - so these two strings must stay in sync.
+POST_AUTHOR = "Andrei Maroz"
+
 
 def build_frontmatter(draft: DraftPost, *, publish_date: datetime, is_draft: bool) -> str:
     """Frontmatter that satisfies src/content.config.ts.
@@ -35,7 +41,7 @@ def build_frontmatter(draft: DraftPost, *, publish_date: datetime, is_draft: boo
         "description": draft.description,
         "pubDate": publish_date.date().isoformat(),
         "tags": list(draft.tags),
-        "author": "AIBuilderHub",
+        "author": POST_AUTHOR,
         "draft": is_draft,
     }
     rendered = yaml.safe_dump(

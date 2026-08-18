@@ -33,7 +33,7 @@ def test_frontmatter_matches_the_content_collection_schema():
 
     data = yaml.safe_load(text.split("---")[1])
     assert data["pubDate"] == "2026-08-11"
-    assert data["author"] == "AIBuilderHub"
+    assert data["author"] == publisher.POST_AUTHOR
     assert data["draft"] is False
     assert data["tags"][0] == "news"
 
