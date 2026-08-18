@@ -39,7 +39,6 @@ export const AUTHOR: AuthorProfile = {
   ],
   email: 'hello@aibuilderhub.app',
   sameAs: [
-    // Add once confirmed, e.g.:
-    // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/...' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maroz-andrei' },
   ],
 };
