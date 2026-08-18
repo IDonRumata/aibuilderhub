@@ -9,6 +9,9 @@ interface Props {
   description?: string;
   canonical?: string;
   type?: 'website' | 'article';
+  /** Keep the page out of search results - used for thin utility pages
+   *  such as the newsletter confirmation landing page. */
+  noindex?: boolean;
 }
 
 const {
@@ -16,6 +19,7 @@ const {
   description = 'The honest guide to building with AI. Real tests, real results, no fluff. Compare AI app builders, vibe coding tools, and no-code platforms.',
   canonical,
   type = 'website',
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = 'https://aibuilderhub.app';
@@ -32,6 +36,7 @@ const fullTitle = title === 'Home'
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- impact.com site verification -->
     <meta name='impact-site-verification' value='b00ba283-8830-44d0-8cfd-3096b4d376d3' />
@@ -160,6 +165,7 @@ const fullTitle = title === 'Home'
             body: JSON.stringify({
               email: field.value,
               website: honeypot ? honeypot.value : '',
+              source: location.pathname,
             }),
           })
             .then(function (r) { return r.json(); })
@@ -167,7 +173,11 @@ const fullTitle = title === 'Home'
               if (data && data.success) {
                 var ok = document.createElement('p');
                 ok.style.cssText = 'color: var(--color-success); font-size: 0.875rem; padding: 0.75rem 0;';
-                ok.textContent = "✓ You're subscribed! Check your inbox.";
+                // With double opt-in the subscription is not active until the
+                // visitor clicks the link, so the copy has to say so.
+                ok.textContent = data.doi
+                  ? '✓ Almost there — check your inbox and confirm your subscription.'
+                  : "✓ You're subscribed! Check your inbox.";
                 form.replaceChildren(ok);
               } else {
                 showError(form, (data && data.error) || 'Something went wrong. Try again.');

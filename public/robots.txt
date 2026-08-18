@@ -2,4 +2,11 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
+# POST-only worker endpoint. Googlebot was hitting it with GET and logging a
+# 404 in Search Console every time - no SEO value, so keep crawlers off it.
+Disallow: /api/
+
+# Cloudflare email obfuscation internals. Not a real page.
+Disallow: /cdn-cgi/
+
 Sitemap: https://aibuilderhub.app/sitemap-index.xml

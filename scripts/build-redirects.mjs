@@ -41,9 +41,24 @@ for (const tool of tools) {
   lines.push(`/go/${tool.id}  ${target}  302`);
 }
 
+// Search Console reports /tools/<id> as 404 for six tools - Google still has
+// those URLs queued from an earlier version of the site and keeps retrying
+// them. Point each one at the tool's review instead of serving a dead page.
+//
+// 301 here, unlike the /go/ links above: these are permanent internal moves,
+// so the redirect is safe to cache and passes ranking signals through.
+lines.push("", "# Legacy /tools/<id> URLs -> the tool's review.");
+let legacy = 0;
+for (const tool of tools) {
+  if (!tool.reviewSlug) continue;
+  lines.push(`/tools/${tool.id}  /blog/${tool.reviewSlug}  301`);
+  legacy += 1;
+}
+
 writeFileSync(resolve(root, "public/_redirects"), lines.join("\n") + "\n", "utf8");
 
 console.log(
   `[redirects] ${tools.length} tool links written, ${monetised} monetised, ` +
     `${tools.length - monetised} still pointing at the vendor for free`
 );
+console.log(`[redirects] ${legacy} legacy /tools/<id> URLs redirected to reviews`);

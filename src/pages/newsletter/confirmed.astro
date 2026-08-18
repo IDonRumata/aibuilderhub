@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+// Landing page for the double opt-in flow. Brevo redirects here after the
+// subscriber clicks the confirmation link in the email, so this is the first
+// page a confirmed subscriber sees - worth pointing them at the content.
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="Subscription confirmed"
+  description="Your subscription to the AIBuilderHub weekly digest is confirmed."
+  noindex={true}
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
+    <p class="text-6xl mb-4" style="color: var(--color-success);">✓</p>
+    <h1 class="text-3xl font-bold mb-3">You're confirmed</h1>
+    <p class="text-lg mb-8 max-w-xl mx-auto" style="color: var(--color-muted);">
+      Thanks for confirming. The next digest lands in your inbox on Tuesday, with new
+      reviews and any pricing changes worth knowing about.
+    </p>
+    <p class="text-sm mb-10" style="color: var(--color-muted);">
+      Changed your mind? Every email has a one-click unsubscribe link at the bottom.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-14">
+      <a href="/blog" class="btn-primary">Browse all reviews</a>
+      <a href="/pricing" class="btn-secondary">Compare pricing</a>
+    </div>
+
+    <h2 class="text-xl font-semibold mb-6 text-left">Start here</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+      {latestPosts.map(post => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          slug={post.slug}
+          pubDate={post.data.pubDate}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
