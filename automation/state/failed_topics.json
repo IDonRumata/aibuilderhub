@@ -47,5 +47,14 @@
     ],
     "reason": "critics returned REJECT after 2 rounds",
     "failed_at": "2026-08-17T07:35:48.254277+00:00"
+  },
+  {
+    "key": "2026 building crm custom enough finally good idea still stupid tools",
+    "title": "Is building a custom CRM in 2026 still a stupid idea, or are the tools finally good enough?",
+    "source_urls": [
+      "https://reddit.com/r/nocode/comments/1vr2g60/is_building_a_custom_crm_in_2026_still_a_stupid"
+    ],
+    "reason": "critics returned REJECT after 1 rounds",
+    "failed_at": "2026-08-18T07:22:41.856693+00:00"
   }
 ]
