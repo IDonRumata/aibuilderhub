@@ -1,29 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { tools } from '../data/tools.json';
+import toolsData from '../data/tools.json';
 
-// Cheapest paid entry point first; free-to-start tools sort by what the first
-// paid tier costs, because that is the number people actually compare.
+const { tools, priceVerified } = toolsData;
+
+// Cheapest month-to-month entry price first. That is the number people compare,
+// and it is what you actually pay if you just sign up today without committing
+// to a year.
 const rows = [...tools].sort((a, b) => a.priceFrom - b.priceFrom);
 
-const cheapestPaid = rows.filter(t => t.priceFrom > 0)[0];
-const freeToStart = rows.filter(t => t.freeTier);
+const cheapestPaid = rows[0];
 const lovable = tools.find(t => t.id === 'lovable');
+const withAnnual = rows.filter(t => t.priceAnnual !== null);
+
+// Render the verification date in a fixed locale so the static build does not
+// depend on the build machine's regional settings.
+const verifiedLabel = new Date(priceVerified).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
 ---
 
 <BaseLayout
-  title="AI App Builder Pricing Compared"
-  description="What every major AI app builder actually costs: entry price, free tier, and who each one is worth paying for. Lovable, Cursor, Bolt, Bubble, Webflow and more."
+  title="AI App Builder Pricing Tracker"
+  description="What every major AI app builder actually costs in 2026: month-to-month price, annual price, and free tier. Verified against vendor pricing pages, with the date we checked."
 >
   <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
 
     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3" style="color: var(--color-text);">
-      What these tools actually cost
+      AI app builder pricing tracker
     </h1>
-    <p class="text-lg mb-8" style="color: var(--color-muted);">
-      Entry prices for every builder we've reviewed, side by side. Vendors change
-      pricing often, so treat this as a starting point and check the current page
-      before you pay.
+    <p class="text-lg mb-4" style="color: var(--color-muted);">
+      Entry prices for every builder reviewed on this site, side by side, with the
+      month-to-month and annual numbers separated - because the difference between
+      them is where most published comparisons quietly go wrong.
+    </p>
+
+    <p class="text-sm mb-8 flex flex-wrap items-center gap-x-2" style="color: var(--color-muted);">
+      <span
+        class="inline-block w-2 h-2 rounded-full"
+        style="background-color: var(--color-success);"
+        aria-hidden="true"
+      ></span>
+      <strong style="color: var(--color-text);">Last verified: {verifiedLabel}</strong>
+      <span>· every price re-checked against the vendor's own pricing page plus two independent sources.</span>
     </p>
 
     <div class="disclosure-notice">
@@ -41,7 +60,8 @@ const lovable = tools.find(t => t.id === 'lovable');
         <thead>
           <tr style="background-color: var(--color-surface-2);">
             <th class="text-left font-semibold px-4 py-3" style="color: var(--color-text);">Tool</th>
-            <th class="text-left font-semibold px-4 py-3 whitespace-nowrap" style="color: var(--color-text);">Starts at</th>
+            <th class="text-left font-semibold px-4 py-3 whitespace-nowrap" style="color: var(--color-text);">Month&#8209;to&#8209;month</th>
+            <th class="text-left font-semibold px-4 py-3 whitespace-nowrap" style="color: var(--color-text);">Billed yearly</th>
             <th class="text-left font-semibold px-4 py-3 whitespace-nowrap" style="color: var(--color-text);">Free tier</th>
             <th class="text-left font-semibold px-4 py-3" style="color: var(--color-text);">Worth paying for if</th>
             {/* relative: sr-only is absolutely positioned, and without a
@@ -58,7 +78,12 @@ const lovable = tools.find(t => t.id === 'lovable');
                 <a href={`/blog/${tool.reviewSlug}`} class="link-accent text-xs">Read the review</a>
               </td>
               <td class="px-4 py-4 align-top whitespace-nowrap" style="color: var(--color-prose-body);">
-                {tool.priceFrom === 0 ? 'Free tier only' : `$${tool.priceFrom}/mo`}
+                ${tool.priceFrom}/mo
+              </td>
+              <td class="px-4 py-4 align-top whitespace-nowrap" style="color: var(--color-prose-body);">
+                {tool.priceAnnual === null
+                  ? <span style="color: var(--color-muted);">No annual rate</span>
+                  : <>${tool.priceAnnual}/mo</>}
               </td>
               <td class="px-4 py-4 align-top" style="color: var(--color-prose-body);">
                 {tool.freeTier ? 'Yes' : 'No'}
@@ -66,6 +91,7 @@ const lovable = tools.find(t => t.id === 'lovable');
               <td class="px-4 py-4 align-top" style="color: var(--color-prose-body);">
                 {tool.bestFor}
                 <div class="text-xs mt-1" style="color: var(--color-muted);">Skip it for: {tool.notFor}</div>
+                <div class="text-xs mt-1" style="color: var(--color-muted);">{tool.priceNote}</div>
               </td>
               <td class="px-4 py-4 align-top">
                 <a
@@ -86,49 +112,72 @@ const lovable = tools.find(t => t.id === 'lovable');
 
     <!-- Guidance -->
     <div class="prose prose-lg max-w-none mt-12">
-      <h2>How to read this table</h2>
+      <h2>How this table is put together</h2>
 
       <p>
-        The entry price is the least useful number on it. Every one of these
-        tools bills against something that runs out, whether that's messages,
-        credits, or compute minutes, and the tier you actually end up on depends
-        on how much you build rather than which plan you picked on day one.
+        Two numbers, not one. Nearly every vendor advertises the annual price as
+        if it were the monthly price, so a comparison that lists a single figure
+        per tool is usually comparing one company's discounted yearly rate
+        against another's full month-to-month rate. {withAnnual.length} of these
+        {' '}{rows.length} tools charge less if you commit to a year; the rest
+        publish one rate or no reliable annual figure at all.
       </p>
 
       <p>
-        {freeToStart.length} of these {rows.length} let you start without a card.
-        Use that. Build the same small thing on two of them and you'll learn more
-        in an afternoon than any comparison table can tell you, including this one.
+        The entry price is still the least useful number here. Every one of these
+        tools bills against something that runs out - messages, credits, workload
+        units, compute minutes - and the tier you actually end up on depends on
+        how much you build rather than which plan you picked on day one. That is
+        what the note under each row is for.
+      </p>
+
+      <p>
+        All {rows.length} let you start without paying. Use that. Build the same
+        small thing on two of them and you will learn more in an afternoon than
+        any comparison table can tell you, including this one.
       </p>
 
       <h2>If you're picking one to pay for</h2>
 
       <p>
-        <strong>You can already code.</strong> Cursor or GitHub Copilot. The
-        cheapest paid option in the table is {cheapestPaid.name} at ${cheapestPaid.priceFrom}/mo,
-        and it's the right first step if you mostly want faster autocomplete
-        rather than an agent rewriting files. Cursor costs twice that and earns
-        it once you're doing multi-file work.
+        <strong>You can already code.</strong> {cheapestPaid.name} is the cheapest
+        paid option in the table at ${cheapestPaid.priceFrom}/mo, and it's the right
+        first step if you mostly want faster autocomplete rather than an agent
+        rewriting files. Cursor costs twice that and earns it once you're doing
+        multi-file work.
       </p>
 
       <p>
         <strong>You can't, and you want a real app.</strong> Lovable, at
-        ${lovable.priceFrom}/mo and the only tool here with no free tier. It costs
-        more than an editor because it hands you a database and auth without you
-        understanding either. That's the thing you're actually buying, and it's
-        also the thing that will bite you the first time something breaks.
+        ${lovable.priceFrom}/mo month-to-month or ${lovable.priceAnnual}/mo on a
+        year. It costs more than an editor because it hands you a database and
+        auth without you understanding either. That's the thing you're actually
+        buying, and it's also the thing that will bite you the first time
+        something breaks. The free tier is five credits a day, which is enough to
+        find out whether you like it and not enough to ship anything.
       </p>
 
       <p>
         <strong>You want a site, not an app.</strong> Framer or Webflow. Framer
-        gets you there faster, Webflow gives you more room to grow. Neither one
-        needs the AI builders at all.
+        gets you there faster and cheaper, Webflow gives you more room to grow.
+        Watch the billing cycle on both: each roughly doubles in price if you pay
+        monthly instead of yearly, and Webflow's site plan is separate from the
+        workspace seat you may also end up paying for. Neither one needs the AI
+        builders at all.
       </p>
 
       <p>
         <strong>You're not sure yet.</strong> Don't pay anyone. Start on Bolt's
         free tier, get something ugly working, and let that tell you which of the
         problems above you actually have.
+      </p>
+
+      <h2>Corrections</h2>
+
+      <p>
+        Prices move and vendors rename plans without notice. If something here is
+        out of date, tell me and I'll fix it and re-date the table:
+        {' '}<a href="mailto:hello@aibuilderhub.app">hello@aibuilderhub.app</a>.
       </p>
     </div>
 

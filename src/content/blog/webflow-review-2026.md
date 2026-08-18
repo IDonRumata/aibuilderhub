@@ -3,7 +3,7 @@ title: "Webflow Review 2026: The Professional's Choice for No-Code Web Developme
 description: "Honest Webflow review for 2026. Who it's actually for, where it beats Framer and Squarespace, pricing breakdown, and what the learning curve really looks like."
 pubDate: 2026-07-21
 tags: [review, webflow, no-code, website-builder, cms]
-author: Andrei Maroz
+author: AIBuilderHub
 draft: false
 ---
 
@@ -57,7 +57,7 @@ The pattern is consistent: these users tried Squarespace or Wix, found the desig
 
 **No AI-first features.** In a world where Framer generates layouts from a text description and Lovable writes entire applications from prompts, Webflow's AI integration is limited. There's a Webflow AI feature that generates content and images, but there's no "describe your site and watch it appear" workflow. You're still building layouts manually. For the audience that wants design control, this is fine — for anyone expecting AI to do the heavy lifting, look elsewhere.
 
-**Pricing scales fast.** The free plan is good for learning but publishes to a webflow.io subdomain. A custom domain requires at minimum the Basic site plan ($14/mo). Real projects typically need the CMS plan ($23/mo) for the CMS functionality. Agencies typically need Business ($39/mo) for client editing and higher page limits. Add Webflow's workspace plan on top for team accounts. It gets expensive fast for agencies managing multiple client sites.
+**Pricing scales fast.** The free plan is good for learning but publishes to a webflow.io subdomain. A custom domain requires at minimum the Basic site plan ($15/mo billed yearly, or $25 if you pay month to month). Real projects typically need the CMS plan ($23/mo) for the CMS functionality. Agencies typically need Business ($39/mo) for client editing and higher page limits. Add Webflow's workspace plan on top for team accounts. It gets expensive fast for agencies managing multiple client sites.
 
 **E-commerce is behind Shopify.** Webflow has e-commerce (Standard $29/mo, Plus $74/mo, Advanced $212/mo) but the product catalog, inventory management, and third-party app ecosystem are significantly weaker than Shopify. For a store with more than a few dozen products or complex inventory, Shopify wins without question. Webflow e-commerce is for designers who want beautiful product pages and only need basic store functionality.
 
@@ -67,11 +67,13 @@ The pattern is consistent: these users tried Squarespace or Wix, found the desig
 
 | Tool | Free Plan | Paid From | Best For |
 |---|---|---|---|
-| **Webflow** | Yes (webflow.io) | $14/mo | Professional sites, serious CMS, complex interactions |
+| **Webflow** | Yes (webflow.io) | $15/mo | Professional sites, serious CMS, complex interactions |
 | **Framer** | Yes (framer.com) | $10/mo | Design-first, polished marketing sites, AI layout gen |
 | **Squarespace** | No (trial) | $16/mo | Beginners, simple sites, e-commerce |
 | **Lovable** | Yes | $25/mo | Apps needing auth + database |
 | **WordPress + Elementor** | Yes (self-host) | ~$10/mo | Flexibility, plugin ecosystem, familiar CMS |
+
+Paid-from figures are per month on annual billing, which is how every vendor in the table advertises them. Paying month to month costs meaningfully more - Webflow's Basic goes from $15 to $25, for instance. The [pricing tracker](/pricing) lists both numbers side by side.
 
 Related comparison: [Lovable vs Framer →](/blog/lovable-vs-framer-2026)
 
@@ -86,10 +88,12 @@ As of July 2026:
 | Plan | Price | What You Get |
 |---|---|---|
 | **Starter** | $0 | webflow.io domain, 1 editor, 50 CMS items |
-| **Basic** | $14/mo | Custom domain, unlimited pages, 0 CMS items |
+| **Basic** | $15/mo | Custom domain, unlimited pages, 0 CMS items |
 | **CMS** | $23/mo | 2,000 CMS items, 3 editors, blog/content API |
 | **Business** | $39/mo | 10,000 CMS items, 10 editors, advanced traffic |
 | **Enterprise** | Custom | Unlimited everything, SLA, security controls |
+
+Site plan prices are per month on annual billing. Month to month costs roughly 40% more - Basic is $25 that way. Verified against Webflow's pricing page in August 2026; see the [pricing tracker](/pricing) for the current side-by-side.
 
 **Workspace Plans (for agencies and teams)**
 

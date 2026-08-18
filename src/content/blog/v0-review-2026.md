@@ -3,7 +3,7 @@ title: "v0 by Vercel Review 2026: The Best UI Generator That Refuses to Be an Ap
 description: "Honest v0 review for 2026. Credit system explained, what the February platform update changed, where v0 beats Lovable and Bolt for UI work, and where it simply stops."
 pubDate: 2026-07-18
 tags: [review, v0, ai-coding, developer-tools, ai-app-builder]
-author: Andrei Maroz
+author: AIBuilderHub
 draft: false
 ---
 
@@ -26,8 +26,8 @@ v0 runs five plans:
 | Plan | Price | What you get |
 |------|-------|--------------|
 | Free | $0 | $5 in monthly credits |
-| Premium | $20/mo | Higher credit allowance, best value for solo builders |
-| Team | $30/user/mo | Shared credits across the team |
+| Premium | $20/mo | *Being sunsetted - closed to new signups. Existing subscribers keep it for now.* |
+| Plus / Team | $30/user/mo | The cheapest plan a new user can actually buy. $30/mo in credits per seat |
 | Business | $100/user/mo | Higher limits, priority access |
 | Enterprise | Custom | SSO, RBAC, no-training guarantee, SOC 2 / GDPR / HIPAA inheritance |
 

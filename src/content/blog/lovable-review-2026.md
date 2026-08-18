@@ -3,7 +3,7 @@ title: "Lovable Review 2026: Is It Actually Worth It?"
 description: "Honest Lovable review for 2026. Real use cases, actual pricing, credit system explained, and how it compares to Bolt and Cursor."
 pubDate: 2026-06-18
 tags: ["review", "lovable", "ai-app-builder", "no-code", "vibe-coding"]
-author: "Andrei Maroz"
+author: "AIBuilderHub"
 draft: false
 ---
 
@@ -69,7 +69,7 @@ Lovable has been all over startup Twitter and Reddit in 2026, so there's no shor
 | **Bolt.new** | Yes | ~$20/mo | Developers wanting speed with full code control |
 | **Cursor** | Yes | $20/mo | Developers wanting AI inside their own IDE |
 | **Replit** | Yes | $25/mo | Full cloud environment, good for beginners who code |
-| **Webflow** | Yes | $14/mo | Designers, marketing sites, no coding needed |
+| **Webflow** | Yes | $15/mo | Designers, marketing sites, no coding needed |
 
 Already compared these in detail? See [Lovable vs Bolt.new →](/blog/lovable-vs-bolt-2026) and [Cursor Review →](/blog/cursor-review-2026).
 
