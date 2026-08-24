@@ -119,5 +119,10 @@ async def _fetch_via_rss(
         client, settings, name=f"r/{subreddit}", url=url, weight=weight
     )
     # fetch_feed tags everything as RSS; correct the kind so scoring applies
-    # the right engagement reference for this platform.
-    return [item.model_copy(update={"kind": SourceKind.REDDIT}) for item in items]
+    # the right engagement reference for this platform. Flag the missing vote
+    # data explicitly: without it these items look like posts that scored zero,
+    # and min_upvotes never got a chance to filter them either.
+    return [
+        item.model_copy(update={"kind": SourceKind.REDDIT, "engagement_measured": False})
+        for item in items
+    ]

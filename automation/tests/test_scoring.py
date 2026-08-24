@@ -1,9 +1,15 @@
 from __future__ import annotations
 
+import pytest
 from tests.conftest import make_item
 
 from aibh_pipeline.models import SourceKind
-from aibh_pipeline.services.scoring import cluster, score_topics
+from aibh_pipeline.services.scoring import (
+    cluster,
+    has_citable_source,
+    is_self_promo,
+    score_topics,
+)
 
 
 def test_cluster_groups_the_same_story():
@@ -120,3 +126,68 @@ def test_topics_with_readable_sources_outrank_bare_headlines(sources_config, set
     )
     topics = score_topics([bare, readable], sources_config, settings)
     assert topics[0].title.startswith("Cursor")
+
+
+# --- topic quality gates -------------------------------------------------
+# Every scheduled run between 12 and 20 August 2026 was rejected by the
+# critics. The cause was upstream: Reddit's JSON endpoint is blocked from the
+# runner, the RSS fallback carries no vote counts, so min_upvotes never
+# applied and "I built X" posts won on keywords and self-text length alone.
+
+
+
+@pytest.mark.parametrize(
+    "title",
+    [
+        "I built a memory + coordination graph my agents can actually use",
+        "So I built a tool that turns Figma into React",
+        "My first side project just hit 1000 users",
+        "I've been working on an AI code reviewer",
+        "Roast my landing page please",
+        "We launched our SaaS after 6 months",
+        "I made deploy a single message",
+    ],
+)
+def test_first_person_project_posts_are_dropped(title):
+    assert is_self_promo(title)
+
+
+@pytest.mark.parametrize(
+    "title",
+    [
+        "Anthropic launched Claude Code for the web",
+        "Cursor raises $900M at a $29B valuation",
+        "Meta's Muse Glimmer: a local model built for agents",
+        "Grok 4.6",
+        "Vercel made v0 free for students",
+        "Are we teaching coding agents to be productive?",
+    ],
+)
+def test_real_news_survives_the_self_promo_filter(title):
+    assert not is_self_promo(title)
+
+
+def test_a_reddit_post_with_unknown_engagement_is_not_citable():
+    item = make_item(
+        title="Some discussion thread",
+        source="r/SideProject",
+        kind=SourceKind.REDDIT,
+        score=0.0,
+    )
+    assert not has_citable_source([item.model_copy(update={"engagement_measured": False})])
+
+
+def test_a_publication_is_always_citable():
+    assert has_citable_source(
+        [make_item(title="Anthropic ships a thing", source="techcrunch", kind=SourceKind.RSS)]
+    )
+
+
+def test_a_reddit_post_with_real_upvotes_is_citable():
+    item = make_item(
+        title="Claude Code goes GA",
+        source="r/ChatGPTCoding",
+        kind=SourceKind.REDDIT,
+        score=850.0,
+    )
+    assert has_citable_source([item])

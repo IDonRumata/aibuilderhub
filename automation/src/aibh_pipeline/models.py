@@ -33,6 +33,11 @@ class SourceItem(BaseModel):
     summary: str = ""
     # Per-source multiplier from sources.yaml.
     weight: float = 1.0
+    # False when the feed carried no vote data at all, which is different from
+    # "nobody voted". Reddit blocks the unauthenticated JSON endpoint from many
+    # networks and the RSS fallback has no counts, so those items would
+    # otherwise look identical to a post that genuinely flopped.
+    engagement_measured: bool = True
 
     @field_validator("published_at")
     @classmethod

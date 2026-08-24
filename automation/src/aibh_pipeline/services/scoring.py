@@ -8,6 +8,7 @@ per-run budget for no gain.
 from __future__ import annotations
 
 import math
+import re
 from datetime import UTC, datetime
 from typing import Any
 
@@ -50,6 +51,52 @@ WEIGHTS = {
 # work from, and the fact-checker then rejects the invented filler. Roughly
 # this many characters of summary across the cluster is enough to write from.
 WRITABLE_SUMMARY_CHARS = 900
+
+# First-person launch and progress posts. These dominate r/SideProject and
+# r/indiehackers, and they are structurally unusable here: one person's
+# anecdote about their own app carries no claim a fact-checker can verify
+# against a source, so the writer either pads it or invents corroboration and
+# the review loop rejects the result. Every run between 12 and 20 August died
+# this way.
+SELF_PROMO_PATTERNS = [
+    re.compile(p, re.IGNORECASE)
+    for p in (
+        r"\b(?:i|we)\s+(?:just\s+|finally\s+|recently\s+|accidentally\s+)?"
+        r"(?:built|made|created|launched|shipped|developed|coded|wrote|designed|open[\s-]?sourced)\b",
+        r"\bso\s+i\s+(?:built|made|created|wrote)\b",
+        r"\bmy\s+(?:first\s+|new\s+|little\s+)?"
+        r"(?:app|saas|startup|side[\s-]?project|tool|extension|project|product|game|site|website)\b",
+        r"\b(?:roast|check\s+out|feedback\s+on|thoughts\s+on)\s+my\b",
+        r"\bi(?:\s+have|['\u2019]ve)?\s*(?:been\s+)?(?:working|building)\s+on\b",
+        r"\b(?:launched|built|shipped)\s+(?:my|our)\s+",
+    )
+]
+
+
+def is_self_promo(title: str) -> bool:
+    """True for a first-person "I built X" style post.
+
+    Deliberately anchored on a first-person pronoun next to a creation verb:
+    "Anthropic launched Claude Code" must stay, "I launched my SaaS" must go.
+    """
+    return any(pattern.search(title) for pattern in SELF_PROMO_PATTERNS)
+
+
+def has_citable_source(items: list[SourceItem]) -> bool:
+    """True when at least one item can be cited as evidence for a claim.
+
+    The fact-checker requires every checkable statement to rest on a source it
+    was handed. A publication or a Hacker News submission qualifies. A Reddit
+    thread only qualifies when we can actually see it did numbers, which needs
+    the JSON endpoint — the RSS fallback carries no counts, so a lone Reddit
+    post with unknown engagement is not something to build a post on.
+    """
+    for item in items:
+        if item.kind in (SourceKind.RSS, SourceKind.HACKERNEWS):
+            return True
+        if item.engagement_measured and item.score_raw > 0:
+            return True
+    return False
 
 
 def cluster(items: list[SourceItem]) -> list[list[SourceItem]]:
@@ -167,9 +214,15 @@ def score_topics(
     reference = now or datetime.now(UTC)
     niche = config.get("niche") or {}
 
+    # Drop first-person project posts before clustering so they cannot pull a
+    # real story into their cluster and rename it.
+    usable = [item for item in items if not is_self_promo(item.title)]
+    self_promo = len(items) - len(usable)
+
     topics: list[ScoredTopic] = []
     off_niche = 0
-    for group in cluster(items):
+    uncitable = 0
+    for group in cluster(usable):
         ordered = sorted(
             group, key=lambda i: (i.score_raw, -i.age_hours(now=reference)), reverse=True
         )
@@ -180,6 +233,11 @@ def score_topics(
         niche_score = _niche_score(ordered, niche)
         if niche_score < settings.min_niche_score:
             off_niche += 1
+            continue
+
+        # Nothing to cite means nothing the fact-checker can pass.
+        if not has_citable_source(ordered):
+            uncitable += 1
             continue
 
         components = {
@@ -208,7 +266,9 @@ def score_topics(
         "scoring_complete",
         candidates=len(items),
         topics=len(topics),
+        dropped_self_promo=self_promo,
         dropped_off_niche=off_niche,
+        dropped_uncitable=uncitable,
         top=[{"title": t.title[:80], "score": t.score} for t in topics[:5]],
     )
     return topics
