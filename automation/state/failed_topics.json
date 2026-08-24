@@ -65,5 +65,14 @@
     ],
     "reason": "critics returned REJECT after 2 rounds",
     "failed_at": "2026-08-20T07:24:50.016149+00:00"
+  },
+  {
+    "key": "anthropic attract best cheaper model struggles thrive tools users",
+    "title": "Anthropic’s best AI model struggles to attract users as cheaper tools thrive",
+    "source_urls": [
+      "https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-08-24T06:32:45.260826+00:00"
   }
 ]
