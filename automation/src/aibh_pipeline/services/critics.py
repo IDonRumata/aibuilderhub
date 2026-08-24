@@ -114,6 +114,14 @@ Unverifiable material must be cut or softened to an explicitly labelled
 opinion. Do not flag the author's own judgements and predictions - those are
 allowed as long as they are clearly opinion.
 
+You will also be given the catalogue of posts already published on this site.
+Links of the form /blog/<slug> to entries in that catalogue are the site's own
+navigation, not factual claims, and the style guide requires the post to carry
+one or two of them. Never ask for an internal link to be removed for lacking a
+source, and never treat one as unverifiable. What you should still flag is a
+*claim about what that post says or found* that goes beyond its catalogue
+description - fix those by trimming the claim, never by cutting the link.
+
 REJECT if the central claim the whole post rests on is not supported by any
 source.
 
@@ -459,7 +467,13 @@ async def review(
     )
 
     briefs: list[tuple[str, str, str]] = [
-        ("fact-checker", FACT_CHECKER, f"Sources:\n{sources}\n\n---\n\nPost:\n{post}"),
+        (
+            "fact-checker",
+            FACT_CHECKER,
+            f"Sources:\n{sources}\n\n"
+            f"Existing posts catalogue (internal links to these are required "
+            f"and are not claims):\n{internal_links}\n\n---\n\nPost:\n{post}",
+        ),
         (
             "ai-pattern",
             AI_PATTERN_CRITIC,
