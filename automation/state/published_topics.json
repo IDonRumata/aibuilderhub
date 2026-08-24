@@ -20,5 +20,15 @@
     ],
     "content_hash": "301ceeb4e40bbc8288c5bc15ee1eaa5c",
     "published_at": "2026-08-14T08:01:16.030666Z"
+  },
+  {
+    "slug": "anthropic-revenue-growth-model-adoption",
+    "canonical_topic": "anthropic's isn't model revenue top",
+    "title": "Anthropic's revenue is up. Its top model isn't.",
+    "source_urls": [
+      "https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t"
+    ],
+    "content_hash": "ecb708fc60496f0a7c60c0ced8f94c14",
+    "published_at": "2026-08-24T07:29:55.286837Z"
   }
 ]
