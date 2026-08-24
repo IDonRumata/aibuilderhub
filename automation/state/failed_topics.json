@@ -74,5 +74,14 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-08-24T06:32:45.260826+00:00"
+  },
+  {
+    "key": "breunig drew quoting",
+    "title": "Quoting Drew Breunig",
+    "source_urls": [
+      "https://simonwillison.net/2026/Aug/23/drew-breunig"
+    ],
+    "reason": "critics returned REJECT after 1 rounds",
+    "failed_at": "2026-08-24T06:39:03.569294+00:00"
   }
 ]
