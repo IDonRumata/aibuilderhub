@@ -1,21 +1,5 @@
 {
-  "finished_at": "2026-08-24T07:29:55.293717+00:00",
-  "published": true,
-  "draft": false,
-  "path": "src/content/blog/anthropic-revenue-growth-model-adoption.md",
-  "slug": "anthropic-revenue-growth-model-adoption",
-  "title": "Anthropic's revenue is up. Its top model isn't.",
-  "word_count": 874,
-  "source_urls": [
-    "https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 16,
-  "usage": {
-    "calls": 16,
-    "input_tokens": 65066,
-    "output_tokens": 14033,
-    "cache_read_tokens": 25770,
-    "cache_write_tokens": 5457
-  }
+  "finished_at": "2026-08-24T07:36:46.389828+00:00",
+  "published": false,
+  "reason": "no_publishable_topic"
 }
