@@ -73,6 +73,17 @@ SELF_PROMO_PATTERNS = [
 ]
 
 
+# Link-blog quote posts ("Quoting Drew Breunig") are a headline plus somebody
+# else's paragraph. There is no story to retell and no claim of the source's
+# own to check, so the fact-checker rejects whatever gets written from them.
+QUOTE_STUB_PREFIX = "quoting "
+
+
+def is_quote_stub(title: str) -> bool:
+    """True for a link-blog post that is just somebody else's quote."""
+    return title.strip().lower().startswith(QUOTE_STUB_PREFIX)
+
+
 def is_self_promo(title: str) -> bool:
     """True for a first-person "I built X" style post.
 
@@ -216,12 +227,17 @@ def score_topics(
 
     # Drop first-person project posts before clustering so they cannot pull a
     # real story into their cluster and rename it.
-    usable = [item for item in items if not is_self_promo(item.title)]
-    self_promo = len(items) - len(usable)
+    usable = [
+        item
+        for item in items
+        if not is_self_promo(item.title) and not is_quote_stub(item.title)
+    ]
+    unusable = len(items) - len(usable)
 
     topics: list[ScoredTopic] = []
     off_niche = 0
     uncitable = 0
+    too_thin = 0
     for group in cluster(usable):
         ordered = sorted(
             group, key=lambda i: (i.score_raw, -i.age_hours(now=reference)), reverse=True
@@ -238,6 +254,15 @@ def score_topics(
         # Nothing to cite means nothing the fact-checker can pass.
         if not has_citable_source(ordered):
             uncitable += 1
+            continue
+
+        # Nor can it pass a post written from a headline and a blurb. Asking
+        # for 700 words on 166 characters of source guarantees invented
+        # filler, and the review loop then spends a dozen model calls
+        # rejecting it. Cheaper to never start.
+        material = sum(len(item.summary) for item in ordered)
+        if material < settings.min_summary_chars:
+            too_thin += 1
             continue
 
         components = {
@@ -266,9 +291,10 @@ def score_topics(
         "scoring_complete",
         candidates=len(items),
         topics=len(topics),
-        dropped_self_promo=self_promo,
+        dropped_unusable=unusable,
         dropped_off_niche=off_niche,
         dropped_uncitable=uncitable,
+        dropped_too_thin=too_thin,
         top=[{"title": t.title[:80], "score": t.score} for t in topics[:5]],
     )
     return topics

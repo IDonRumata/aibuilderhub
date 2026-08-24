@@ -109,6 +109,9 @@ class Settings(BaseSettings):
     # Minimum niche relevance a topic must clear to be publishable at all.
     # Anything at or below zero is off-topic for this audience.
     min_niche_score: float = 0.15
+    # Minimum characters of source summary across a topic's cluster. Below
+    # this the writer has to invent, and the fact-checker rejects the result.
+    min_summary_chars: int = 400
     # Days a topic that failed review is left alone before being retried.
     failed_topic_cooloff_days: int = 7
 

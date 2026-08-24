@@ -36,7 +36,18 @@ def make_item(
     source: str = "hackernews",
     kind: SourceKind = SourceKind.HACKERNEWS,
     score: float = 100.0,
-    summary: str = "",
+    # Enough material by default that scoring's "too thin to write from" gate
+    # does not silently drop every fixture; tests about that gate pass their
+    # own short summary explicitly.
+    summary: str = (
+        "A reported story with enough detail to write from: what shipped, who "
+        "it is for, what it costs, and how it compares with the alternatives "
+        "that solo builders already pay for. Includes the vendor's own framing, "
+        "the pricing page as it stood on the day, and the first round of "
+        "independent reaction from people who actually tried it in anger, "
+        "including the two complaints that came up more than once and the "
+        "one thing every reviewer agreed the vendor got right this time."
+    ),
     hours_old: float = 1.0,
     weight: float = 1.0,
 ) -> SourceItem:

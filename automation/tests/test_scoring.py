@@ -7,6 +7,7 @@ from aibh_pipeline.models import SourceKind
 from aibh_pipeline.services.scoring import (
     cluster,
     has_citable_source,
+    is_quote_stub,
     is_self_promo,
     score_topics,
 )
@@ -191,3 +192,30 @@ def test_a_reddit_post_with_real_upvotes_is_citable():
         score=850.0,
     )
     assert has_citable_source([item])
+
+
+def test_quote_stub_link_blog_posts_are_dropped():
+    assert is_quote_stub("Quoting Drew Breunig")
+    assert is_quote_stub("quoting simonw")
+    assert not is_quote_stub("Anthropic is quoting its own benchmarks again")
+
+
+def test_a_topic_with_almost_no_source_material_is_not_selectable(settings, sources_config):
+    """166 characters of blurb cannot become a 700-word post without invention."""
+    thin = make_item(
+        "Inherent says its AI teammate outperformed Anthropic at replicating research",
+        source="techcrunch-ai",
+        kind=SourceKind.RSS,
+        summary="A 57-character blurb and nothing else to go on.",
+    )
+    assert score_topics([thin], sources_config, settings) == []
+
+
+def test_a_well_sourced_topic_still_gets_through(settings, sources_config):
+    fat = make_item(
+        "Anthropic ships Claude Code for the web",
+        source="techcrunch-ai",
+        kind=SourceKind.RSS,
+        summary="Claude Code now runs in the browser for vibe coding and no-code builders. " * 12,
+    )
+    assert [t.title for t in score_topics([fat], sources_config, settings)] == [fat.title]
