@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "key": "agents chat claude managed run sdk",
+    "title": "Run Claude Managed Agents with Chat SDK",
+    "source_urls": [
+      "https://vercel.com/changelog/claude-managed-agents-with-chat-sdk"
+    ],
+    "reason": "banned patterns survived the rewrite: too-vague",
+    "failed_at": "2026-08-27T17:50:49.629623+00:00"
+  }
+]
