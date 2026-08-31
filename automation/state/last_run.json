@@ -1,6 +1,5 @@
 {
-  "finished_at": "2026-08-27T17:50:49.629717+00:00",
+  "finished_at": "2026-08-31T14:15:56.715676+00:00",
   "published": false,
-  "reason": "banned patterns survived the rewrite: too-vague",
-  "topic": "Run Claude Managed Agents with Chat SDK"
+  "reason": "no_publishable_topic"
 }
