@@ -1,6 +1,21 @@
 {
-  "finished_at": "2026-09-01T05:36:56.595967+00:00",
-  "published": false,
-  "reason": "critics returned REJECT after 1 rounds",
-  "topic": "AI agents have no sense of time and are not aware of it"
+  "finished_at": "2026-09-01T06:00:39.846917+00:00",
+  "published": true,
+  "draft": false,
+  "path": "src/content/blog/vercel-design-md-agents-brand.md",
+  "slug": "vercel-design-md-agents-brand",
+  "title": "Vercel's design.md: teaching coding agents your brand rules",
+  "word_count": 875,
+  "source_urls": [
+    "https://vercel.com/blog/how-our-agents-build-on-brand-pages-with-design-md"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 19,
+  "usage": {
+    "calls": 19,
+    "input_tokens": 65219,
+    "output_tokens": 15564,
+    "cache_read_tokens": 33846,
+    "cache_write_tokens": 6027
+  }
 }
