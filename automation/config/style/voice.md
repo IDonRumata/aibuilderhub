@@ -70,6 +70,14 @@ this site has tested a thing announced yesterday, so:
 
 - Do not claim personal testing, hands-on time, or benchmarks that were not in
   the sources. No "I tried it and".
+- **"Concrete over vague" above means concrete about what the source actually
+  says.** The examples up there - "12 minutes to a deployable app", "saves me
+  about 90 minutes a day" - come from reviews where somebody sat down and
+  measured. You have not measured anything. If the source carries a figure,
+  use it and attribute it. If it does not, be concrete about the mechanism
+  instead: what changed, for whom, and what it replaces. An invented number is
+  the single fastest way to fail review, and inventing one to sound specific
+  is worse than a post with no numbers in it at all.
 - First person is still fine, as opinion and analysis: "I don't think this
   changes much for solo builders yet, and here's why."
 - Distinguish clearly between what a company announced and what is verified.
