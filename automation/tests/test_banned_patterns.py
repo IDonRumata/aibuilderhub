@@ -123,3 +123,58 @@ def test_the_rhythm_rules_are_calibrated_to_human_writing(rules, settings):
         if violations:
             offenders[post.slug] = [f"{v.rule}: {v.excerpt}" for v in violations]
     assert not offenders, f"human-written posts fail the rhythm rules: {offenders}"
+
+
+# --- advisory vs blocking -------------------------------------------------
+# The "too-vague" rule wants three concrete figures, but the only legal source
+# of a figure is the article's sources, and the humanizer is forbidden from
+# adding statistics because it runs after the fact-checker. A draft whose
+# numbers were all stripped in review therefore has no way back above the
+# threshold. Runs on 12 August and 1 September died there with zero blocking
+# issues everywhere else.
+
+
+async def test_a_vague_post_is_published_with_a_note_not_blocked(settings, rules):
+    from aibh_pipeline.services import humanizer
+
+    clean_but_vague = (
+        "## What changed\n\n"
+        "OpenAI shipped a reference for its work tool. It's small.\n\n"
+        "You skim it once and forget it, and that would be the reasonable "
+        "response for almost everyone reading this, because the thing it "
+        "documents is not the thing that will change your week. But it "
+        "isn't nothing either.\n\n"
+        "Don't rush. If you aren't already living in the desktop app, this "
+        "won't move you, and you'll want to wait until the agent story "
+        "settles into something you can plan around. Wait.\n"
+    )
+
+    class NoOpClient:
+        async def complete(self, **kwargs) -> str:
+            return clean_but_vague
+
+    body, blocking = await humanizer.humanize(
+        clean_but_vague, client=NoOpClient(), settings=settings, voice="voice"
+    )
+
+    assert [v.rule for v in humanizer.scan(body, rules) if v.rule == "too-vague"] == ["too-vague"]
+    assert blocking == [], "an unsatisfiable style preference must not skip the day"
+
+
+async def test_a_banned_word_still_blocks(settings):
+    from aibh_pipeline.services import humanizer
+
+    with_banned = (
+        "## What changed\n\n"
+        "This is a game-changer that will revolutionize how you work. "
+        "It's seamless and robust.\n"
+    )
+
+    class StubbornClient:
+        async def complete(self, **kwargs) -> str:
+            return with_banned
+
+    _, blocking = await humanizer.humanize(
+        with_banned, client=StubbornClient(), settings=settings, voice="voice"
+    )
+    assert blocking, "hard style rules must still stop publication"

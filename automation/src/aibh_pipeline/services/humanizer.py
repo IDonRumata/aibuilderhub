@@ -295,6 +295,23 @@ def _structure_violations(body: str, limits: dict[str, Any]) -> list[Violation]:
     return out
 
 
+# Rules that cannot be satisfied by editing alone, so they must not stop a
+# publication.
+#
+# "too-vague" wants at least three concrete figures. The only way to add one
+# is to take it from a source, and the humanizer is deliberately forbidden
+# from introducing statistics: it runs AFTER the fact-checker, so anything it
+# invented would reach the site unchecked. That prohibition is a safety
+# property and stays. Meanwhile the fact-checker spends the review rounds
+# stripping every number the sources do not support, which is how a draft
+# arrives here below the threshold with no legal way back above it. Two runs
+# died on exactly this - 12 August and 1 September - after passing every
+# other check with zero blocking issues.
+#
+# It still gets scanned and logged, so a pattern of vague posts stays visible.
+ADVISORY_RULES = frozenset({"too-vague"})
+
+
 HUMANIZER_SYSTEM = """\
 You are a line editor removing machine-writing tells from a draft blog post.
 
@@ -371,9 +388,14 @@ async def humanize(
         current = _strip_wrapping_fence(current)
 
     remaining = scan(current, rules)
-    if remaining:
-        log.warning("humanizer_unresolved", violations=[v.as_dict() for v in remaining[:10]])
-    return current, remaining
+    blocking = [v for v in remaining if v.rule not in ADVISORY_RULES]
+    advisory = [v for v in remaining if v.rule in ADVISORY_RULES]
+
+    if advisory:
+        log.info("humanizer_advisory", violations=[v.as_dict() for v in advisory])
+    if blocking:
+        log.warning("humanizer_unresolved", violations=[v.as_dict() for v in blocking[:10]])
+    return current, blocking
 
 
 def _strip_wrapping_fence(text: str) -> str:
