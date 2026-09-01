@@ -17,6 +17,7 @@ from ..clients.anthropic_client import AnthropicClient
 from ..logging_setup import get_logger
 from ..models import CritiqueReport, DraftPost, ScoredTopic
 from ..settings import Settings
+from ..textutil import drop_orphan_code_fence
 
 log = get_logger(__name__)
 
@@ -125,7 +126,7 @@ def _to_draft(payload: dict[str, Any], topic: ScoredTopic) -> DraftPost:
         description=str(payload["description"]).strip(),
         slug=slug,
         tags=[str(t).strip().lower() for t in payload.get("tags", []) if str(t).strip()],
-        body=str(payload["body"]).strip(),
+        body=drop_orphan_code_fence(str(payload["body"]).strip()),
         source_urls=topic.source_urls[:MAX_SOURCES_PER_TOPIC],
     )
 

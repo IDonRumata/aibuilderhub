@@ -99,6 +99,28 @@ def token_overlap(left: str, right: str) -> float:
     return len(a & b) / min(len(a), len(b))
 
 
+def drop_orphan_code_fence(body: str) -> str:
+    """Remove an unclosed ``` line left behind by the model.
+
+    The post body arrives as markdown inside a JSON string, and the model
+    occasionally opens a fence it never closes. Markdown then renders the rest
+    of the article as a code block. Three separate critics flagged the same
+    stray fence on 1 September and the writer could not remove it, because a
+    revision prompt describing "the stray backtick" is ambiguous about which
+    one to drop.
+
+    Balanced fences are legitimate content and are left alone: only an odd
+    count means one of them is an artifact, and it is the last one that has
+    no partner.
+    """
+    lines = body.splitlines()
+    fences = [i for i, line in enumerate(lines) if line.lstrip().startswith("```")]
+    if len(fences) % 2 == 0:
+        return body
+    del lines[fences[-1]]
+    return "\n".join(lines)
+
+
 def strip_markdown(text: str) -> str:
     """Rough markdown-to-plain-text, good enough for word counts and matching."""
     without_code = re.sub(r"```.*?```", " ", text, flags=re.S)

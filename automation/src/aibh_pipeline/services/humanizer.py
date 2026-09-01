@@ -19,7 +19,7 @@ import yaml
 from ..clients.anthropic_client import AnthropicClient
 from ..logging_setup import get_logger
 from ..settings import Settings
-from ..textutil import strip_markdown
+from ..textutil import drop_orphan_code_fence, strip_markdown
 
 log = get_logger(__name__)
 
@@ -415,7 +415,7 @@ async def humanize(
             thinking=False,
             effort="medium",
         )
-        current = _strip_wrapping_fence(current)
+        current = drop_orphan_code_fence(_strip_wrapping_fence(current))
 
     remaining = scan(current, rules)
     blocking = [v for v in remaining if v.rule not in ADVISORY_RULES]
