@@ -17,5 +17,14 @@
     ],
     "reason": "banned patterns survived the rewrite: too-vague",
     "failed_at": "2026-09-01T05:14:22.611115+00:00"
+  },
+  {
+    "key": "available harness layer sdk",
+    "title": "fx is now available in the AI SDK harness layer",
+    "source_urls": [
+      "https://vercel.com/changelog/fx-ai-sdk-harness-adapter"
+    ],
+    "reason": "banned patterns survived the rewrite: word:harness",
+    "failed_at": "2026-09-01T05:22:37.073048+00:00"
   }
 ]
