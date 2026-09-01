@@ -143,6 +143,9 @@ def _title_case_violations(body: str, proper_nouns: set[str]) -> list[Violation]
 def scan(body: str, rules: dict[str, Any]) -> list[Violation]:
     """Return every banned-pattern and rhythm violation found in ``body``."""
     violations: list[Violation] = []
+    # Word, phrase and construction rules are about our own prose, so they run
+    # against a copy with code spans and link targets blanked out.
+    prose = mask_non_prose(body)
 
     for rule in rules.get("typography") or []:
         for match in re.finditer(rule["pattern"], body):
@@ -152,7 +155,7 @@ def scan(body: str, rules: dict[str, Any]) -> list[Violation]:
 
     for word in rules.get("words") or []:
         pattern = rf"\b{re.escape(word)}\b"
-        for match in re.finditer(pattern, body, re.IGNORECASE):
+        for match in re.finditer(pattern, prose, re.IGNORECASE):
             violations.append(
                 Violation(
                     f"word:{word}",
@@ -163,7 +166,7 @@ def scan(body: str, rules: dict[str, Any]) -> list[Violation]:
 
     for phrase in rules.get("phrases") or []:
         pattern = r"\s+".join(re.escape(part) for part in phrase.split())
-        for match in re.finditer(pattern, body, re.IGNORECASE):
+        for match in re.finditer(pattern, prose, re.IGNORECASE):
             violations.append(
                 Violation(
                     f"phrase:{phrase}",
@@ -173,7 +176,7 @@ def scan(body: str, rules: dict[str, Any]) -> list[Violation]:
             )
 
     for rule in rules.get("constructions") or []:
-        matches = list(re.finditer(rule["pattern"], body, re.IGNORECASE))
+        matches = list(re.finditer(rule["pattern"], prose, re.IGNORECASE))
         allowed = int(rule.get("max_occurrences", 0))
         for match in matches[allowed:]:
             violations.append(
@@ -310,6 +313,33 @@ def _structure_violations(body: str, limits: dict[str, Any]) -> list[Violation]:
 #
 # It still gets scanned and logged, so a pattern of vague posts stays visible.
 ADVISORY_RULES = frozenset({"too-vague"})
+
+
+# Regions where a banned word is somebody else's name, not our prose: fenced
+# blocks, inline code, the target half of a markdown link, and bare URLs.
+_MASKABLE = re.compile(
+    r"```.*?```"           # fenced code
+    r"|`[^`]*`"            # inline code
+    r"|\]\([^)]*\)"        # the (target) of [text](target)
+    r"|https?://\S+",      # bare URL
+    re.S,
+)
+
+
+def mask_non_prose(body: str) -> str:
+    """Blank out code and link targets, keeping every character position.
+
+    A style rule about word choice applies to what we wrote, not to what a
+    vendor called their package. Vercel shipping "@ai-sdk/harness-fx" tripped
+    the ban on "harness" twice, once inside a code span and once inside the
+    changelog URL, and no rewrite could clear it because renaming someone
+    else's package is not an option. The run was skipped on 1 September for
+    exactly that.
+
+    Offsets are preserved so the reported excerpt still points at the real
+    text in the original body.
+    """
+    return _MASKABLE.sub(lambda m: " " * (m.end() - m.start()), body)
 
 
 HUMANIZER_SYSTEM = """\
