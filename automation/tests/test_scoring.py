@@ -219,3 +219,10 @@ def test_a_well_sourced_topic_still_gets_through(settings, sources_config):
         summary="Claude Code now runs in the browser for vibe coding and no-code builders. " * 12,
     )
     assert [t.title for t in score_topics([fat], sources_config, settings)] == [fat.title]
+
+
+def test_the_lookback_window_covers_the_longest_gap_between_runs(settings):
+    """The cron fires Mondays and Thursdays, so Thursday to Monday is 96 hours.
+    A shorter window silently discards every Friday, Saturday and Sunday story
+    before scoring ever sees it."""
+    assert settings.lookback_hours >= 96

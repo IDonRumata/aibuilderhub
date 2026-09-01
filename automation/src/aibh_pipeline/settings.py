@@ -95,9 +95,19 @@ class Settings(BaseSettings):
     price_output_per_mtok: float = 15.0
 
     # --- ingest -----------------------------------------------------------
-    lookback_hours: int = 36
+    # The cron runs Mondays and Thursdays, so the longest gap between runs
+    # is 96 hours. A 36-hour window meant every Friday, Saturday and Sunday
+    # story was invisible to the pipeline - more than half the week's news
+    # was discarded before scoring ever saw it. Freshness is still scored,
+    # so newer items keep winning; older ones are no longer thrown away.
+    lookback_hours: int = 96
     min_candidates: int = 20
-    max_candidates: int = 150
+    # Candidates are truncated after being sorted by raw engagement, and
+    # RSS items carry no vote count, so a tight cap silently throws away
+    # the publication feeds first - exactly the material worth writing
+    # from. Scoring is cheap arithmetic, so the cap only needs to stop a
+    # runaway feed, not to bound normal work.
+    max_candidates: int = 400
     http_timeout_seconds: float = 20.0
     # Reddit rate limits per client; hitting five subreddits at once 429s.
     reddit_delay_seconds: float = 3.0

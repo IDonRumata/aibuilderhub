@@ -41,6 +41,61 @@ rss:
     url: https://huggingface.co/blog/feed.xml
     weight: 0.8
 
+  # --- added 1 Sep 2026 -------------------------------------------------
+  # Picked by measuring what each feed actually delivers, not by reputation:
+  # items published in the last 36 hours, items in the last 7 days, and the
+  # average length of the text that comes with them. A feed that publishes
+  # weekly or ships headline-only entries cannot feed this pipeline, because
+  # the writer needs material and the fact-checker rejects invented filler.
+
+  # Hacker News, filtered to this site's subject matter. The highest-yield
+  # addition: 11 fresh items in 36 hours, all on-niche by construction.
+  - name: hn-nocode
+    url: https://hnrss.org/newest?q=no-code+OR+%22vibe+coding%22+OR+%22AI+agent%22&points=40
+    weight: 1.3
+  - name: hn-ai-tools
+    url: https://hnrss.org/newest?q=Cursor+OR+%22Claude+Code%22+OR+Lovable&points=40
+    weight: 1.3
+  - name: hn-show
+    url: https://hnrss.org/show?points=80
+    weight: 1.0
+
+  # Dedicated AI newsrooms. Daily cadence, summaries long enough to write from.
+  - name: the-decoder
+    url: https://the-decoder.com/feed/
+    weight: 1.1
+  - name: marktechpost
+    url: https://www.marktechpost.com/feed/
+    weight: 1.0
+  - name: infoq-ai
+    url: https://feed.infoq.com/ai-ml-data-eng/
+    weight: 1.0
+
+  # Developer-facing. dev.to carries the most fresh items of anything tested
+  # (12 in 36 hours) with real article bodies; weighted down because it is
+  # user-generated and the quality spread is wide.
+  - name: devto-ai
+    url: https://dev.to/feed/tag/ai
+    weight: 0.8
+  - name: latent-space
+    url: https://www.latent.space/feed
+    weight: 1.2
+
+  # Lower cadence, but squarely on-niche and long-form. These are the feeds
+  # that carry a quiet day.
+  - name: github-changelog
+    url: https://github.blog/changelog/feed/
+    weight: 1.1
+  - name: zapier-blog
+    url: https://zapier.com/blog/feeds/latest/
+    weight: 1.0
+  - name: n8n-blog
+    url: https://blog.n8n.io/rss/
+    weight: 1.1
+  - name: cloudflare-blog
+    url: https://blog.cloudflare.com/rss/
+    weight: 0.9
+
 hackernews:
   - name: hackernews
     listing: topstories
@@ -49,12 +104,9 @@ hackernews:
     weight: 1.1
 
 reddit:
-  - subreddit: SideProject
-    sort: top
-    period: day
-    limit: 25
-    min_upvotes: 60
-    weight: 1.2
+  # r/SideProject and r/indiehackers were removed on 1 Sep 2026: between them
+  # they supplied 25 candidates in one window and all 25 were "I built X"
+  # posts that selection discards. See scoring.is_self_promo.
   - subreddit: nocode
     sort: top
     period: day
@@ -73,12 +125,6 @@ reddit:
     limit: 25
     min_upvotes: 150
     weight: 0.9
-  - subreddit: indiehackers
-    sort: top
-    period: day
-    limit: 25
-    min_upvotes: 15
-    weight: 1.2
 
 # ---------------------------------------------------------------------------
 # Scoring vocabulary. Matched against the normalised title + summary.
