@@ -26,5 +26,14 @@
     ],
     "reason": "banned patterns survived the rewrite: word:harness",
     "failed_at": "2026-09-01T05:22:37.073048+00:00"
+  },
+  {
+    "key": "100k agentic agents challenge chaos security",
+    "title": "Agents of Chaos: A New $100K Agentic Security Challenge",
+    "source_urls": [
+      "https://dev.to/mark0_617b45cda9782a/agents-of-chaos-a-new-100k-agentic-security-challenge-2bk3"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-01T05:31:02.139025+00:00"
   }
 ]
