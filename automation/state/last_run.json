@@ -1,5 +1,6 @@
 {
-  "finished_at": "2026-08-31T14:15:56.715676+00:00",
+  "finished_at": "2026-09-01T05:14:22.611214+00:00",
   "published": false,
-  "reason": "no_publishable_topic"
+  "reason": "banned patterns survived the rewrite: too-vague",
+  "topic": "ChatGPT Work Tool and Skill Reference"
 }

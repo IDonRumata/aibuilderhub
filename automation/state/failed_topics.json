@@ -7,5 +7,15 @@
     ],
     "reason": "banned patterns survived the rewrite: too-vague",
     "failed_at": "2026-08-27T17:50:49.629623+00:00"
+  },
+  {
+    "key": "chatgpt reference skill tool work",
+    "title": "ChatGPT Work Tool and Skill Reference",
+    "source_urls": [
+      "https://codex-tool-reference.simonw.chatgpt.site/",
+      "https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work"
+    ],
+    "reason": "banned patterns survived the rewrite: too-vague",
+    "failed_at": "2026-09-01T05:14:22.611115+00:00"
   }
 ]
