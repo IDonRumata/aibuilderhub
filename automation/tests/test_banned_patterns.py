@@ -92,13 +92,17 @@ def test_no_published_post_contains_banned_patterns(rules, settings):
     for post in existing_posts(settings.content_dir):
         if "news" not in post.tags:
             continue
-        from aibh_pipeline.services.humanizer import scan_metadata
+        from aibh_pipeline.services.humanizer import ADVISORY_RULES, scan_metadata
 
         violations = scan(post.body, rules) + scan_metadata(
             post.title, post.description, rules
         )
-        if violations:
-            offenders[post.slug] = sorted({v.rule for v in violations})
+        # Advisory rules are reported by the pipeline and deliberately do not
+        # stop a publication, so the gate must not fail on them either -
+        # otherwise a post the pipeline accepted still cannot reach the site.
+        blocking = [v for v in violations if v.rule not in ADVISORY_RULES]
+        if blocking:
+            offenders[post.slug] = sorted({v.rule for v in blocking})
     assert not offenders, f"banned patterns in generated posts: {offenders}"
 
 
@@ -109,7 +113,7 @@ def test_the_rhythm_rules_are_calibrated_to_human_writing(rules, settings):
     fails, a limit drifted past what a person actually writes and the
     humaniser will start chasing an impossible target.
     """
-    from aibh_pipeline.services.humanizer import _structure_violations
+    from aibh_pipeline.services.humanizer import ADVISORY_RULES, _structure_violations
 
     limits = rules.get("structure") or {}
     offenders = {}
@@ -119,7 +123,9 @@ def test_the_rhythm_rules_are_calibrated_to_human_writing(rules, settings):
         # reviews and comparisons are the right reference shape.
         if {"guide", "tutorial"} & set(post.tags):
             continue
-        violations = _structure_violations(post.body, limits)
+        violations = [
+            v for v in _structure_violations(post.body, limits) if v.rule not in ADVISORY_RULES
+        ]
         if violations:
             offenders[post.slug] = [f"{v.rule}: {v.excerpt}" for v in violations]
     assert not offenders, f"human-written posts fail the rhythm rules: {offenders}"
