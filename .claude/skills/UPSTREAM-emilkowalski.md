@@ -1,4 +1,4 @@
-# Upstream — emilkowalski/skills
+# Upstream - emilkowalski/skills
 
 These skills are vendored, unmodified, from:
 
@@ -29,9 +29,9 @@ Upstream also ships three skills that do not apply to this codebase (Astro,
 zero-JS by default, no React Native, no Swift). Skill descriptions are loaded
 into every session's context, so carrying dead ones costs tokens on every turn.
 
-- `animate-expo` — React Native / Reanimated / Expo Router.
-- `write-swift` — Swift 6 language guide.
-- `ask-sonner` — Sonner toast library (React-only; this site ships no React).
+- `animate-expo` - React Native / Reanimated / Expo Router.
+- `write-swift` - Swift 6 language guide.
+- `ask-sonner` - Sonner toast library (React-only; this site ships no React).
 
 Clone upstream directly if the stack ever changes.
 
@@ -55,5 +55,5 @@ This site is static Astro with **zero JavaScript by default** (see `README.md`).
 Any motion these skills produce must stay CSS-only (`transform`/`opacity`,
 `@media (prefers-reduced-motion: reduce)` honored) unless a component genuinely
 justifies a client directive. Shipping a motion library to hit a 300ms ease-out
-would trade a Core Web Vitals score for a flourish — the skills raise the craft
+would trade a Core Web Vitals score for a flourish - the skills raise the craft
 bar, they do not override the performance budget.
