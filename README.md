@@ -79,6 +79,9 @@ Content pipeline:
 
 ```
 aibuilderhub/
+├── .claude/
+│   └── skills/                 # Agent skills (see "Agent skills" below)
+│
 ├── public/
 │   ├── favicon.svg             # SVG favicon (indigo brand color)
 │   └── robots.txt              # Allow all + sitemap reference
@@ -204,6 +207,40 @@ Or just write the URL — the PostLayout already includes a disclosure notice at
 | `success` | `#10B981` | "Updated" badges, positive indicators |
 
 Font: **Inter** (Google Fonts, preconnect loaded in BaseLayout)
+
+---
+
+## 🧠 Agent skills
+
+`.claude/skills/` holds skills that any Claude Code session in this repo loads
+automatically. They exist so the agent stops guessing on decisions where taste,
+not logic, decides the outcome.
+
+**Design & motion** — vendored from [emilkowalski/skills](https://github.com/emilkowalski/skills)
+(MIT). Provenance, the update recipe and the list of deliberately skipped skills:
+[.claude/skills/UPSTREAM-emilkowalski.md](.claude/skills/UPSTREAM-emilkowalski.md).
+
+| Skill | Invoke with | Use it for |
+|-------|-------------|------------|
+| `emil-design-eng` | automatic | UI polish, component design, the details that decide whether a page feels cheap |
+| `animate` | automatic | Building a transition: right curve, right duration, right properties |
+| `apple-design` | automatic | Fluid, physical interaction patterns translated to CSS |
+| `find-animation-opportunities` | automatic | Where motion would actually help, and where it would not |
+| `improve-animations` | automatic | Codebase-wide motion audit with prioritized plans |
+| `animation-vocabulary` | automatic | Naming an effect you can only describe |
+| `review-animations` | `/review-animations` | Strict review of motion in a diff |
+| `pick-ui-library` | `/pick-ui-library` | Choosing a dependency instead of hand-rolling one |
+| `prototype` | `/prototype` | N divergent versions of one component behind a picker |
+
+**Constraint that overrides all of the above:** this site ships zero JavaScript
+by default. Motion stays CSS-only (`transform` / `opacity`, `prefers-reduced-motion`
+honored) unless a component genuinely earns a client directive. A 300ms ease-out
+is never worth a Lighthouse point.
+
+**Content hygiene** — `remove-ai-marks` (vendored, see
+[.claude/skills/remove-ai-marks/UPSTREAM.md](.claude/skills/remove-ai-marks/UPSTREAM.md))
+strips invisible Unicode and provenance metadata. The content pipeline in
+`automation/` already runs this stage on generated posts.
 
 ---
 
