@@ -216,7 +216,7 @@ Font: **Inter** (Google Fonts, preconnect loaded in BaseLayout)
 automatically. They exist so the agent stops guessing on decisions where taste,
 not logic, decides the outcome.
 
-**Design & motion** — vendored from [emilkowalski/skills](https://github.com/emilkowalski/skills)
+**Design & motion** - vendored from [emilkowalski/skills](https://github.com/emilkowalski/skills)
 (MIT). Provenance, the update recipe and the list of deliberately skipped skills:
 [.claude/skills/UPSTREAM-emilkowalski.md](.claude/skills/UPSTREAM-emilkowalski.md).
 
@@ -237,7 +237,7 @@ by default. Motion stays CSS-only (`transform` / `opacity`, `prefers-reduced-mot
 honored) unless a component genuinely earns a client directive. A 300ms ease-out
 is never worth a Lighthouse point.
 
-**Content hygiene** — `remove-ai-marks` (vendored, see
+**Content hygiene** - `remove-ai-marks` (vendored, see
 [.claude/skills/remove-ai-marks/UPSTREAM.md](.claude/skills/remove-ai-marks/UPSTREAM.md))
 strips invisible Unicode and provenance metadata. The content pipeline in
 `automation/` already runs this stage on generated posts.
