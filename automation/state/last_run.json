@@ -1,21 +1,24 @@
 {
-  "finished_at": "2026-09-01T06:00:39.846917+00:00",
+  "finished_at": "2026-09-03T11:33:28.953412+00:00",
   "published": true,
   "draft": false,
-  "path": "src/content/blog/vercel-design-md-agents-brand.md",
-  "slug": "vercel-design-md-agents-brand",
-  "title": "Vercel's design.md: teaching coding agents your brand rules",
-  "word_count": 875,
+  "path": "src/content/blog/claude-fable-mythos-5-1-pricing.md",
+  "slug": "claude-fable-mythos-5-1-pricing",
+  "title": "Claude Fable 5.1: cheaper agentic coding, check your bill",
+  "word_count": 821,
   "source_urls": [
-    "https://vercel.com/blog/how-our-agents-build-on-brand-pages-with-design-md"
+    "https://anthropic.com/claude-fable-and-mythos-5-1",
+    "https://latent.space/p/ainews-claude-fablemythos-51-new",
+    "https://simonwillison.net/2026/Sep/1/claude-fable-5-1",
+    "https://theverge.com/ai-artificial-intelligence/987830/anthropic-claude-fable-mythos-5-1"
   ],
   "critic_rounds": 3,
-  "llm_calls": 19,
+  "llm_calls": 17,
   "usage": {
-    "calls": 19,
-    "input_tokens": 65219,
-    "output_tokens": 15564,
-    "cache_read_tokens": 33846,
+    "calls": 17,
+    "input_tokens": 72805,
+    "output_tokens": 13835,
+    "cache_read_tokens": 30304,
     "cache_write_tokens": 6027
   }
 }

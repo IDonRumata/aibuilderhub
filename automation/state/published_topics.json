@@ -40,5 +40,22 @@
     ],
     "content_hash": "d46af1abda7eb047c75b4301a19b6ab7",
     "published_at": "2026-09-01T06:00:39.837700Z"
+  },
+  {
+    "slug": "claude-fable-mythos-5-1-pricing",
+    "canonical_topic": "agentic bill cheaper check claude coding fable",
+    "title": "Claude Fable 5.1: cheaper agentic coding, check your bill",
+    "source_urls": [
+      "https://anthropic.com/claude-fable-and-mythos-5-1",
+      "https://latent.space/p/ainews-claude-fablemythos-51-new",
+      "https://simonwillison.net/2026/Sep/1/claude-fable-5-1",
+      "https://theverge.com/ai-artificial-intelligence/987830/anthropic-claude-fable-mythos-5-1",
+      "https://the-decoder.com/anthropics-claude-fable-5-1-promises-better-coding-and-research-at-up-to-45-percent-less",
+      "https://marktechpost.com/2026/09/01/anthropic-releases-claude-fable-5-1-and-claude-mythos-5-1-52-6-on-terminal-bench-science-and-75-cheaper-cache-reads",
+      "https://github.blog/changelog/2026-09-01-claude-fable-5-1-generally-available-in-github-copilot",
+      "https://vercel.com/changelog/claude-fable-5-1-now-available-on-ai-gateway"
+    ],
+    "content_hash": "87335fd6bc153e710fa79dd9676ea4f4",
+    "published_at": "2026-09-03T11:33:28.943268Z"
   }
 ]
