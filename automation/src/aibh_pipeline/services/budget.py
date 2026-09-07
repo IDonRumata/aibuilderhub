@@ -86,6 +86,17 @@ class MonthlyBudget:
     def exceeded(self) -> bool:
         return self.spent_this_month >= self._settings.monthly_budget_usd
 
+    def allows_another_post(self, spent_in_flight: float = 0.0) -> bool:
+        """Whether there is room in the month for one more post.
+
+        Checked between posts, not only at startup: starting a post the month
+        cannot pay for means spending most of its cost and then aborting, which
+        is the worst of both outcomes. ``spent_in_flight`` is what the current
+        run has already used, which is not in the persisted total yet - without
+        it a run could overshoot the ceiling by its own length.
+        """
+        return self.remaining - spent_in_flight >= self._settings.typical_post_cost_usd
+
     def record(self, usage: dict[str, int], prices: Prices) -> float:
         cost = estimate_cost(usage, prices)
         month = self.months.setdefault(

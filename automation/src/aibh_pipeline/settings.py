@@ -72,22 +72,53 @@ class Settings(BaseSettings):
     max_tokens_critic: int = 2000
     max_tokens_humanizer: int = 6000
 
+    # --- cadence ----------------------------------------------------------
+    # The cron fires daily; these decide whether a given day writes anything.
+    # See services/cadence.py for why this is a quota and not a calendar.
+    #
+    # Three posts a week is the deliberate ceiling. The site's bottleneck is
+    # domain authority, not volume (LINK-BUILDING-PLAN.md), and a daily
+    # machine-written news feed is precisely the shape Google's scaled content
+    # abuse policy targets. Raise this only with a reason.
+    weekly_target_posts: int = 3
+    # A single run may publish more than one post only to repay a silence.
+    max_posts_per_run: int = 2
+    # Ceiling on topics tried in one run, including the ones that fail review.
+    # A run that fails three different stories has a real problem; trying a
+    # fourth just spends money on it.
+    max_topic_attempts_per_run: int = 3
+    # Minimum spacing between posts. Without it the weekly quota could be
+    # satisfied by three posts on Monday and silence until the next Monday,
+    # which is the outage this whole mechanism exists to prevent.
+    min_hours_between_posts: float = 36.0
+    # After this much silence a run is allowed to publish two posts to catch up.
+    catchup_after_hours: float = 72.0
+
     # --- budget guards ----------------------------------------------------
-    # Hard ceiling on LLM calls per run. The writer/critic loop is bounded at
-    # 1 + 3 * (1 + 4) = 16 calls plus humanising, so 25 leaves headroom while
+    # Hard ceiling on LLM calls for ONE post. The writer/critic loop is bounded
+    # at 1 + 3 * (1 + 4) = 16 calls plus humanising, so 25 leaves headroom while
     # still stopping any runaway loop.
     max_llm_calls: int = 25
+    # Ceiling for the whole run, across every post and every failed attempt.
+    max_llm_calls_per_run: int = 80
     max_critic_rounds: int = 3
 
-    # Token ceilings for a single run. A normal run uses roughly 60k input
-    # and 12k output, so these leave headroom while still stopping a loop.
-    max_input_tokens_per_run: int = 400_000
-    max_output_tokens_per_run: int = 80_000
+    # Token ceilings for a single run. One post uses roughly 60k input and 12k
+    # output; a run may now attempt three, so these leave headroom while still
+    # stopping a loop.
+    max_input_tokens_per_run: int = 900_000
+    max_output_tokens_per_run: int = 180_000
 
     # Hard monthly ceiling on estimated spend. Once the month's estimate
     # reaches this, the pipeline refuses to start until the month rolls over.
-    # A normal day costs under a cent, so 5 dollars is roughly 20x headroom.
-    monthly_budget_usd: float = 5.0
+    # At three posts a week and roughly 45 cents a post the expected monthly
+    # bill is about 6 dollars including failed attempts, so 10 is the runaway
+    # guard rather than the operating limit.
+    monthly_budget_usd: float = 10.0
+
+    # What one post is assumed to cost when deciding whether to start another.
+    # Measured, not guessed: the September runs averaged 0.39 dollars each.
+    typical_post_cost_usd: float = 0.45
 
     # US dollars per million tokens, for the spend estimate only. Defaults are
     # the standard claude-sonnet-5 rates; update if you change model.

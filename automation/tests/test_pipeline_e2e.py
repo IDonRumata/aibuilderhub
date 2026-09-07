@@ -8,6 +8,7 @@ checked by running `aibh-pipeline run --dry-run` with a key.
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from tests.conftest import make_item
@@ -93,6 +94,18 @@ class StubClient:
         self.usage = Usage()
         self.closed = False
         self.labels: list[str] = []
+        self._post_start = 0
+
+    def begin_post(self) -> None:
+        self._post_start = self.usage.calls
+
+    @property
+    def calls_this_post(self) -> int:
+        return self.usage.calls - self._post_start
+
+    @property
+    def calls_remaining_in_run(self) -> int:
+        return 80 - self.usage.calls
 
     async def complete_json(self, *, label: str, **kwargs) -> dict:
         self.usage.calls += 1
@@ -195,7 +208,9 @@ async def test_second_run_refuses_to_publish_the_same_story(wired):
 
     assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
     # The URL-level filter removes every candidate, so there is no topic left.
-    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
+    # Forced, because the quota would otherwise stop the second run before it
+    # ever reached the dedup this test is about.
+    assert await main.run(as_draft=True, dry_run=False, force=True) == main.EXIT_OK
     assert len(list(content.glob("cursor-adds-agent-mode*.md"))) == 1
 
 
@@ -341,4 +356,177 @@ async def test_a_truncated_draft_is_repaired_before_the_reviewers_see_it(wired, 
     # The repair pass runs before any critic call.
     assert seen[1] == "writer-revision--1"
     assert seen.index("writer-revision--1") < seen.index("critic-fact-checker")
+    assert (content / "cursor-adds-agent-mode.md").exists()
+
+
+# Long enough to clear the "nothing to write from" gate in scoring: a topic
+# whose whole cluster carries less than min_summary_chars is dropped before
+# the writer ever sees it.
+LOVABLE_ITEM_SUMMARY = (
+    "The vendor opened a free tier with a monthly generation allowance, "
+    "published the limits on its pricing page, and said the paid plans keep "
+    "their existing quotas. Independent write-ups compared the allowance with "
+    "the two competitors solo builders usually weigh it against, and noted "
+    "which parts of the workflow the free tier does not cover at all, "
+    "including the deployment step that still needs a card on file and the "
+    "collaboration features that stay behind the team plan. Reaction from "
+    "people who tried it on the first day was mixed on the allowance and "
+    "positive on how little setup it took to get a first page running."
+)
+
+
+@pytest.fixture
+def two_topics(wired, monkeypatch):
+    """Two unrelated stories in the feed instead of one."""
+
+    async def fake_ingest(_settings, _config):
+        return [
+            make_item(
+                "Cursor ships an agent mode for vibe coding",
+                url="https://example.com/cursor",
+                score=420,
+            ),
+            make_item(
+                "Lovable opens a free tier for weekend builders",
+                url="https://example.com/lovable",
+                source="the-verge-ai",
+                score=300,
+                summary=LOVABLE_ITEM_SUMMARY,
+            ),
+        ]
+
+    monkeypatch.setattr(main, "ingest", fake_ingest)
+    return wired
+
+
+class TwoStoryStub(StubClient):
+    """Writes a different post depending on which story it was handed."""
+
+    async def complete_json(self, *, label: str, **kwargs) -> dict:
+        payload = await StubClient.complete_json(self, label=label, **kwargs)
+        if label.startswith("writer") and "Lovable" in kwargs.get("user", ""):
+            return {
+                **payload,
+                "title": "Lovable opens a free tier for weekend builders",
+                "description": (
+                    "Lovable's free tier gives weekend builders a monthly allowance "
+                    "instead of a card up front. Here's what that changes for a solo "
+                    "builder."
+                ),
+                "slug": "lovable-free-tier",
+                "body": payload["body"].replace(
+                    "https://example.com/cursor", "https://example.com/lovable"
+                ),
+            }
+        return payload
+
+
+async def test_a_rejected_story_falls_through_to_the_next_one(two_topics, monkeypatch):
+    """The bug that cost the site a fortnight: one bad story ended the day.
+
+    Four scheduled runs between 24 August and 7 September produced one post,
+    because a rejection stopped the run instead of moving to the next
+    candidate.
+    """
+    _settings, content, state = two_topics
+
+    class FirstStoryRejected(TwoStoryStub):
+        async def complete_json(self, *, label: str, **kwargs) -> dict:
+            payload = await TwoStoryStub.complete_json(self, label=label, **kwargs)
+            payload_text = kwargs.get("user", "")
+            if label.startswith("critic-fact") and "slug: cursor-adds-agent-mode" in payload_text:
+                return {"verdict": "REJECT", "notes": "central claim unsupported", "issues": []}
+            return payload
+
+    monkeypatch.setattr(main, "AnthropicClient", FirstStoryRejected)
+    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
+
+    assert (content / "lovable-free-tier.md").exists()
+    assert not (content / "cursor-adds-agent-mode.md").exists()
+
+    summary = json.loads((state / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["published"] is True
+    assert summary["count"] == 1
+    assert summary["failed_attempts"][0]["reason"].startswith("critics returned REJECT")
+
+    # The rejected story is quarantined so tomorrow does not retry it.
+    failures = json.loads((state / "failed_topics.json").read_text(encoding="utf-8"))
+    assert len(failures) == 1
+
+
+async def test_a_long_silence_is_repaid_with_two_posts(two_topics, monkeypatch):
+    _settings, content, state = two_topics
+    monkeypatch.setattr(main, "AnthropicClient", TwoStoryStub)
+
+    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
+    assert (content / "cursor-adds-agent-mode.md").exists()
+    assert (content / "lovable-free-tier.md").exists()
+
+    summary = json.loads((state / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["count"] == 2
+    assert len(summary["posts"]) == 2
+
+
+async def test_a_week_on_target_never_touches_the_model(wired, monkeypatch):
+    """An on-schedule day must cost nothing: no feeds, no embeddings, no calls."""
+    _settings, _content, state = wired
+
+    now = datetime.now(UTC)
+    (state / "topics.json").write_text(
+        json.dumps(
+            [
+                {
+                    "slug": f"already-{index}",
+                    "canonical_topic": f"story {index}",
+                    "title": f"Story {index}",
+                    "source_urls": [],
+                    "content_hash": "",
+                    "published_at": (now - timedelta(hours=hours)).isoformat(),
+                }
+                for index, hours in enumerate((10, 60, 120))
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    class Exploding:
+        def __init__(self, *_args, **_kwargs) -> None:
+            raise AssertionError("an on-target day must not open a model client")
+
+    async def exploding_ingest(_settings, _config):
+        raise AssertionError("an on-target day must not fetch feeds")
+
+    monkeypatch.setattr(main, "AnthropicClient", Exploding)
+    monkeypatch.setattr(main, "ingest", exploding_ingest)
+
+    assert await main.run(as_draft=True, dry_run=False) == main.EXIT_OK
+    summary = json.loads((state / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["published"] is False
+    assert "on schedule" in summary["reason"]
+
+
+async def test_force_publishes_even_when_the_week_is_on_target(wired, monkeypatch):
+    """Manual runs still work on a day the quota would have skipped."""
+    _settings, content, state = wired
+    assert state.exists()
+
+    now = datetime.now(UTC)
+    (state / "topics.json").write_text(
+        json.dumps(
+            [
+                {
+                    "slug": f"already-{index}",
+                    "canonical_topic": f"story {index}",
+                    "title": f"Story {index}",
+                    "source_urls": [],
+                    "content_hash": "",
+                    "published_at": (now - timedelta(hours=hours)).isoformat(),
+                }
+                for index, hours in enumerate((10, 60, 120))
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    assert await main.run(as_draft=True, dry_run=False, force=True) == main.EXIT_OK
     assert (content / "cursor-adds-agent-mode.md").exists()

@@ -79,3 +79,23 @@ def test_the_input_token_ceiling_stops_a_runaway_loop(settings):
     client.usage = Usage(calls=1, input_tokens=settings.max_input_tokens_per_run)
     with pytest.raises(BudgetExceededError, match="input token budget"):
         client._charge("writer-draft")
+
+
+def test_a_month_with_no_room_left_refuses_another_post(settings, budget):
+    prices = Prices.from_settings(settings)
+    budget.record({"output_tokens": 700_000}, prices)  # most of the ceiling
+    assert budget.remaining < settings.typical_post_cost_usd
+    assert not budget.allows_another_post()
+
+
+def test_the_run_s_own_spend_counts_before_it_is_saved(settings, budget):
+    """A run must not overshoot the ceiling by its own length.
+
+    The month total is only written at the end of a run, so the second post of
+    a run would otherwise be waved through on a balance that no longer exists.
+    """
+    prices = Prices.from_settings(settings)
+    budget.record({"output_tokens": 620_000}, prices)
+    room = budget.remaining
+    assert budget.allows_another_post()
+    assert not budget.allows_another_post(spent_in_flight=room)

@@ -34,6 +34,15 @@ class BudgetExceededError(RuntimeError):
     """Raised when a run tries to exceed its LLM call ceiling."""
 
 
+class PostBudgetExceededError(BudgetExceededError):
+    """One post ran away with the budget; the run itself may continue.
+
+    Distinguishing the two matters now that a run can attempt several posts: a
+    single looping critic should cost that post and nothing else, while the
+    run-wide ceiling has to stop everything.
+    """
+
+
 class RefusalError(RuntimeError):
     """The model declined the request (stop_reason == 'refusal')."""
 
@@ -59,6 +68,10 @@ class Usage:
 class AnthropicClient:
     """Thin async wrapper around the Messages API."""
 
+    # Class-level default so an instance built without __init__ (the budget
+    # tests do exactly that) still has a per-post baseline to measure from.
+    _post_start_calls: int = 0
+
     def __init__(self, settings: Settings) -> None:
         self._settings = settings
         self._client = anthropic.AsyncAnthropic(
@@ -66,10 +79,26 @@ class AnthropicClient:
             max_retries=0,  # tenacity owns the retry policy
         )
         self.usage = Usage()
+        # Calls already spent when the current post started. Every ceiling that
+        # is "per post" is measured from here.
+        self._post_start_calls = 0
+
+    def begin_post(self) -> None:
+        """Open a new per-post call budget. Called once per topic attempt."""
+        self._post_start_calls = self.usage.calls
+
+    @property
+    def calls_this_post(self) -> int:
+        return self.usage.calls - self._post_start_calls
 
     @property
     def calls_remaining(self) -> int:
-        return max(0, self._settings.max_llm_calls - self.usage.calls)
+        """Calls left for the current post."""
+        return max(0, self._settings.max_llm_calls - self.calls_this_post)
+
+    @property
+    def calls_remaining_in_run(self) -> int:
+        return max(0, self._settings.max_llm_calls_per_run - self.usage.calls)
 
     async def aclose(self) -> None:
         await self._client.close()
@@ -160,9 +189,14 @@ class AnthropicClient:
 
     def _charge(self, label: str) -> None:
         settings = self._settings
-        if self.usage.calls >= settings.max_llm_calls:
+        if self.usage.calls >= settings.max_llm_calls_per_run:
             raise BudgetExceededError(
-                f"LLM call budget of {settings.max_llm_calls} exhausted at {label!r}"
+                f"run LLM call budget of {settings.max_llm_calls_per_run} "
+                f"exhausted at {label!r}"
+            )
+        if self.calls_this_post >= settings.max_llm_calls:
+            raise PostBudgetExceededError(
+                f"per-post LLM call budget of {settings.max_llm_calls} exhausted at {label!r}"
             )
         if self.usage.input_tokens >= settings.max_input_tokens_per_run:
             raise BudgetExceededError(
