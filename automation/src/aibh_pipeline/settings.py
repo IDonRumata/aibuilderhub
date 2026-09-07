@@ -110,14 +110,21 @@ class Settings(BaseSettings):
     max_output_tokens_per_run: int = 180_000
 
     # Hard monthly ceiling on estimated spend. Once the month's estimate
-    # reaches this, the pipeline refuses to start until the month rolls over.
-    # At three posts a week and roughly 45 cents a post the expected monthly
-    # bill is about 6 dollars including failed attempts, so 10 is the runaway
-    # guard rather than the operating limit.
-    monthly_budget_usd: float = 10.0
+    # reaches this, the pipeline refuses to start until the month rolls over -
+    # which reads as weeks of silence, so the ceiling has to sit above the real
+    # cost of the target rate rather than at it.
+    #
+    # Measured: one attempt costs about 0.40 dollars whether it publishes or
+    # not, and roughly a third of attempts are rejected by the critics. Three
+    # posts a week is therefore about 22 attempts and 9 dollars a month. Twelve
+    # leaves a month's worth of margin for a debugging session.
+    #
+    # Two posts a week instead of three costs about 6. That is the one number
+    # to change if the bill matters more than the cadence.
+    monthly_budget_usd: float = 12.0
 
-    # What one post is assumed to cost when deciding whether to start another.
-    # Measured, not guessed: the September runs averaged 0.39 dollars each.
+    # What one attempt is assumed to cost when deciding whether to start
+    # another. Measured: 0.46 dollars for the run of 7 September.
     typical_post_cost_usd: float = 0.45
 
     # US dollars per million tokens, for the spend estimate only. Defaults are

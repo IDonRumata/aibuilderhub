@@ -128,10 +128,12 @@ Content configuration:
   post uses about 17: 1 draft, 3 x (4 critics + 1 revision), 1-2 humaniser
   passes. A post that exhausts its own ceiling is abandoned; the run keeps what
   is left of the budget for the next candidate.
-- One post costs roughly $0.40. Three a week, with the odd failed attempt, is
-  about $6 a month against a `monthly_budget_usd` ceiling of $10. The ceiling
-  is a runaway guard, not the operating limit - but a debugging session of five
-  manual runs really does cost $2, so check `state/usage.json` before one.
+- One attempt costs roughly $0.40 whether it publishes or is rejected, and
+  about a third are rejected. Three posts a week is therefore some 22 attempts
+  and **$9 a month**, against a `monthly_budget_usd` ceiling of $12. The
+  ceiling sits above the target rate on purpose: set level with it, the month
+  ends in silence. A debugging session of five manual runs costs $2, so check
+  `state/usage.json` before one.
 - Scoring, clustering and all mechanical checks are plain Python. No model is
   asked to count characters or rank 100 headlines.
 - The shared voice document is cached across every call in a run.

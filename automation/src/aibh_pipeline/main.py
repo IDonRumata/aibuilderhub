@@ -436,10 +436,13 @@ async def run(*, as_draft: bool, dry_run: bool, force: bool = False) -> int:
     prices = budget.Prices.from_settings(settings)
     client = AnthropicClient(settings)
 
+    # An explicit iterator rather than `async for`: the loop must not pull a
+    # topic it has no intention of writing. Pulling one runs a dedup check and,
+    # worse, logs `topic_selected` for a story nobody touched, which is exactly
+    # the kind of thing that misleads whoever reads these logs at 2am.
+    stream = _publishable_topics(topics, store, provider, settings)
     try:
-        async for topic in _publishable_topics(topics, store, provider, settings):
-            if len(published) >= wanted:
-                break
+        while len(published) < wanted:
             if attempts >= settings.max_topic_attempts_per_run:
                 log.warning("attempt_limit_reached", attempts=attempts)
                 break
@@ -454,6 +457,10 @@ async def run(*, as_draft: bool, dry_run: bool, force: bool = False) -> int:
             if client.calls_remaining_in_run < settings.max_llm_calls:
                 log.warning("run_call_budget_too_low", used=client.usage.calls)
                 stopped_by_budget = True
+                break
+
+            topic = await anext(stream, None)
+            if topic is None:
                 break
 
             attempts += 1
