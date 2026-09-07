@@ -57,5 +57,15 @@
     ],
     "content_hash": "87335fd6bc153e710fa79dd9676ea4f4",
     "published_at": "2026-09-03T11:33:28.943268Z"
+  },
+  {
+    "slug": "gpt-6-astra-vercel-ai-gateway",
+    "canonical_topic": "astra gateway gpt hits means vercel's",
+    "title": "GPT 6 Astra hits Vercel's AI Gateway: what it means",
+    "source_urls": [
+      "https://vercel.com/changelog/gpt-6-astra-now-available-on-vercel-ai-gateway"
+    ],
+    "content_hash": "ebc461b22ff1a1488dd5203908e33580",
+    "published_at": "2026-09-07T12:35:23.364558Z"
   }
 ]

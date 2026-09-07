@@ -44,5 +44,15 @@
     ],
     "reason": "critics returned REJECT after 1 rounds",
     "failed_at": "2026-09-01T05:36:56.595860+00:00"
+  },
+  {
+    "key": "acceleration inside openai research view",
+    "title": "Research acceleration: The view inside OpenAI",
+    "source_urls": [
+      "https://openai.com/index/research-acceleration-view-inside-openai",
+      "https://simonwillison.net/2026/Sep/6/research-acceleration-the-view-inside-openai"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-07T12:32:06.767775+00:00"
   }
 ]

@@ -1,24 +1,43 @@
 {
-  "finished_at": "2026-09-03T11:33:28.953412+00:00",
+  "finished_at": "2026-09-07T12:35:23.378869+00:00",
   "published": true,
+  "count": 1,
   "draft": false,
-  "path": "src/content/blog/claude-fable-mythos-5-1-pricing.md",
-  "slug": "claude-fable-mythos-5-1-pricing",
-  "title": "Claude Fable 5.1: cheaper agentic coding, check your bill",
-  "word_count": 821,
+  "posts": [
+    {
+      "path": "src/content/blog/gpt-6-astra-vercel-ai-gateway.md",
+      "slug": "gpt-6-astra-vercel-ai-gateway",
+      "title": "GPT 6 Astra hits Vercel's AI Gateway: what it means",
+      "word_count": 718,
+      "source_urls": [
+        "https://vercel.com/changelog/gpt-6-astra-now-available-on-vercel-ai-gateway"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 18
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "Research acceleration: The view inside OpenAI",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 34,
+    "input_tokens": 131533,
+    "output_tokens": 24984,
+    "cache_read_tokens": 66342,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/gpt-6-astra-vercel-ai-gateway.md",
+  "slug": "gpt-6-astra-vercel-ai-gateway",
+  "title": "GPT 6 Astra hits Vercel's AI Gateway: what it means",
+  "word_count": 718,
   "source_urls": [
-    "https://anthropic.com/claude-fable-and-mythos-5-1",
-    "https://latent.space/p/ainews-claude-fablemythos-51-new",
-    "https://simonwillison.net/2026/Sep/1/claude-fable-5-1",
-    "https://theverge.com/ai-artificial-intelligence/987830/anthropic-claude-fable-mythos-5-1"
+    "https://vercel.com/changelog/gpt-6-astra-now-available-on-vercel-ai-gateway"
   ],
   "critic_rounds": 3,
-  "llm_calls": 17,
-  "usage": {
-    "calls": 17,
-    "input_tokens": 72805,
-    "output_tokens": 13835,
-    "cache_read_tokens": 30304,
-    "cache_write_tokens": 6027
-  }
+  "llm_calls": 18
 }
