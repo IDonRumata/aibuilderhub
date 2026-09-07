@@ -1,43 +1,7 @@
 {
-  "finished_at": "2026-09-07T12:35:23.378869+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/gpt-6-astra-vercel-ai-gateway.md",
-      "slug": "gpt-6-astra-vercel-ai-gateway",
-      "title": "GPT 6 Astra hits Vercel's AI Gateway: what it means",
-      "word_count": 718,
-      "source_urls": [
-        "https://vercel.com/changelog/gpt-6-astra-now-available-on-vercel-ai-gateway"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 18
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Research acceleration: The view inside OpenAI",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 34,
-    "input_tokens": 131533,
-    "output_tokens": 24984,
-    "cache_read_tokens": 66342,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/gpt-6-astra-vercel-ai-gateway.md",
-  "slug": "gpt-6-astra-vercel-ai-gateway",
-  "title": "GPT 6 Astra hits Vercel's AI Gateway: what it means",
-  "word_count": 718,
-  "source_urls": [
-    "https://vercel.com/changelog/gpt-6-astra-now-available-on-vercel-ai-gateway"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 18
+  "finished_at": "2026-09-07T19:20:05.677227+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
