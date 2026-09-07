@@ -1,0 +1,127 @@
+name: Content watchdog
+
+# Nobody was watching. Between 24 August and 7 September the pipeline
+# published one post out of four scheduled attempts, and the only way to find
+# out was to open the Actions tab and read the logs - a skipped day exits 0 and
+# looks exactly like a healthy one from the outside.
+#
+# This job asks the single question that matters - when did the site last
+# publish? - and turns a long silence into a GitHub issue, which arrives as
+# email. It never touches the model and costs nothing.
+
+on:
+  schedule:
+    # Two hours after the afternoon pipeline run, so a run that was going to
+    # fix the silence has already had its chance.
+    - cron: "30 17 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: content-watchdog
+  cancel-in-progress: false
+
+env:
+  # A quiet stretch longer than this means something is wrong. The quota
+  # targets three posts a week with at least 36 hours between them, so four
+  # days without a post cannot happen while the pipeline is healthy.
+  STALL_HOURS: "96"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: How long since the pipeline last published
+        id: check
+        run: |
+          set -euo pipefail
+          state="automation/state/published_topics.json"
+          if [ ! -s "$state" ]; then
+            echo "no state file yet, nothing to judge"
+            echo "stalled=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Trimmed to whole seconds: the registry writes microseconds, which
+          # older date(1) builds refuse to parse.
+          last=$(jq -r '[.[].published_at] | sort | last | .[0:19]' "$state")
+          if [ -z "$last" ] || [ "$last" = "null" ]; then
+            echo "registry is empty"
+            echo "stalled=true" >> "$GITHUB_OUTPUT"
+            echo "hours=unknown" >> "$GITHUB_OUTPUT"
+            echo "last=never" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          last_epoch=$(date -u -d "$last UTC" +%s)
+          hours=$(( ( $(date -u +%s) - last_epoch ) / 3600 ))
+          echo "last published $last UTC, $hours hours ago"
+          echo "hours=$hours" >> "$GITHUB_OUTPUT"
+          echo "last=$last" >> "$GITHUB_OUTPUT"
+          if [ "$hours" -ge "${STALL_HOURS}" ]; then
+            echo "stalled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "stalled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Raise a stall issue
+        if: steps.check.outputs.stalled == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOURS: ${{ steps.check.outputs.hours }}
+          LAST: ${{ steps.check.outputs.last }}
+        run: |
+          set -euo pipefail
+          gh label create pipeline-stall \
+            --color B60205 \
+            --description "The content pipeline has stopped publishing" \
+            2>/dev/null || true
+
+          open=$(gh issue list --label pipeline-stall --state open --json number \
+            --jq 'length')
+          if [ "$open" != "0" ]; then
+            echo "a stall issue is already open; not opening a second one"
+            exit 0
+          fi
+
+          gh issue create \
+            --title "Content pipeline has published nothing for ${HOURS}h" \
+            --label pipeline-stall \
+            --body "$(cat <<EOF
+          The last automated post landed at **${LAST} UTC**, ${HOURS} hours ago.
+          The quota targets three posts a week, so this gap is not normal.
+
+          Where to look, in order:
+
+          1. **Actions, Content pipeline** - the recent runs. A run whose job
+             summary says *on schedule* is healthy and deliberate. One that says
+             *topic(s) tried and rejected* is a quality problem, and the summary
+             names the reason.
+          2. **Missing runs entirely.** GitHub delays and sometimes drops
+             scheduled jobs. Run the workflow by hand:
+             \`gh workflow run content-pipeline.yml -f force=true\`
+          3. **The month's budget.** \`automation/state/usage.json\`. Once the
+             monthly ceiling is reached the pipeline refuses to start until the
+             month rolls over, and that reads as silence.
+
+          This issue closes itself once a post goes out.
+          EOF
+          )"
+
+      - name: Close the stall issue once posts resume
+        if: steps.check.outputs.stalled == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOURS: ${{ steps.check.outputs.hours }}
+        run: |
+          set -euo pipefail
+          for number in $(gh issue list --label pipeline-stall --state open \
+            --json number --jq '.[].number'); do
+            gh issue close "$number" \
+              --comment "Publishing resumed: the last post is ${HOURS}h old."
+          done
