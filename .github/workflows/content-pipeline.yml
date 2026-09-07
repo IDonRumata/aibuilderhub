@@ -53,6 +53,13 @@ jobs:
     defaults:
       run:
         working-directory: automation
+    env:
+      # Read here rather than in the deploy step so the step can test whether
+      # the credential exists: the `secrets` context is not available in a
+      # step-level `if`, but `env` is.
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
 
     steps:
       - uses: actions/checkout@v4
@@ -118,6 +125,28 @@ jobs:
           # Rebase rather than force: a human commit landing mid-run wins.
           git pull --rebase origin main
           git push origin HEAD:main
+
+      # Committing a post is not publishing it. On 7 September the site was
+      # serving a build from 1 September: the 3 September post had been in main
+      # for four days and no reader could see it. Pushing to main is evidently
+      # not enough to rebuild the site, so the workflow that writes the post
+      # now also puts it live.
+      #
+      # Skipped, with a warning, until the credentials exist - a missing token
+      # must not turn a good post into a red run.
+      - name: Deploy the site to Cloudflare Pages
+        if: steps.pipeline.outputs.published == 'true' && env.CLOUDFLARE_API_TOKEN != ''
+        working-directory: .
+        run: |
+          npx --yes wrangler@4 pages deploy dist \
+            --project-name "${CLOUDFLARE_PAGES_PROJECT:-aibuilderhub}" \
+            --branch main \
+            --commit-dirty=true
+
+      - name: Warn that the post is committed but not deployed
+        if: steps.pipeline.outputs.published == 'true' && env.CLOUDFLARE_API_TOKEN == ''
+        run: |
+          echo "::warning::Post committed to git, but CLOUDFLARE_API_TOKEN is not set, so the site was not rebuilt and readers cannot see it. See SETUP-DEPLOY.md."
 
       # A skipped day still changes state: the topic that failed review is
       # recorded so tomorrow does not pick it again. Without this the failure

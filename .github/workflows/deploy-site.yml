@@ -1,0 +1,83 @@
+name: Deploy the site
+
+# Builds the site from main and puts it live on Cloudflare Pages.
+#
+# The content pipeline deploys by itself after publishing. This workflow is the
+# manual handle: run it after editing a post by hand, or when the live site has
+# fallen behind main for any other reason. On 7 September the site was serving
+# a build from 1 September, with two posts sitting in main that nobody could
+# read, and there was no way to push them live short of a laptop with wrangler
+# logged in.
+#
+# Needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as repository secrets.
+# See SETUP-DEPLOY.md.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refuse to run without credentials
+        if: env.CLOUDFLARE_API_TOKEN == ''
+        run: |
+          echo "::error::CLOUDFLARE_API_TOKEN is not set. See SETUP-DEPLOY.md."
+          exit 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages
+        run: |
+          npx --yes wrangler@4 pages deploy dist \
+            --project-name "${CLOUDFLARE_PAGES_PROJECT:-aibuilderhub}" \
+            --branch main \
+            --commit-dirty=true
+
+      - name: Check the newest post is actually served
+        run: |
+          set -euo pipefail
+          # By publication date, not by file mtime: a fresh checkout gives
+          # every file the same timestamp, so `ls -t` would pick at random.
+          newest=$(for f in src/content/blog/*.md; do
+            day=$(grep -m1 -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}" "$f" | head -1)
+            echo "${day:-0000-00-00} $f"
+          done | sort | tail -1 | cut -d' ' -f2)
+          slug=$(basename "$newest" .md)
+          echo "checking https://aibuilderhub.app/blog/$slug/"
+          for attempt in 1 2 3 4 5 6; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" \
+              "https://aibuilderhub.app/blog/$slug/" || true)
+            if [ "$code" = "200" ]; then
+              echo "live"
+              exit 0
+            fi
+            echo "attempt $attempt: HTTP $code, waiting"
+            sleep 20
+          done
+          echo "::error::The newest post is still not served. The deploy \
+          reported success, so the custom domain is probably attached to a \
+          different Pages project than CLOUDFLARE_PAGES_PROJECT."
+          exit 1
