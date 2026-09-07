@@ -42,9 +42,20 @@ credential, which only the account owner can create.
 ### 2. Find the account ID and the project name
 
 Both are in the dashboard: **Workers & Pages**. The account ID is in the URL
-(`dash.cloudflare.com/<account id>/...`), and the project name is the row whose
-**Custom domains** column says `aibuilderhub.app`. It is very likely *not* the
-project called `aibuilderhub`, which serves an old build.
+(`dash.cloudflare.com/<account id>/...`), and the project is the row whose
+**Custom domains** column says `aibuilderhub.app`. It is not the project called
+`aibuilderhub`, which serves an old build with 9 posts.
+
+**Write down what that row calls itself: "Pages" or "Worker".** It matters,
+and it cannot be determined from outside: the seven obvious candidate names
+(`aibuilderhub-app`, `aibuilderhub-site`, `aibuilder-hub`, `aibuilderhub-web`,
+`aibuilderhub2`, `aibuilderhub-astro`, `aibuilderhubapp`) all fail to resolve
+as `*.pages.dev`, so the deployment serving the domain is either a Pages
+project under some other name or a Worker serving static assets. The workflow
+runs `wrangler pages deploy`, which is right for a Pages project and wrong for
+a Worker - a Worker needs `wrangler deploy` and a `wrangler.toml` instead. If
+the row says Worker, say so before adding the token and the workflow gets a
+one-line change.
 
 ### 3. Put them in the repository
 
