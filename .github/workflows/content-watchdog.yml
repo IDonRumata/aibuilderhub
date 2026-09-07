@@ -15,6 +15,11 @@ on:
     # fix the silence has already had its chance.
     - cron: "30 17 * * *"
   workflow_dispatch:
+    inputs:
+      stall_hours:
+        description: "Override the stall threshold in hours (to test the alert)"
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -24,12 +29,6 @@ concurrency:
   group: content-watchdog
   cancel-in-progress: false
 
-env:
-  # A quiet stretch longer than this means something is wrong. The quota
-  # targets three posts a week with at least 36 hours between them, so four
-  # days without a post cannot happen while the pipeline is healthy.
-  STALL_HOURS: "96"
-
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -38,6 +37,13 @@ jobs:
 
       - name: How long since the pipeline last published
         id: check
+        env:
+          # A quiet stretch longer than this means something is wrong. The quota
+          # targets three posts a week with at least 36 hours between them, so
+          # four days without a post cannot happen while the pipeline is
+          # healthy. Overridable by hand so the alert path can be exercised
+          # without waiting four days for a real outage.
+          STALL_HOURS: ${{ inputs.stall_hours || '96' }}
         run: |
           set -euo pipefail
           state="automation/state/published_topics.json"
