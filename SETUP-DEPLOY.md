@@ -1,96 +1,101 @@
-# Deploying the site: what is wrong and how to fix it
+# Deploying the site: what was wrong, and what to do when it breaks again
 
 ## The symptom
 
-On 7 September 2026 the live site was serving a build made on 1 September.
-Two posts - `claude-fable-mythos-5-1-pricing` (3 September) and
-`gpt-6-astra-vercel-ai-gateway` (7 September) - were in `main`, were not
+Between 3 and 9 September 2026 the live site served a build made on
+1 September. Three posts - `claude-fable-mythos-5-1-pricing` (3 September),
+`gpt-6-astra-vercel-ai-gateway` (7 September) and
+`chatgpt-images-2-5-sketch-feature` (9 September) - were in `main`, were not
 drafts, built cleanly in CI, and returned 404 to readers.
 
-Measured, not assumed:
+The content pipeline was doing its job the whole time. Nobody could see the
+result.
 
-| URL | Result |
-|---|---|
-| `aibuilderhub.app/blog/` | 200, lists 27 posts, newest is 1 September |
-| `aibuilderhub.app/blog/claude-fable-mythos-5-1-pricing/` | 404 |
-| `aibuilderhub.pages.dev/blog/` | 200, lists **9** posts - a much older build |
-| `main.aibuilderhub.pages.dev/blog/` | 404 - no branch alias exists |
+## What was actually wrong
 
-Two conclusions follow. The custom domain is served by a different Pages
-deployment than `aibuilderhub.pages.dev`, and nothing rebuilds the site when
-`main` changes: a git-connected project would have a `main.<project>.pages.dev`
-alias, and this one does not.
+The first version of this document guessed. The guess was wrong in a way worth
+recording, because it would have cost real money and time to act on.
 
-So the pipeline has been doing its job and the result has been invisible. Any
-work on publishing cadence is pointless until this is fixed - a post that
-readers cannot open is not published.
+**The domain is served by a Worker, not by a Pages project.** In the Cloudflare
+dashboard, Workers & Pages lists three things:
+
+| Name | Kind | Serves |
+|---|---|---|
+| `aibuilderhub` | Worker | **aibuilderhub.app** - the live site |
+| `aibuilderhub` | Pages | `aibuilderhub.pages.dev` - an abandoned July build |
+| `aibuilderhub-subscribe` | Worker | the newsletter endpoint |
+
+A Worker and a Pages project may carry the same name; they are different
+objects. Every deploy instruction written against the Pages project would have
+updated a URL nobody reads, and the domain would have stayed stale.
+
+**The Worker was already connected to this repository, and was already
+rebuilding on every push.** Its build settings are build command `npm run
+build`, deploy command `npx wrangler deploy`, branch `main`. Nothing was
+missing. Every build was simply failing, and had been since 3 September.
+
+**Why it failed.** `main` carried no `wrangler.jsonc`. Faced with an Astro
+project and no configuration, wrangler decided what kind of project this must
+be: it pulled `@astrojs/cloudflare` at whatever version was newest, wired it in
+as a server-side-rendering adapter, and rebuilt the site through it. That
+adapter does not match the `astro` version pinned in `package-lock.json`, so
+every deploy died on the same line:
+
+```
+[MISSING_EXPORT] "renderForPrerender" is not exported by
+node_modules/astro/dist/core/app/entrypoints/index.js
+  at node_modules/@astrojs/cloudflare/dist/utils/prerender.js:1:10
+```
+
+Nothing in the repository changed on 3 September. The adapter was never in
+`package.json`, so it was never pinned, and a new release of it broke a build
+that had worked the day before. The site has no server-side rendering at all -
+`astro build` emits static files and no `_worker.js` - so the adapter should
+never have been involved.
+
+**Why nobody noticed.** The build command succeeded every time; only the deploy
+command failed. The GitHub run was green, the pipeline state file said
+published, and the watchdog measured the registry rather than the site. Every
+signal available said healthy.
 
 ## The fix
 
-The repository now deploys the site itself, from the same workflow that writes
-the post, instead of hoping something else notices the push. It needs one
-credential, which only the account owner can create.
+`wrangler.jsonc` in the repository root now states what this project is: static
+assets in `dist/`, no `main`, no adapter, no compatibility flags. There is
+nothing left for wrangler to guess, and no second build to fall out of step
+with the lockfile. The long comment at the top of that file is the explanation;
+keep it there.
 
-### 1. Create a Cloudflare API token
+No credential was needed, and none was added. Deploys continue to happen where
+they always happened - Cloudflare Workers Builds, on every push to `main`.
 
-1. <https://dash.cloudflare.com/profile/api-tokens> -> **Create Token**
-2. Use the template **Edit Cloudflare Workers**, or a custom token with
-   permission **Account / Cloudflare Pages / Edit**
-3. Restrict it to the one account that owns the site
-4. Create, then copy the token. It is shown once.
+The workflow that writes a post now waits for the live URL to answer 200 and
+raises a warning if it does not, so this class of failure can no longer pass
+for health.
 
-### 2. Find the account ID and the project name
+## When the site is stale again
 
-Both are in the dashboard: **Workers & Pages**. The account ID is in the URL
-(`dash.cloudflare.com/<account id>/...`), and the project is the row whose
-**Custom domains** column says `aibuilderhub.app`. It is not the project called
-`aibuilderhub`, which serves an old build with 9 posts.
+1. **Check whether readers can see the newest post.** Not the repository - the
+   site.
 
-**Write down what that row calls itself: "Pages" or "Worker".** It matters,
-and it cannot be determined from outside: the seven obvious candidate names
-(`aibuilderhub-app`, `aibuilderhub-site`, `aibuilder-hub`, `aibuilderhub-web`,
-`aibuilderhub2`, `aibuilderhub-astro`, `aibuilderhubapp`) all fail to resolve
-as `*.pages.dev`, so the deployment serving the domain is either a Pages
-project under some other name or a Worker serving static assets. The workflow
-runs `wrangler pages deploy`, which is right for a Pages project and wrong for
-a Worker - a Worker needs `wrangler deploy` and a `wrangler.toml` instead. If
-the row says Worker, say so before adding the token and the workflow gets a
-one-line change.
+   ```bash
+   curl -o /dev/null -w '%{http_code}\n' https://aibuilderhub.app/blog/<slug>/
+   ```
 
-### 3. Put them in the repository
+2. **Look at the Worker's build history.** Cloudflare dashboard -> Workers &
+   Pages -> `aibuilderhub` (the row whose custom domain is `aibuilderhub.app`)
+   -> Deployments -> build history. A red row is a failed deploy; open it and
+   read the last twenty lines of the log, which is where the actual error is.
 
-GitHub -> the repo -> **Settings** -> **Secrets and variables** -> **Actions**:
+3. **Retry from there.** The same page has **Retry build**. It needs no token
+   and no laptop.
 
-| Where | Name | Value |
-|---|---|---|
-| Secrets | `CLOUDFLARE_API_TOKEN` | the token from step 1 |
-| Secrets | `CLOUDFLARE_ACCOUNT_ID` | the account ID from step 2 |
-| Variables | `CLOUDFLARE_PAGES_PROJECT` | the project name from step 2 |
+4. **If the build itself is fine but the domain is stale**, the domain is
+   attached to something other than the `name` in `wrangler.jsonc`. Check
+   Workers & Pages -> `aibuilderhub` -> Domains.
 
-The variable can be left out if the project really is called `aibuilderhub`;
-the workflow falls back to that name.
-
-### 4. Push the waiting posts live
-
-Actions -> **Deploy the site** -> **Run workflow**. It builds from `main`,
-deploys, and then checks over HTTP that the newest post actually answers 200.
-If the deploy succeeds but the check fails, the custom domain belongs to a
-different project than the one in `CLOUDFLARE_PAGES_PROJECT`.
-
-From then on the content pipeline deploys automatically after every post.
-
-## If wrangler refuses the upload
-
-If the deploy step fails with a message about the project being connected to a
-Git repository, then the project *is* git-connected after all and its builds
-are failing rather than not running. In that case do not add the token: open
-the project in the dashboard, look at the failed builds, and fix the build
-there instead. The two facts to check first are the build command
-(`npm run build`) and the Node version (the site needs 20.19 or newer; the
-repository pins 22 in `.node-version`).
-
-## Why not a deploy hook
-
-Cloudflare deploy hooks only exist for git-connected projects, and this one
-does not appear to be git-connected. An API token works either way and keeps
-the failure visible in Actions, where the rest of the pipeline already reports.
+The `Deploy the site` workflow in GitHub Actions is a spare handle for the case
+where the Cloudflare wiring is broken rather than the build. It needs
+`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as repository secrets, which
+do not exist today; it refuses to run rather than pretending to work. Creating
+them is only worth doing if step 3 is ever unavailable.

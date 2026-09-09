@@ -1,16 +1,21 @@
 name: Deploy the site
 
-# Builds the site from main and puts it live on Cloudflare Pages.
+# Builds the site from main and puts it live on the Cloudflare Worker that
+# serves aibuilderhub.app.
 #
-# The content pipeline deploys by itself after publishing. This workflow is the
-# manual handle: run it after editing a post by hand, or when the live site has
-# fallen behind main for any other reason. On 7 September the site was serving
-# a build from 1 September, with two posts sitting in main that nobody could
-# read, and there was no way to push them live short of a laptop with wrangler
-# logged in.
+# This is the spare handle, not the normal path. Normally a push to main is
+# enough: Workers Builds is wired to this repository and rebuilds on every one.
+# The manual lever that needs no credential at all is in the Cloudflare
+# dashboard - the aibuilderhub Worker, Deployments, Retry build.
 #
-# Needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as repository secrets.
-# See SETUP-DEPLOY.md.
+# This workflow exists for the case where the Cloudflare side of that wiring is
+# itself broken. It needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as
+# repository secrets, which are not set today, so it will refuse to run until
+# somebody creates them. See SETUP-DEPLOY.md.
+#
+# It deploys a Worker, not a Pages project. The Pages project called
+# aibuilderhub exists, serves aibuilderhub.pages.dev, holds a build from July
+# and is attached to nothing - deploying to it changes what no one reads.
 
 on:
   workflow_dispatch:
@@ -29,7 +34,6 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
     steps:
       - uses: actions/checkout@v4
 
