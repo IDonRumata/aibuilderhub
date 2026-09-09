@@ -128,8 +128,19 @@ jobs:
 
       # The pipeline can be perfectly healthy and the site still stale: the
       # deploy runs on Cloudflare, not here, and its failures are invisible
-      # from GitHub. So ask the site itself, over HTTP, the way a reader would.
-      - name: Can a reader open the newest post
+      # from GitHub. So ask the site itself, over HTTP.
+      #
+      # It asks for the sitemap rather than the post. The zone has Bot Fight
+      # Mode enabled, and it answers any request for a page from a datacenter
+      # address with a managed challenge - HTTP 403 - whatever User-Agent the
+      # request carries, because the giveaway is the TLS fingerprint and no
+      # command-line client has a browser's. Static files are not challenged.
+      #
+      # The sitemap is the better question anyway. Astro regenerates it from
+      # the content collection on every build, so a slug appearing in it is
+      # proof that the build which contains that post is the build being
+      # served - which is exactly what this job needs to know.
+      - name: Is the newest post in the sitemap the site is serving
         id: live
         run: |
           set -euo pipefail
@@ -143,22 +154,33 @@ jobs:
 
           slug=$(basename "$newest" .md)
           url="https://aibuilderhub.app/blog/${slug}/"
+          sitemap="https://aibuilderhub.app/sitemap-0.xml"
 
-          # A browser User-Agent, and not out of mischief. The zone has Bot
-          # Fight Mode on, which answers a bare curl from a datacenter address
-          # with a managed challenge - HTTP 403. The first run of this check
-          # duly reported the site broken while it was serving readers fine.
-          # The question being asked is "can a reader open this", so ask it the
-          # way a reader's browser would.
-          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 25             -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"             -H 'Accept: text/html,application/xhtml+xml'             "$url" || echo 000)
-          echo "$url -> HTTP $code"
-          echo "slug=$slug"  >> "$GITHUB_OUTPUT"
-          echo "url=$url"    >> "$GITHUB_OUTPUT"
-          echo "code=$code"  >> "$GITHUB_OUTPUT"
-          if [ "$code" = "200" ]; then
+          body=$(curl -sS --max-time 25 "$sitemap" || true)
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 "$sitemap" || echo 000)
+          echo "$sitemap -> HTTP $code, $(printf '%s' "$body" | wc -c) bytes"
+          echo "looking for /blog/${slug}/"
+
+          echo "slug=$slug" >> "$GITHUB_OUTPUT"
+          echo "url=$url"   >> "$GITHUB_OUTPUT"
+
+          if [ "$code" != "200" ]; then
+            # Not a verdict about the site: the check itself could not run.
+            # Say so out loud rather than reporting either kind of health.
+            echo "::warning::Could not read ${sitemap} (HTTP ${code}); the live check did not run."
+            echo "code=$code"    >> "$GITHUB_OUTPUT"
+            echo "stale=false"   >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if printf '%s' "$body" | grep -q "/blog/${slug}/"; then
+            echo "the newest post is in the served sitemap"
+            echo "code=200"    >> "$GITHUB_OUTPUT"
             echo "stale=false" >> "$GITHUB_OUTPUT"
           else
-            echo "stale=true" >> "$GITHUB_OUTPUT"
+            echo "the served sitemap does not contain the newest post"
+            echo "code=stale"  >> "$GITHUB_OUTPUT"
+            echo "stale=true"  >> "$GITHUB_OUTPUT"
           fi
 
       - name: Raise a stale-site issue
@@ -178,8 +200,10 @@ jobs:
           fi
 
           gh issue create             --title "The newest post is in main but answers ${CODE} to readers"             --label site-stale             --body "$(cat <<EOF
-          \`${URL}\` answers **HTTP ${CODE}**. The post is committed, is not a
-          draft, and builds here - so this is the deploy, not the writing.
+          The sitemap being served does not list \`${URL}\`. The post is
+          committed, is not a draft, and builds here - so this is the deploy,
+          not the writing. Astro rebuilds the sitemap from the content on every
+          build, so a missing entry means the served build predates the post.
 
           Where to look, in order:
 
@@ -203,7 +227,7 @@ jobs:
         run: |
           set -euo pipefail
           for number in $(gh issue list --label site-stale --state open             --json number --jq '.[].number'); do
-            gh issue close "$number" --comment "The site is current again: ${URL} answers 200."
+            gh issue close "$number" --comment "The site is current again: the served sitemap lists ${URL}."
           done
 
       - name: Close the stall issue once posts resume

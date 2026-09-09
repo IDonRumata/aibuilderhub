@@ -143,21 +143,23 @@ jobs:
           SLUGS: ${{ steps.pipeline.outputs.slugs }}
         run: |
           slug="${SLUGS%%,*}"
-          url="https://aibuilderhub.app/blog/${slug}/"
-          echo "waiting for ${url}"
-          code=000
+          # The sitemap rather than the post itself. Bot Fight Mode is on for
+          # this zone and answers any request for a page from a datacenter
+          # address with a managed challenge, whatever User-Agent it carries.
+          # Static files are not challenged, and Astro rebuilds the sitemap
+          # from the content on every build - so the slug appearing there is
+          # proof that the build being served is the one containing the post.
+          sitemap="https://aibuilderhub.app/sitemap-0.xml"
+          echo "waiting for /blog/${slug}/ to appear in ${sitemap}"
           for attempt in $(seq 1 20); do
-            # Browser User-Agent: Bot Fight Mode answers a bare curl from a
-            # datacenter address with a 403 challenge. See the watchdog.
-            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20               -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"               -H 'Accept: text/html,application/xhtml+xml'               "$url" || echo 000)
-            echo "attempt ${attempt}: HTTP ${code}"
-            if [ "${code}" = "200" ]; then
+            if curl -sS --max-time 20 "$sitemap" | grep -q "/blog/${slug}/"; then
               echo "the post is live"
               exit 0
             fi
+            echo "attempt ${attempt}: not there yet"
             sleep 20
           done
-          echo "::warning::${url} still answers ${code}. The post is committed           but readers cannot see it. Open the aibuilderhub Worker in Cloudflare,           read the newest entry under Deployments -> build history, and see           SETUP-DEPLOY.md."
+          echo "::warning::/blog/${slug}/ is still not in the served sitemap.           The post is committed but readers cannot see it. Open the           aibuilderhub Worker in Cloudflare, read the newest entry under           Deployments -> build history, and see SETUP-DEPLOY.md."
 
       # A skipped day still changes state: the topic that failed review is
       # recorded so tomorrow does not pick it again. Without this the failure
