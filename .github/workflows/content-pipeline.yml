@@ -146,19 +146,30 @@ jobs:
           # The sitemap rather than the post itself. Bot Fight Mode is on for
           # this zone and answers any request for a page from a datacenter
           # address with a managed challenge, whatever User-Agent it carries.
-          # Static files are not challenged, and Astro rebuilds the sitemap
-          # from the content on every build - so the slug appearing there is
-          # proof that the build being served is the one containing the post.
+          # Astro rebuilds the sitemap from the content on every build, so the
+          # slug appearing there proves the build being served is the one that
+          # contains the post.
           sitemap="https://aibuilderhub.app/sitemap-0.xml"
           echo "waiting for /blog/${slug}/ to appear in ${sitemap}"
+
           for attempt in $(seq 1 20); do
-            if curl -sS --max-time 20 "$sitemap" | grep -q "/blog/${slug}/"; then
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$sitemap" || echo 000)
+            if [ "$code" = "403" ]; then
+              # Bot Fight Mode challenges the runner. That is a fact about
+              # Cloudflare's settings, not about the site, and retrying it
+              # twenty times would burn seven minutes to reach the same wrong
+              # conclusion. Say the check could not run and stop.
+              echo "::warning::Cannot verify the deploy: ${sitemap} answers 403               to this runner because Bot Fight Mode challenges it. Turn Bot               Fight Mode off, or add a WAF skip rule, to get this check back.               See HANDOFF.md section 7."
+              exit 0
+            fi
+            if [ "$code" = "200" ] && curl -sS --max-time 20 "$sitemap" | grep -q "/blog/${slug}/"; then
               echo "the post is live"
               exit 0
             fi
-            echo "attempt ${attempt}: not there yet"
+            echo "attempt ${attempt}: HTTP ${code}, post not in the sitemap yet"
             sleep 20
           done
+
           echo "::warning::/blog/${slug}/ is still not in the served sitemap.           The post is committed but readers cannot see it. Open the           aibuilderhub Worker in Cloudflare, read the newest entry under           Deployments -> build history, and see SETUP-DEPLOY.md."
 
       # A skipped day still changes state: the topic that failed review is

@@ -167,7 +167,7 @@ jobs:
           if [ "$code" != "200" ]; then
             # Not a verdict about the site: the check itself could not run.
             # Say so out loud rather than reporting either kind of health.
-            echo "::warning::Could not read ${sitemap} (HTTP ${code}); the live check did not run."
+            echo "::warning::Could not read ${sitemap} (HTTP ${code}); the live             check did not run. A 403 here is Bot Fight Mode challenging this             runner - see HANDOFF.md section 7."
             echo "code=$code"    >> "$GITHUB_OUTPUT"
             echo "stale=false"   >> "$GITHUB_OUTPUT"
             exit 0
