@@ -75,3 +75,17 @@ def test_posts_older_than_a_week_do_not_count_towards_the_target(settings):
 @pytest.mark.parametrize("hours", [0.0, 1.0, 35.9])
 def test_spacing_holds_for_any_recent_post(settings, hours):
     assert cadence.plan(published(hours), settings, now=NOW).wanted == 0
+
+
+def test_the_run_can_afford_every_attempt_it_is_allowed(settings):
+    """The attempt ceiling must not be silently smaller than it reads.
+
+    The publishing loop stops as soon as fewer than ``max_llm_calls`` remain in
+    the run, so a run-wide ceiling below ``attempts * per-post`` ends the day
+    early while ``max_topic_attempts_per_run`` still claims otherwise. That is
+    the worst kind of setting: one that lies in the direction of silence.
+    """
+    assert (
+        settings.max_llm_calls_per_run
+        >= settings.max_topic_attempts_per_run * settings.max_llm_calls
+    )

@@ -5,9 +5,16 @@ name: Content watchdog
 # out was to open the Actions tab and read the logs - a skipped day exits 0 and
 # looks exactly like a healthy one from the outside.
 #
-# This job asks the single question that matters - when did the site last
-# publish? - and turns a long silence into a GitHub issue, which arrives as
-# email. It never touches the model and costs nothing.
+# This job asks the two questions that matter - when did the pipeline last
+# publish, and can a reader actually open what it published? - and turns a bad
+# answer into a GitHub issue, which arrives as email. It never touches the
+# model and costs nothing.
+#
+# The second question was added on 9 September, after six days in which the
+# first one answered healthy and readers still saw 404. The pipeline was
+# writing posts, the runs were green, this watchdog was satisfied, and the
+# deploy on Cloudflare's side had been failing since 3 September. A registry
+# entry is a promise that a post exists, not evidence that anyone can read it.
 
 on:
   schedule:
@@ -118,6 +125,79 @@ jobs:
           This issue closes itself once a post goes out.
           EOF
           )"
+
+      # The pipeline can be perfectly healthy and the site still stale: the
+      # deploy runs on Cloudflare, not here, and its failures are invisible
+      # from GitHub. So ask the site itself, over HTTP, the way a reader would.
+      - name: Can a reader open the newest post
+        id: live
+        run: |
+          set -euo pipefail
+          # By publication date out of the frontmatter, not by file mtime: a
+          # fresh checkout stamps every file with the same timestamp.
+          newest=$(for f in src/content/blog/*.md; do
+            grep -qE '^draft:[[:space:]]*true' "$f" && continue
+            day=$(grep -m1 -oE '^pubDate:.*[0-9]{4}-[0-9]{2}-[0-9]{2}' "$f"               | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+            echo "${day:-0000-00-00} $f"
+          done | sort | tail -1 | cut -d' ' -f2)
+
+          slug=$(basename "$newest" .md)
+          url="https://aibuilderhub.app/blog/${slug}/"
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 "$url" || echo 000)
+          echo "$url -> HTTP $code"
+          echo "slug=$slug"  >> "$GITHUB_OUTPUT"
+          echo "url=$url"    >> "$GITHUB_OUTPUT"
+          echo "code=$code"  >> "$GITHUB_OUTPUT"
+          if [ "$code" = "200" ]; then
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Raise a stale-site issue
+        if: steps.live.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ steps.live.outputs.url }}
+          CODE: ${{ steps.live.outputs.code }}
+        run: |
+          set -euo pipefail
+          gh label create site-stale             --color D93F0B             --description "Posts are in main but the live site does not serve them"             2>/dev/null || true
+
+          open=$(gh issue list --label site-stale --state open --json number --jq 'length')
+          if [ "$open" != "0" ]; then
+            echo "a stale-site issue is already open; not opening a second one"
+            exit 0
+          fi
+
+          gh issue create             --title "The newest post is in main but answers ${CODE} to readers"             --label site-stale             --body "$(cat <<EOF
+          \`${URL}\` answers **HTTP ${CODE}**. The post is committed, is not a
+          draft, and builds here - so this is the deploy, not the writing.
+
+          Where to look, in order:
+
+          1. **Cloudflare dashboard, Workers & Pages, \`aibuilderhub\`** - the
+             row whose custom domain is aibuilderhub.app. Open Deployments, then
+             build history. A red row is a failed deploy; the real error is in
+             the last twenty lines of its log.
+          2. **Retry build** on that same page. It needs no token.
+          3. **\`SETUP-DEPLOY.md\`** for the failure this has taken before and
+             what \`wrangler.jsonc\` is there to prevent.
+
+          This issue closes itself once the newest post answers 200.
+          EOF
+          )"
+
+      - name: Close the stale-site issue once the post is readable
+        if: steps.live.outputs.stale == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ steps.live.outputs.url }}
+        run: |
+          set -euo pipefail
+          for number in $(gh issue list --label site-stale --state open             --json number --jq '.[].number'); do
+            gh issue close "$number" --comment "The site is current again: ${URL} answers 200."
+          done
 
       - name: Close the stall issue once posts resume
         if: steps.check.outputs.stalled == 'false'

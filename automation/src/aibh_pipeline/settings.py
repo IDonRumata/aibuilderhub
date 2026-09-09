@@ -84,9 +84,19 @@ class Settings(BaseSettings):
     # A single run may publish more than one post only to repay a silence.
     max_posts_per_run: int = 2
     # Ceiling on topics tried in one run, including the ones that fail review.
-    # A run that fails three different stories has a real problem; trying a
-    # fourth just spends money on it.
-    max_topic_attempts_per_run: int = 3
+    #
+    # Three was too tight. The funnel offers about sixteen usable topics a day
+    # and roughly a third of attempts are rejected, so three attempts leave a
+    # real chance that a day ends silent while a dozen perfectly good stories
+    # are still queued behind the ones that failed. Five makes an empty day
+    # need five consecutive rejections, which has never happened.
+    #
+    # This is not the real limit and is not meant to be. Before every attempt
+    # the run checks the month's remaining budget and its own call ceiling and
+    # stops on either, so a pathological day cannot spend the month - it simply
+    # stops earlier than five. Raising this number buys attempts on the days
+    # that have budget for them; it cannot create budget.
+    max_topic_attempts_per_run: int = 5
     # Minimum spacing between posts. Without it the weekly quota could be
     # satisfied by three posts on Monday and silence until the next Monday,
     # which is the outage this whole mechanism exists to prevent.
@@ -100,11 +110,15 @@ class Settings(BaseSettings):
     # still stopping any runaway loop.
     max_llm_calls: int = 25
     # Ceiling for the whole run, across every post and every failed attempt.
-    max_llm_calls_per_run: int = 80
+    # The loop stops as soon as fewer than max_llm_calls remain, so this has to
+    # be at least max_topic_attempts_per_run * max_llm_calls or the attempt
+    # ceiling above is decorative: at 80 the run ran out of calls after three
+    # attempts no matter what the setting said.
+    max_llm_calls_per_run: int = 130
     max_critic_rounds: int = 3
 
     # Token ceilings for a single run. One post uses roughly 60k input and 12k
-    # output; a run may now attempt three, so these leave headroom while still
+    # output; a run may attempt five, so these leave headroom while still
     # stopping a loop.
     max_input_tokens_per_run: int = 900_000
     max_output_tokens_per_run: int = 180_000
