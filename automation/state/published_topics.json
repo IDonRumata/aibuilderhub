@@ -67,5 +67,17 @@
     ],
     "content_hash": "ebc461b22ff1a1488dd5203908e33580",
     "published_at": "2026-09-07T12:35:23.364558Z"
+  },
+  {
+    "slug": "chatgpt-images-2-5-sketch-feature",
+    "canonical_topic": "care changed chatgpt images",
+    "title": "ChatGPT Images 2.5: what changed and who should care",
+    "source_urls": [
+      "https://openai.com/index/introducing-chatgpt-images-2-5",
+      "https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25",
+      "https://theverge.com/ai-artificial-intelligence/991727/openai-chatgpt-images-2-5-sketch"
+    ],
+    "content_hash": "8c2a5e9acfeb2dbcee9320cccd407737",
+    "published_at": "2026-09-09T07:08:00.654674Z"
   }
 ]

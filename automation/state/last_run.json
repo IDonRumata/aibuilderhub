@@ -1,7 +1,42 @@
 {
-  "finished_at": "2026-09-08T18:52:03.890667+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: last post was 30h ago, below the 36h spacing",
-  "published_last_week": 2
+  "finished_at": "2026-09-09T07:08:00.662878+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/chatgpt-images-2-5-sketch-feature.md",
+      "slug": "chatgpt-images-2-5-sketch-feature",
+      "title": "ChatGPT Images 2.5: what changed and who should care",
+      "word_count": 758,
+      "source_urls": [
+        "https://openai.com/index/introducing-chatgpt-images-2-5",
+        "https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25",
+        "https://theverge.com/ai-artificial-intelligence/991727/openai-chatgpt-images-2-5-sketch"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 19
+    }
+  ],
+  "failed_attempts": [],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 19,
+    "input_tokens": 73460,
+    "output_tokens": 15429,
+    "cache_read_tokens": 33846,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/chatgpt-images-2-5-sketch-feature.md",
+  "slug": "chatgpt-images-2-5-sketch-feature",
+  "title": "ChatGPT Images 2.5: what changed and who should care",
+  "word_count": 758,
+  "source_urls": [
+    "https://openai.com/index/introducing-chatgpt-images-2-5",
+    "https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25",
+    "https://theverge.com/ai-artificial-intelligence/991727/openai-chatgpt-images-2-5-sketch"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 19
 }
