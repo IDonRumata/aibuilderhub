@@ -1,7 +1,47 @@
 {
-  "finished_at": "2026-09-10T18:36:55.906885+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: last post was 35h ago, below the 36h spacing",
-  "published_last_week": 2
+  "finished_at": "2026-09-11T11:47:01.938540+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/openai-agents-api-vercel-deploy.md",
+      "slug": "openai-agents-api-vercel-deploy",
+      "title": "OpenAI's Agents API lands on Vercel: what solo builders get",
+      "word_count": 746,
+      "source_urls": [
+        "https://developers.openai.com/api/docs/guides/agents-api/overview",
+        "https://vercel.com/changelog/build-with-openai-agents-api-on-vercel",
+        "https://latent.space/p/ainews-openai-reports-navier-stokes"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 19
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "DeepSeek v4.1 Flash",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 35,
+    "input_tokens": 142842,
+    "output_tokens": 26482,
+    "cache_read_tokens": 68406,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/openai-agents-api-vercel-deploy.md",
+  "slug": "openai-agents-api-vercel-deploy",
+  "title": "OpenAI's Agents API lands on Vercel: what solo builders get",
+  "word_count": 746,
+  "source_urls": [
+    "https://developers.openai.com/api/docs/guides/agents-api/overview",
+    "https://vercel.com/changelog/build-with-openai-agents-api-on-vercel",
+    "https://latent.space/p/ainews-openai-reports-navier-stokes"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 19
 }

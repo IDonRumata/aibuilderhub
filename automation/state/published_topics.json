@@ -79,5 +79,17 @@
     ],
     "content_hash": "8c2a5e9acfeb2dbcee9320cccd407737",
     "published_at": "2026-09-09T07:08:00.654674Z"
+  },
+  {
+    "slug": "openai-agents-api-vercel-deploy",
+    "canonical_topic": "agents api builders get lands openai's solo vercel",
+    "title": "OpenAI's Agents API lands on Vercel: what solo builders get",
+    "source_urls": [
+      "https://developers.openai.com/api/docs/guides/agents-api/overview",
+      "https://vercel.com/changelog/build-with-openai-agents-api-on-vercel",
+      "https://latent.space/p/ainews-openai-reports-navier-stokes"
+    ],
+    "content_hash": "a2e8b2728cb202147c1b2ca8cfd1e234",
+    "published_at": "2026-09-11T11:47:01.927324Z"
   }
 ]

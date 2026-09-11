@@ -54,5 +54,16 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-09-07T12:32:06.767775+00:00"
+  },
+  {
+    "key": "deepseek flash",
+    "title": "DeepSeek v4.1 Flash",
+    "source_urls": [
+      "https://twitter.com/deepseek_ai/status/2097930608790167907",
+      "https://the-decoder.com/new-deepseek-model-v4-1-flash-cuts-memory-needs-for-ai-agents",
+      "https://vercel.com/changelog/deepseek-v4-1-flash-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-11T11:44:05.237059+00:00"
   }
 ]
