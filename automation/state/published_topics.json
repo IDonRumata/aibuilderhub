@@ -91,5 +91,15 @@
     ],
     "content_hash": "a2e8b2728cb202147c1b2ca8cfd1e234",
     "published_at": "2026-09-11T11:47:01.927324Z"
+  },
+  {
+    "slug": "ai-agent-memecoin-launch-postmortem",
+    "canonical_topic": "broke day here's launch memecoin ran",
+    "title": "An AI ran a memecoin launch for a day. Here's what broke",
+    "source_urls": [
+      "https://dev.to/fifty_operator/what-actually-happened-when-an-ai-tried-to-get-a-memecoin-noticed-day-one-postmortem-4j1f"
+    ],
+    "content_hash": "c3c64aaf83f1a21b61f22ee1cb71aa83",
+    "published_at": "2026-09-14T13:14:08.407956Z"
   }
 ]

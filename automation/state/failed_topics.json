@@ -65,5 +65,14 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-09-11T11:44:05.237059+00:00"
+  },
+  {
+    "key": "available copilot github harness layer sdk",
+    "title": "GitHub Copilot is now available in the AI SDK harness layer",
+    "source_urls": [
+      "https://vercel.com/changelog/github-copilot-ai-sdk-harness-adapter"
+    ],
+    "reason": "critics returned REJECT after 1 rounds",
+    "failed_at": "2026-09-14T13:11:04.527295+00:00"
   }
 ]
