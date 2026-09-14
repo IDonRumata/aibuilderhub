@@ -1,43 +1,7 @@
 {
-  "finished_at": "2026-09-14T13:14:08.417522+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/ai-agent-memecoin-launch-postmortem.md",
-      "slug": "ai-agent-memecoin-launch-postmortem",
-      "title": "An AI ran a memecoin launch for a day. Here's what broke",
-      "word_count": 815,
-      "source_urls": [
-        "https://dev.to/fifty_operator/what-actually-happened-when-an-ai-tried-to-get-a-memecoin-noticed-day-one-postmortem-4j1f"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 18
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "GitHub Copilot is now available in the AI SDK harness layer",
-      "reason": "critics returned REJECT after 1 rounds"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 24,
-    "input_tokens": 86835,
-    "output_tokens": 17704,
-    "cache_read_tokens": 44678,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/ai-agent-memecoin-launch-postmortem.md",
-  "slug": "ai-agent-memecoin-launch-postmortem",
-  "title": "An AI ran a memecoin launch for a day. Here's what broke",
-  "word_count": 815,
-  "source_urls": [
-    "https://dev.to/fifty_operator/what-actually-happened-when-an-ai-tried-to-get-a-memecoin-noticed-day-one-postmortem-4j1f"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 18
+  "finished_at": "2026-09-14T19:54:45.624987+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
