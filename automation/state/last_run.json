@@ -1,43 +1,7 @@
 {
-  "finished_at": "2026-09-16T12:01:34.047330+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/intent-debt-agentic-coding.md",
-      "slug": "intent-debt-agentic-coding",
-      "title": "What is intent debt, and why solo builders should care",
-      "word_count": 836,
-      "source_urls": [
-        "https://dev.to/rorehe/how-i-accidentally-solved-intent-debt-3on9"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 19
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Gemini 3.8 Live and 3.8 Live Extended Thinking",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 34,
-    "input_tokens": 136675,
-    "output_tokens": 28164,
-    "cache_read_tokens": 66342,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/intent-debt-agentic-coding.md",
-  "slug": "intent-debt-agentic-coding",
-  "title": "What is intent debt, and why solo builders should care",
-  "word_count": 836,
-  "source_urls": [
-    "https://dev.to/rorehe/how-i-accidentally-solved-intent-debt-3on9"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 19
+  "finished_at": "2026-09-16T19:00:00.679949+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
