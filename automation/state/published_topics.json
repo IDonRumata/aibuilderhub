@@ -101,5 +101,15 @@
     ],
     "content_hash": "c3c64aaf83f1a21b61f22ee1cb71aa83",
     "published_at": "2026-09-14T13:14:08.407956Z"
+  },
+  {
+    "slug": "intent-debt-agentic-coding",
+    "canonical_topic": "builders care debt intent solo",
+    "title": "What is intent debt, and why solo builders should care",
+    "source_urls": [
+      "https://dev.to/rorehe/how-i-accidentally-solved-intent-debt-3on9"
+    ],
+    "content_hash": "9255a9261cb648817f1ca964866c8fad",
+    "published_at": "2026-09-16T12:01:34.033550Z"
   }
 ]

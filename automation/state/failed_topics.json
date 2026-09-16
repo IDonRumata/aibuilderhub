@@ -74,5 +74,15 @@
     ],
     "reason": "critics returned REJECT after 1 rounds",
     "failed_at": "2026-09-14T13:11:04.527295+00:00"
+  },
+  {
+    "key": "extended gemini live thinking",
+    "title": "Gemini 3.8 Live and 3.8 Live Extended Thinking",
+    "source_urls": [
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking",
+      "https://simonwillison.net/2026/Sep/15/gemini-live"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-16T11:58:12.256731+00:00"
   }
 ]
