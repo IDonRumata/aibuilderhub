@@ -84,5 +84,15 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-09-16T11:58:12.256731+00:00"
+  },
+  {
+    "key": "openjev",
+    "title": "OpenJev",
+    "source_urls": [
+      "https://openjev.com/",
+      "https://reddit.com/r/LocalLLaMA/comments/1wjlyzr/still_on_the_jev_waitlist_i_hosted_openjev_its"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-18T18:39:56.002855+00:00"
   }
 ]

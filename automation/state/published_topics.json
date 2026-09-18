@@ -111,5 +111,15 @@
     ],
     "content_hash": "9255a9261cb648817f1ca964866c8fad",
     "published_at": "2026-09-16T12:01:34.033550Z"
+  },
+  {
+    "slug": "scenerok-agent-launch-video",
+    "canonical_topic": "agent cut launch scenerok video wants",
+    "title": "SceneRok wants your agent to cut your launch video",
+    "source_urls": [
+      "https://dev.to/nidheeshdas/your-agent-shipped-the-feature-why-is-the-launch-reel-still-in-capcut-2nbd"
+    ],
+    "content_hash": "38de80b7dbb17b74685a665a157192bd",
+    "published_at": "2026-09-18T18:42:40.764559Z"
   }
 ]
