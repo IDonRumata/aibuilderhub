@@ -1,43 +1,7 @@
 {
-  "finished_at": "2026-09-18T18:42:40.776874+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/scenerok-agent-launch-video.md",
-      "slug": "scenerok-agent-launch-video",
-      "title": "SceneRok wants your agent to cut your launch video",
-      "word_count": 764,
-      "source_urls": [
-        "https://dev.to/nidheeshdas/your-agent-shipped-the-feature-why-is-the-launch-reel-still-in-capcut-2nbd"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 18
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "OpenJev",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 34,
-    "input_tokens": 137023,
-    "output_tokens": 27887,
-    "cache_read_tokens": 66342,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/scenerok-agent-launch-video.md",
-  "slug": "scenerok-agent-launch-video",
-  "title": "SceneRok wants your agent to cut your launch video",
-  "word_count": 764,
-  "source_urls": [
-    "https://dev.to/nidheeshdas/your-agent-shipped-the-feature-why-is-the-launch-reel-still-in-capcut-2nbd"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 18
+  "finished_at": "2026-09-19T11:20:07.766636+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
