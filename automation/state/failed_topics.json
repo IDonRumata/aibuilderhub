@@ -94,5 +94,38 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-09-18T18:39:56.002855+00:00"
+  },
+  {
+    "key": "grok",
+    "title": "Grok 4.7",
+    "source_urls": [
+      "https://x.ai/news/grok-4-7",
+      "https://the-decoder.com/xai-launches-grok-4-7-at-bargain-prices-but-benchmarks-reveal-a-wide-gap-to-claude-and-gpt-6",
+      "https://github.blog/changelog/2026-09-21-grok-4-7-is-now-available-in-github-copilot",
+      "https://vercel.com/changelog/grok-4-7-now-available-and-40-off-on-ai-gateway-fx-eve"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-21T20:08:40.323108+00:00"
+  },
+  {
+    "key": "always bad idea mcp",
+    "title": "MCP was always a bad idea?",
+    "source_urls": [
+      "https://maharship.com/blog/why-mcp-was-always-a-bad-idea",
+      "https://simonwillison.net/2026/Sep/20/hn-49779718"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-21T20:11:06.166799+00:00"
+  },
+  {
+    "key": "agent amazon blocks com meta muse shopping",
+    "title": "Amazon blocks Meta’s new Muse AI agent from shopping on amazon.com",
+    "source_urls": [
+      "https://forbes.com/sites/jonmarkman/2026/09/21/amazon-blocks-metas-new-muse-ai-agent-from-shopping-on-amazoncom",
+      "https://the-decoder.com/amazon-blocks-metas-ai-agent-muse-from-online-shopping",
+      "https://theverge.com/tech/998078/amazon-blocks-meta-muse-ai-agent-shopping"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-21T20:13:21.838848+00:00"
   }
 ]

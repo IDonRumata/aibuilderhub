@@ -121,5 +121,15 @@
     ],
     "content_hash": "38de80b7dbb17b74685a665a157192bd",
     "published_at": "2026-09-18T18:42:40.764559Z"
+  },
+  {
+    "slug": "llm-keys-ui-remote-agent-keys",
+    "canonical_topic": "agents api coding fixes keys plugin remote tiny",
+    "title": "A tiny plugin fixes API keys on remote coding agents",
+    "source_urls": [
+      "https://simonwillison.net/2026/Sep/20/llm-keys-ui"
+    ],
+    "content_hash": "5211c37db4618ed663bd00013e21f367",
+    "published_at": "2026-09-21T20:16:08.150630Z"
   }
 ]

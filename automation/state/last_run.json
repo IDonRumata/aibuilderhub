@@ -1,7 +1,51 @@
 {
-  "finished_at": "2026-09-21T13:08:50.600598+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-09-21T20:16:08.162934+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/llm-keys-ui-remote-agent-keys.md",
+      "slug": "llm-keys-ui-remote-agent-keys",
+      "title": "A tiny plugin fixes API keys on remote coding agents",
+      "word_count": 697,
+      "source_urls": [
+        "https://simonwillison.net/2026/Sep/20/llm-keys-ui"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 19
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "Grok 4.7",
+      "reason": "critics returned REJECT after 3 rounds"
+    },
+    {
+      "topic": "MCP was always a bad idea?",
+      "reason": "critics returned REJECT after 3 rounds"
+    },
+    {
+      "topic": "Amazon blocks Meta’s new Muse AI agent from shopping on amazon.com",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 67,
+    "input_tokens": 268064,
+    "output_tokens": 48833,
+    "cache_read_tokens": 137526,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/llm-keys-ui-remote-agent-keys.md",
+  "slug": "llm-keys-ui-remote-agent-keys",
+  "title": "A tiny plugin fixes API keys on remote coding agents",
+  "word_count": 697,
+  "source_urls": [
+    "https://simonwillison.net/2026/Sep/20/llm-keys-ui"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 19
 }
