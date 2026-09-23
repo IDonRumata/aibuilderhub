@@ -131,5 +131,22 @@
     ],
     "content_hash": "5211c37db4618ed663bd00013e21f367",
     "published_at": "2026-09-21T20:16:08.150630Z"
+  },
+  {
+    "slug": "claude-opus-5-5-price-cuts",
+    "canonical_topic": "claude dropped everyone's lands opus prices",
+    "title": "Claude Opus 5.5 lands, and everyone's prices just dropped",
+    "source_urls": [
+      "https://anthropic.com/claude-opus-5-5",
+      "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "https://zapier.com/blog/automate-claude",
+      "https://latent.space/p/ainews-claude-opus-55-the-new-default",
+      "https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna",
+      "https://github.blog/changelog/2026-09-22-claude-opus-5-5-is-now-available-in-github-copilot",
+      "https://theverge.com/ai-artificial-intelligence/998868/anthropic-claude-opus-5-5-cybersecurity",
+      "https://vercel.com/changelog/claude-opus-5-5-now-available-on-ai-gateway"
+    ],
+    "content_hash": "d1e345a458da199a7b3e056d8fd3fb32",
+    "published_at": "2026-09-23T19:12:39.700011Z"
   }
 ]
