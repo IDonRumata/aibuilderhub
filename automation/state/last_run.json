@@ -1,44 +1,7 @@
 {
-  "finished_at": "2026-09-23T19:12:39.713033+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/claude-opus-5-5-price-cuts.md",
-      "slug": "claude-opus-5-5-price-cuts",
-      "title": "Claude Opus 5.5 lands, and everyone's prices just dropped",
-      "word_count": 723,
-      "source_urls": [
-        "https://anthropic.com/claude-opus-5-5",
-        "https://artificialanalysis.ai/models/claude-opus-5-5",
-        "https://zapier.com/blog/automate-claude",
-        "https://latent.space/p/ainews-claude-opus-55-the-new-default"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 17
-    }
-  ],
-  "failed_attempts": [],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 17,
-    "input_tokens": 72743,
-    "output_tokens": 15475,
-    "cache_read_tokens": 30304,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/claude-opus-5-5-price-cuts.md",
-  "slug": "claude-opus-5-5-price-cuts",
-  "title": "Claude Opus 5.5 lands, and everyone's prices just dropped",
-  "word_count": 723,
-  "source_urls": [
-    "https://anthropic.com/claude-opus-5-5",
-    "https://artificialanalysis.ai/models/claude-opus-5-5",
-    "https://zapier.com/blog/automate-claude",
-    "https://latent.space/p/ainews-claude-opus-55-the-new-default"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 17
+  "finished_at": "2026-09-24T12:04:06.535627+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
