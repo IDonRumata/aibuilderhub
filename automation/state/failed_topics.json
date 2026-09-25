@@ -127,5 +127,24 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-09-21T20:13:21.838848+00:00"
+  },
+  {
+    "key": "design ide open show software source thoughtful w26 whiteboard",
+    "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
+    "source_urls": [
+      "https://github.com/devdotfast/whiteboard"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-25T19:28:13.537224+00:00"
+  },
+  {
+    "key": "gpt introducing luna sol",
+    "title": "Introducing GPT-6 Sol and Luna",
+    "source_urls": [
+      "https://openai.com/index/introducing-gpt-6-sol-and-luna",
+      "https://vercel.com/changelog/gpt-6-sol-and-luna-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 2 rounds",
+    "failed_at": "2026-09-25T19:30:02.864572+00:00"
   }
 ]

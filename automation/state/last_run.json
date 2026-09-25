@@ -1,7 +1,47 @@
 {
-  "finished_at": "2026-09-25T12:04:20.639522+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-09-25T19:32:53.293129+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/agent-skills-registry-growth.md",
+      "slug": "agent-skills-registry-growth",
+      "title": "Agent skills hit a million: what it means for you",
+      "word_count": 705,
+      "source_urls": [
+        "https://vercel.com/blog/state-of-agent-skills"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 19
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
+      "reason": "critics returned REJECT after 3 rounds"
+    },
+    {
+      "topic": "Introducing GPT-6 Sol and Luna",
+      "reason": "critics returned REJECT after 2 rounds"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 45,
+    "input_tokens": 176358,
+    "output_tokens": 34619,
+    "cache_read_tokens": 90070,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/agent-skills-registry-growth.md",
+  "slug": "agent-skills-registry-growth",
+  "title": "Agent skills hit a million: what it means for you",
+  "word_count": 705,
+  "source_urls": [
+    "https://vercel.com/blog/state-of-agent-skills"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 19
 }

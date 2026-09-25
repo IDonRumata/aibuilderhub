@@ -148,5 +148,15 @@
     ],
     "content_hash": "d1e345a458da199a7b3e056d8fd3fb32",
     "published_at": "2026-09-23T19:12:39.700011Z"
+  },
+  {
+    "slug": "agent-skills-registry-growth",
+    "canonical_topic": "agent hit means million skills",
+    "title": "Agent skills hit a million: what it means for you",
+    "source_urls": [
+      "https://vercel.com/blog/state-of-agent-skills"
+    ],
+    "content_hash": "bed10193b945502258fc910513bd4589",
+    "published_at": "2026-09-25T19:32:53.279197Z"
   }
 ]
