@@ -158,5 +158,19 @@
     ],
     "content_hash": "bed10193b945502258fc910513bd4589",
     "published_at": "2026-09-25T19:32:53.279197Z"
+  },
+  {
+    "slug": "claude-sonnet-5-5-release",
+    "canonical_topic": "cheaper claude faster middle model sonnet",
+    "title": "Claude Sonnet 5.5: a cheaper, faster middle model",
+    "source_urls": [
+      "https://anthropic.com/claude-sonnet-5-5",
+      "https://github.blog/changelog/2026-09-28-claude-sonnet-5-5-in-github-copilot",
+      "https://the-decoder.com/anthropics-claude-sonnet-5-5-nearly-matches-opus-5-5-on-benchmarks-while-costing-up-to-30-percent-less-per-task",
+      "https://techcrunch.com/2026/09/28/anthropic-releases-sonnet-5-5-which-it-calls-a-significantly-cheaper-faster-work-partner",
+      "https://vercel.com/changelog/claude-sonnet-5-5-now-available-on-ai-gateway"
+    ],
+    "content_hash": "4b3ea3c7262c17144bb11ccf06ead7ea",
+    "published_at": "2026-09-28T21:22:00.246723Z"
   }
 ]

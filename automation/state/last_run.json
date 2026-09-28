@@ -1,7 +1,44 @@
 {
-  "finished_at": "2026-09-28T14:18:46.875244+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-09-28T21:22:00.261101+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/claude-sonnet-5-5-release.md",
+      "slug": "claude-sonnet-5-5-release",
+      "title": "Claude Sonnet 5.5: a cheaper, faster middle model",
+      "word_count": 605,
+      "source_urls": [
+        "https://anthropic.com/claude-sonnet-5-5",
+        "https://github.blog/changelog/2026-09-28-claude-sonnet-5-5-in-github-copilot",
+        "https://the-decoder.com/anthropics-claude-sonnet-5-5-nearly-matches-opus-5-5-on-benchmarks-while-costing-up-to-30-percent-less-per-task",
+        "https://techcrunch.com/2026/09/28/anthropic-releases-sonnet-5-5-which-it-calls-a-significantly-cheaper-faster-work-partner"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 18
+    }
+  ],
+  "failed_attempts": [],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 18,
+    "input_tokens": 75451,
+    "output_tokens": 14176,
+    "cache_read_tokens": 32075,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/claude-sonnet-5-5-release.md",
+  "slug": "claude-sonnet-5-5-release",
+  "title": "Claude Sonnet 5.5: a cheaper, faster middle model",
+  "word_count": 605,
+  "source_urls": [
+    "https://anthropic.com/claude-sonnet-5-5",
+    "https://github.blog/changelog/2026-09-28-claude-sonnet-5-5-in-github-copilot",
+    "https://the-decoder.com/anthropics-claude-sonnet-5-5-nearly-matches-opus-5-5-on-benchmarks-while-costing-up-to-30-percent-less-per-task",
+    "https://techcrunch.com/2026/09/28/anthropic-releases-sonnet-5-5-which-it-calls-a-significantly-cheaper-faster-work-partner"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 18
 }
