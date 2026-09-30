@@ -146,5 +146,35 @@
     ],
     "reason": "critics returned REJECT after 2 rounds",
     "failed_at": "2026-09-25T19:30:02.864572+00:00"
+  },
+  {
+    "key": "agents always dots",
+    "title": "Dots: Always-on agents",
+    "source_urls": [
+      "https://openai.com/index/introducing-dots",
+      "https://latent.space/p/ainews-openai-devday-2026-dots-61",
+      "https://marktechpost.com/2026/09/29/openai-launches-dots-always-on-gpt-6-astra-agents-that-work-from-their-own-cloud-computers"
+    ],
+    "reason": "final dedup check: title trigram overlap 0.49 > 0.4 (vs openai-agents-api-vercel-deploy)",
+    "failed_at": "2026-09-30T20:15:35.483424+00:00"
+  },
+  {
+    "key": "available gateway gpt sol",
+    "title": "GPT-6.1 Sol now available on AI Gateway",
+    "source_urls": [
+      "https://vercel.com/changelog/gpt-6-1-sol-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-30T20:17:32.320885+00:00"
+  },
+  {
+    "key": "2026 blog devday live openai",
+    "title": "OpenAI DevDay 2026 live blog",
+    "source_urls": [
+      "https://simonwillison.net/2026/Sep/29/openai-devday-2026-live-blog",
+      "https://openai.com/index/devday-2026-recap"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-09-30T20:19:41.827197+00:00"
   }
 ]

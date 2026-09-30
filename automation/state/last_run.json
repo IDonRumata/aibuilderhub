@@ -1,7 +1,27 @@
 {
-  "finished_at": "2026-09-30T12:52:58.908966+00:00",
+  "finished_at": "2026-09-30T20:19:41.839267+00:00",
   "published": false,
   "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "reason": "all 3 topic(s) failed review",
+  "failed_attempts": [
+    {
+      "topic": "Dots: Always-on agents",
+      "reason": "final dedup check: title trigram overlap 0.49 > 0.4 (vs openai-agents-api-vercel-deploy)"
+    },
+    {
+      "topic": "GPT-6.1 Sol now available on AI Gateway",
+      "reason": "critics returned REJECT after 3 rounds"
+    },
+    {
+      "topic": "OpenAI DevDay 2026 live blog",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "usage": {
+    "calls": 50,
+    "input_tokens": 206726,
+    "output_tokens": 39689,
+    "cache_read_tokens": 100902,
+    "cache_write_tokens": 6027
+  }
 }
