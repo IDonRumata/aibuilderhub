@@ -1,35 +1,35 @@
 {
-  "finished_at": "2026-10-01T13:50:15.852105+00:00",
+  "finished_at": "2026-10-01T20:25:47.975990+00:00",
   "published": false,
   "count": 0,
   "reason": "all 5 topic(s) failed review",
   "failed_attempts": [
     {
-      "topic": "OpenAI Releases GPT-6.1 Sol: Near-Astra Coding and Computer Use at One-Fifth of Astra’s Token Price",
-      "reason": "banned patterns survived the rewrite: dated-language"
+      "topic": "Fix or Rebuild Your Vibe-Coded App? A 30-Minute Self-Test",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MbY966UtUXc7TZNcc'}"
     },
     {
-      "topic": "The best large language models (LLMs) in 2026",
-      "reason": "critics returned REJECT after 3 rounds"
+      "topic": "Node.js Content Moderation: Structured Outputs for Comments, Avatars, and Uploads",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9McnndvgXESCwYsVtj'}"
     },
     {
-      "topic": "OKF4net 0.6.0: auditing what your AI agent knows, in zero-dependency .NET",
-      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCDgEv43YNPKNZqhTa'}"
+      "topic": "Run OpenCode from your phone or laptop: remote hosting, authentication, and reverse proxy",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MdYBwusSyYSbpdchQ'}"
     },
     {
-      "topic": "OpenAI launches ChatGPT plugin discovery, sort of",
-      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCF8JsgrBGyGxQRohg'}"
+      "topic": "Search trace spans from the Vercel CLI",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MeFbwbNYudpicpCon'}"
     },
     {
-      "topic": "594 KB to orbit: a browser for AI agents with no Chromium attached",
-      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCFpyaCeWQfSpzhpFf'}"
+      "topic": "TypeSafe AI Releases Jev: A Decision-Only Model That Returns Typed Probabilities Instead of Text",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MetJt5o1aLQpAHHgo'}"
     }
   ],
   "usage": {
-    "calls": 46,
-    "input_tokens": 168223,
-    "output_tokens": 33330,
-    "cache_read_tokens": 85558,
-    "cache_write_tokens": 6027
+    "calls": 5,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0
   }
 }

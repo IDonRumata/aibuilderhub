@@ -224,5 +224,50 @@
     ],
     "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCFpyaCeWQfSpzhpFf'}",
     "failed_at": "2026-10-01T13:50:15.834940+00:00"
+  },
+  {
+    "key": "app coded fix minute rebuild self test vibe",
+    "title": "Fix or Rebuild Your Vibe-Coded App? A 30-Minute Self-Test",
+    "source_urls": [
+      "https://dev.to/manveer-banxal/fix-or-rebuild-your-vibe-coded-app-a-30-minute-self-test-5ei1"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MbY966UtUXc7TZNcc'}",
+    "failed_at": "2026-10-01T20:25:47.307089+00:00"
+  },
+  {
+    "key": "avatars comments content moderation node outputs structured uploads",
+    "title": "Node.js Content Moderation: Structured Outputs for Comments, Avatars, and Uploads",
+    "source_urls": [
+      "https://dev.to/apexz69/nodejs-content-moderation-structured-outputs-for-comments-avatars-and-uploads-28hg"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9McnndvgXESCwYsVtj'}",
+    "failed_at": "2026-10-01T20:25:47.467464+00:00"
+  },
+  {
+    "key": "authentication hosting laptop opencode phone proxy remote reverse run",
+    "title": "Run OpenCode from your phone or laptop: remote hosting, authentication, and reverse proxy",
+    "source_urls": [
+      "https://dev.to/zjshen14/run-opencode-from-your-phone-or-laptop-remote-hosting-authentication-and-reverse-proxy-16bd"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MdYBwusSyYSbpdchQ'}",
+    "failed_at": "2026-10-01T20:25:47.634434+00:00"
+  },
+  {
+    "key": "cli search spans trace vercel",
+    "title": "Search trace spans from the Vercel CLI",
+    "source_urls": [
+      "https://vercel.com/changelog/search-trace-spans-from-the-vercel-cli"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MeFbwbNYudpicpCon'}",
+    "failed_at": "2026-10-01T20:25:47.796527+00:00"
+  },
+  {
+    "key": "decision instead jev model only probabilities releases returns text typed typesafe",
+    "title": "TypeSafe AI Releases Jev: A Decision-Only Model That Returns Typed Probabilities Instead of Text",
+    "source_urls": [
+      "https://infoq.com/news/2026/10/typesafe-ai-jev-released"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MetJt5o1aLQpAHHgo'}",
+    "failed_at": "2026-10-01T20:25:47.960684+00:00"
   }
 ]
