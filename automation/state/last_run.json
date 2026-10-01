@@ -1,27 +1,35 @@
 {
-  "finished_at": "2026-09-30T20:19:41.839267+00:00",
+  "finished_at": "2026-10-01T13:50:15.852105+00:00",
   "published": false,
   "count": 0,
-  "reason": "all 3 topic(s) failed review",
+  "reason": "all 5 topic(s) failed review",
   "failed_attempts": [
     {
-      "topic": "Dots: Always-on agents",
-      "reason": "final dedup check: title trigram overlap 0.49 > 0.4 (vs openai-agents-api-vercel-deploy)"
+      "topic": "OpenAI Releases GPT-6.1 Sol: Near-Astra Coding and Computer Use at One-Fifth of Astra’s Token Price",
+      "reason": "banned patterns survived the rewrite: dated-language"
     },
     {
-      "topic": "GPT-6.1 Sol now available on AI Gateway",
+      "topic": "The best large language models (LLMs) in 2026",
       "reason": "critics returned REJECT after 3 rounds"
     },
     {
-      "topic": "OpenAI DevDay 2026 live blog",
-      "reason": "critics returned REJECT after 3 rounds"
+      "topic": "OKF4net 0.6.0: auditing what your AI agent knows, in zero-dependency .NET",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCDgEv43YNPKNZqhTa'}"
+    },
+    {
+      "topic": "OpenAI launches ChatGPT plugin discovery, sort of",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCF8JsgrBGyGxQRohg'}"
+    },
+    {
+      "topic": "594 KB to orbit: a browser for AI agents with no Chromium attached",
+      "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCFpyaCeWQfSpzhpFf'}"
     }
   ],
   "usage": {
-    "calls": 50,
-    "input_tokens": 206726,
-    "output_tokens": 39689,
-    "cache_read_tokens": 100902,
+    "calls": 46,
+    "input_tokens": 168223,
+    "output_tokens": 33330,
+    "cache_read_tokens": 85558,
     "cache_write_tokens": 6027
   }
 }

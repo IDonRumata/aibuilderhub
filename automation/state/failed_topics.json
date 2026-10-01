@@ -176,5 +176,53 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-09-30T20:19:41.827197+00:00"
+  },
+  {
+    "key": "astra coding computer fifth gpt near one openai price releases sol token use",
+    "title": "OpenAI Releases GPT-6.1 Sol: Near-Astra Coding and Computer Use at One-Fifth of Astra’s Token Price",
+    "source_urls": [
+      "https://marktechpost.com/2026/09/30/openai-releases-gpt-6-1-sol-near-astra-coding-and-computer-use-at-one-fifth-of-astras-token-price",
+      "https://simonwillison.net/2026/Sep/29/hn-49898129",
+      "https://openai.com/index/introducing-gpt-6-1-sol"
+    ],
+    "reason": "banned patterns survived the rewrite: dated-language",
+    "failed_at": "2026-10-01T13:47:10.362919+00:00"
+  },
+  {
+    "key": "2026 best language large llms models",
+    "title": "The best large language models (LLMs) in 2026",
+    "source_urls": [
+      "https://zapier.com/blog/best-llm",
+      "https://simonwillison.net/2026/Sep/27/2026-in-llms-so-far"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-01T13:49:14.869040+00:00"
+  },
+  {
+    "key": "agent auditing dependency knows net okf4net zero",
+    "title": "OKF4net 0.6.0: auditing what your AI agent knows, in zero-dependency .NET",
+    "source_urls": [
+      "https://dev.to/julien_chable/okf4net-060-auditing-what-your-ai-agent-knows-in-zero-dependency-net-492d"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCDgEv43YNPKNZqhTa'}",
+    "failed_at": "2026-10-01T13:50:15.497792+00:00"
+  },
+  {
+    "key": "chatgpt discovery launches openai plugin sort",
+    "title": "OpenAI launches ChatGPT plugin discovery, sort of",
+    "source_urls": [
+      "https://dev.to/alpic/openai-launches-chatgpt-plugin-discovery-sort-of-4oba"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCF8JsgrBGyGxQRohg'}",
+    "failed_at": "2026-10-01T13:50:15.648559+00:00"
+  },
+  {
+    "key": "594 agents attached browser chromium orbit",
+    "title": "594 KB to orbit: a browser for AI agents with no Chromium attached",
+    "source_urls": [
+      "https://dev.to/slabb/594-kb-to-orbit-a-browser-for-ai-agents-with-no-chromium-attached-1odg"
+    ],
+    "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfbdCFpyaCeWQfSpzhpFf'}",
+    "failed_at": "2026-10-01T13:50:15.834940+00:00"
   }
 ]
