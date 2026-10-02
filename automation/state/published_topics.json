@@ -172,5 +172,18 @@
     ],
     "content_hash": "4b3ea3c7262c17144bb11ccf06ead7ea",
     "published_at": "2026-09-28T21:22:00.246723Z"
+  },
+  {
+    "slug": "gemini-4-argon-gated-release",
+    "canonical_topic": "argon can't gemini lands use yet",
+    "title": "Gemini 4 Argon lands, but you can't use it yet",
+    "source_urls": [
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon",
+      "https://latent.space/p/ainews-gemini-4-argon-gdms-answer",
+      "https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet",
+      "https://marktechpost.com/2026/09/30/google-deepmind-unveils-gemini-4-argon-with-1m-output-tokens-for-coding-knowledge-work-and-cyber-defense"
+    ],
+    "content_hash": "68608885c2e66865dc63dc3de7183ec6",
+    "published_at": "2026-10-02T13:02:14.229990Z"
   }
 ]
