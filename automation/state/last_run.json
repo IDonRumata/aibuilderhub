@@ -1,44 +1,7 @@
 {
-  "finished_at": "2026-10-02T13:02:14.244471+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/gemini-4-argon-gated-release.md",
-      "slug": "gemini-4-argon-gated-release",
-      "title": "Gemini 4 Argon lands, but you can't use it yet",
-      "word_count": 676,
-      "source_urls": [
-        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon",
-        "https://latent.space/p/ainews-gemini-4-argon-gdms-answer",
-        "https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet",
-        "https://marktechpost.com/2026/09/30/google-deepmind-unveils-gemini-4-argon-with-1m-output-tokens-for-coding-knowledge-work-and-cyber-defense"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 18
-    }
-  ],
-  "failed_attempts": [],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 18,
-    "input_tokens": 75140,
-    "output_tokens": 16559,
-    "cache_read_tokens": 31782,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/gemini-4-argon-gated-release.md",
-  "slug": "gemini-4-argon-gated-release",
-  "title": "Gemini 4 Argon lands, but you can't use it yet",
-  "word_count": 676,
-  "source_urls": [
-    "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon",
-    "https://latent.space/p/ainews-gemini-4-argon-gdms-answer",
-    "https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet",
-    "https://marktechpost.com/2026/09/30/google-deepmind-unveils-gemini-4-argon-with-1m-output-tokens-for-coding-knowledge-work-and-cyber-defense"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 18
+  "finished_at": "2026-10-02T20:04:50.606104+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: last post was 7h ago, below the 36h spacing",
+  "published_last_week": 2
 }
