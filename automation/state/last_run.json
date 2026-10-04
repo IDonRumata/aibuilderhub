@@ -1,55 +1,7 @@
 {
-  "finished_at": "2026-10-04T12:54:18.994894+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/claude-code-goal-judge-false-positives.md",
-      "slug": "claude-code-goal-judge-false-positives",
-      "title": "Claude Code's /goal lets the agent grade its own work",
-      "word_count": 704,
-      "source_urls": [
-        "https://dev.to/syntaxixr/c-1akk"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 16
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Show HN: Pi pod – Run your pi coding agent in sandboxes on your own server",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "Muse Gadgets",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "I A/B-tested 9 popular AI agent skills. 4 of them did nothing.",
-      "reason": "banned patterns survived the rewrite: dated-language"
-    },
-    {
-      "topic": "Show HN: Open-source model routing for coding agents at Astra-level performance",
-      "reason": "post broke a hard requirement after humanising: This link does not resolve. Replace it with a working source URL."
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 83,
-    "input_tokens": 322966,
-    "output_tokens": 59320,
-    "cache_read_tokens": 170914,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/claude-code-goal-judge-false-positives.md",
-  "slug": "claude-code-goal-judge-false-positives",
-  "title": "Claude Code's /goal lets the agent grade its own work",
-  "word_count": 704,
-  "source_urls": [
-    "https://dev.to/syntaxixr/c-1akk"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 16
+  "finished_at": "2026-10-04T18:42:53.879444+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
