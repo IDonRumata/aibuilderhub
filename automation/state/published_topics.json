@@ -185,5 +185,15 @@
     ],
     "content_hash": "68608885c2e66865dc63dc3de7183ec6",
     "published_at": "2026-10-02T13:02:14.229990Z"
+  },
+  {
+    "slug": "claude-code-goal-judge-false-positives",
+    "canonical_topic": "agent claude code's goal grade lets own work",
+    "title": "Claude Code's /goal lets the agent grade its own work",
+    "source_urls": [
+      "https://dev.to/syntaxixr/c-1akk"
+    ],
+    "content_hash": "762955c6f993bdb387189afb0e021171",
+    "published_at": "2026-10-04T12:54:18.979957Z"
   }
 ]

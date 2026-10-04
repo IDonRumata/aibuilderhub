@@ -269,5 +269,43 @@
     ],
     "reason": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cfc9MetJt5o1aLQpAHHgo'}",
     "failed_at": "2026-10-01T20:25:47.960684+00:00"
+  },
+  {
+    "key": "agent coding own pod run sandboxes server show",
+    "title": "Show HN: Pi pod – Run your pi coding agent in sandboxes on your own server",
+    "source_urls": [
+      "https://pipod.dev/"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-04T12:46:07.196604+00:00"
+  },
+  {
+    "key": "gadgets muse",
+    "title": "Muse Gadgets",
+    "source_urls": [
+      "https://gadgets.muse.ai/",
+      "https://the-decoder.com/muse-gadgets-turns-ai-hardware-into-an-open-source-diy-project",
+      "https://theverge.com/tech/1004330/meta-muse-ai-gadgets-home-link"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-04T12:47:55.921250+00:00"
+  },
+  {
+    "key": "agent did nothing popular skills tested",
+    "title": "I A/B-tested 9 popular AI agent skills. 4 of them did nothing.",
+    "source_urls": [
+      "https://dev.to/menadirali/i-ab-tested-9-popular-ai-agent-skills-4-of-them-did-nothing-5ba5"
+    ],
+    "reason": "banned patterns survived the rewrite: dated-language",
+    "failed_at": "2026-10-04T12:50:03.571176+00:00"
+  },
+  {
+    "key": "agents astra coding level model open performance routing show source",
+    "title": "Show HN: Open-source model routing for coding agents at Astra-level performance",
+    "source_urls": [
+      "https://news.ycombinator.com/item?id=49911500"
+    ],
+    "reason": "post broke a hard requirement after humanising: This link does not resolve. Replace it with a working source URL.",
+    "failed_at": "2026-10-04T12:52:23.423771+00:00"
   }
 ]
