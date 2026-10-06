@@ -1,49 +1,7 @@
 {
-  "finished_at": "2026-10-06T13:37:25.842654+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/openai-chatgpt-text-watermarking-eu.md",
-      "slug": "openai-chatgpt-text-watermarking-eu",
-      "title": "OpenAI is watermarking ChatGPT text, but only in the EU",
-      "word_count": 744,
-      "source_urls": [
-        "https://techcrunch.com/2026/10/05/openai-will-start-watermarking-chatgpts-text-in-the-eu",
-        "https://theverge.com/ai-artificial-intelligence/1004880/openai-chatgpt-text-watermarks-eu-ai-act"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 18
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Beam: Reflection's 501B open-weight model",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "I Let an AI Agent Move My Production SaaS to a New Server. Here Is What It Actually Did",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 49,
-    "input_tokens": 203628,
-    "output_tokens": 37536,
-    "cache_read_tokens": 98838,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/openai-chatgpt-text-watermarking-eu.md",
-  "slug": "openai-chatgpt-text-watermarking-eu",
-  "title": "OpenAI is watermarking ChatGPT text, but only in the EU",
-  "word_count": 744,
-  "source_urls": [
-    "https://techcrunch.com/2026/10/05/openai-will-start-watermarking-chatgpts-text-in-the-eu",
-    "https://theverge.com/ai-artificial-intelligence/1004880/openai-chatgpt-text-watermarks-eu-ai-act"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 18
+  "finished_at": "2026-10-06T20:27:54.331758+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
