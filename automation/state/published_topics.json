@@ -195,5 +195,16 @@
     ],
     "content_hash": "762955c6f993bdb387189afb0e021171",
     "published_at": "2026-10-04T12:54:18.979957Z"
+  },
+  {
+    "slug": "openai-chatgpt-text-watermarking-eu",
+    "canonical_topic": "chatgpt only openai text watermarking",
+    "title": "OpenAI is watermarking ChatGPT text, but only in the EU",
+    "source_urls": [
+      "https://techcrunch.com/2026/10/05/openai-will-start-watermarking-chatgpts-text-in-the-eu",
+      "https://theverge.com/ai-artificial-intelligence/1004880/openai-chatgpt-text-watermarks-eu-ai-act"
+    ],
+    "content_hash": "43d185b246e9f7d975ccabf96eaf607a",
+    "published_at": "2026-10-06T13:37:25.830057Z"
   }
 ]

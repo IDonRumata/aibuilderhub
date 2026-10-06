@@ -307,5 +307,27 @@
     ],
     "reason": "post broke a hard requirement after humanising: This link does not resolve. Replace it with a working source URL.",
     "failed_at": "2026-10-04T12:52:23.423771+00:00"
+  },
+  {
+    "key": "501b beam model open reflection's weight",
+    "title": "Beam: Reflection's 501B open-weight model",
+    "source_urls": [
+      "https://reflection.ai/blog/introducing-beam",
+      "https://the-decoder.com/reflections-beam-becomes-the-most-capable-open-weight-model-built-outside-china",
+      "https://latent.space/p/ainews-reflection-beam-501b-a23b",
+      "https://marktechpost.com/2026/10/05/reflection-ai-introduces-beam-a-501b-open-weight-moe-model-with-23b-active-parameters-for-coding-and-agentic-workloads",
+      "https://techcrunch.com/2026/10/05/reflection-debuts-beam-a-open-weight-ai-model-to-rival-chinese-models-at-lower-compute-cost"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-06T13:32:53.258209+00:00"
+  },
+  {
+    "key": "actually agent did here let move production saas server",
+    "title": "I Let an AI Agent Move My Production SaaS to a New Server. Here Is What It Actually Did",
+    "source_urls": [
+      "https://dev.to/convertica/i-let-an-ai-agent-move-my-production-saas-to-a-new-server-here-is-what-it-actually-did-p6"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-06T13:35:03.557598+00:00"
   }
 ]
