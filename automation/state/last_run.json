@@ -1,49 +1,7 @@
 {
-  "finished_at": "2026-10-09T13:40:57.497810+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/claude-haiku-5-5-price-cut.md",
-      "slug": "claude-haiku-5-5-price-cut",
-      "title": "Claude Haiku 5.5: a big price cut, with an asterisk",
-      "word_count": 769,
-      "source_urls": [
-        "https://the-decoder.com/claude-haiku-5-5-arrives-with-massive-price-cuts-proving-the-ai-pricing-arms-race-is-far-from-over",
-        "https://latent.space/p/ainews-claude-haiku-55-better-than",
-        "https://zapier.com/blog/claude-models",
-        "https://simonwillison.net/2026/Oct/7/claude-haiku-5-5"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 17
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Mistral Large 4",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 33,
-    "input_tokens": 147045,
-    "output_tokens": 25003,
-    "cache_read_tokens": 64864,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/claude-haiku-5-5-price-cut.md",
-  "slug": "claude-haiku-5-5-price-cut",
-  "title": "Claude Haiku 5.5: a big price cut, with an asterisk",
-  "word_count": 769,
-  "source_urls": [
-    "https://the-decoder.com/claude-haiku-5-5-arrives-with-massive-price-cuts-proving-the-ai-pricing-arms-race-is-far-from-over",
-    "https://latent.space/p/ainews-claude-haiku-55-better-than",
-    "https://zapier.com/blog/claude-models",
-    "https://simonwillison.net/2026/Oct/7/claude-haiku-5-5"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 17
+  "finished_at": "2026-10-09T20:13:34.947703+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
