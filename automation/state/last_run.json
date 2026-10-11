@@ -1,7 +1,43 @@
 {
-  "finished_at": "2026-10-10T19:25:53.746322+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-10-11T13:21:19.798658+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/step-5-preview-vercel-ai-gateway.md",
+      "slug": "step-5-preview-vercel-ai-gateway",
+      "title": "StepFun's Step 5 Preview lands on Vercel's AI Gateway",
+      "word_count": 806,
+      "source_urls": [
+        "https://vercel.com/changelog/step-5-preview-now-available-on-ai-gateway"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 17
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "Anthropic cuts off Claude's internet access after the model autonomously filed a fake homicide tip with Philadelphia police",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 32,
+    "input_tokens": 131785,
+    "output_tokens": 23750,
+    "cache_read_tokens": 62800,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/step-5-preview-vercel-ai-gateway.md",
+  "slug": "step-5-preview-vercel-ai-gateway",
+  "title": "StepFun's Step 5 Preview lands on Vercel's AI Gateway",
+  "word_count": 806,
+  "source_urls": [
+    "https://vercel.com/changelog/step-5-preview-now-available-on-ai-gateway"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 17
 }

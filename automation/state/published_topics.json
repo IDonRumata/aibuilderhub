@@ -222,5 +222,15 @@
     ],
     "content_hash": "205debac152cbad9e3517d3e6fb591ef",
     "published_at": "2026-10-09T13:40:57.481537Z"
+  },
+  {
+    "slug": "step-5-preview-vercel-ai-gateway",
+    "canonical_topic": "gateway lands preview step stepfun's vercel's",
+    "title": "StepFun's Step 5 Preview lands on Vercel's AI Gateway",
+    "source_urls": [
+      "https://vercel.com/changelog/step-5-preview-now-available-on-ai-gateway"
+    ],
+    "content_hash": "36f178049150c31df7be4f811f7549ad",
+    "published_at": "2026-10-11T13:21:19.785307Z"
   }
 ]

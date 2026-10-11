@@ -341,5 +341,16 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-10-09T13:38:29.932068+00:00"
+  },
+  {
+    "key": "access after anthropic autonomously claude's cuts fake filed homicide internet model off philadelphia police tip",
+    "title": "Anthropic cuts off Claude's internet access after the model autonomously filed a fake homicide tip with Philadelphia police",
+    "source_urls": [
+      "https://the-decoder.com/anthropic-cuts-off-claudes-internet-access-after-the-model-autonomously-filed-a-fake-homicide-tip-with-philadelphia-police",
+      "https://theverge.com/ai-artificial-intelligence/1009090/anthropic-fake-homicide-information-philadelphia-pd-tip",
+      "https://techcrunch.com/2026/10/09/an-anthropic-ai-model-sent-a-false-homicide-tip-to-philadelphia-police"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-11T13:19:09.014245+00:00"
   }
 ]
