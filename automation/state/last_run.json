@@ -1,7 +1,44 @@
 {
-  "finished_at": "2026-10-12T22:32:40.465930+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-10-13T14:30:59.880085+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/meta-muse-wonder-frontier-model.md",
+      "slug": "meta-muse-wonder-frontier-model",
+      "title": "Meta's Muse Wonder breaks into the frontier tier, at a cost",
+      "word_count": 764,
+      "source_urls": [
+        "https://research.meta.ai/blog/muse-wonder",
+        "https://latent.space/p/ainews-meta-muse-wonder-and-wonder",
+        "https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier",
+        "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 18
+    }
+  ],
+  "failed_attempts": [],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 18,
+    "input_tokens": 71525,
+    "output_tokens": 15024,
+    "cache_read_tokens": 31782,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/meta-muse-wonder-frontier-model.md",
+  "slug": "meta-muse-wonder-frontier-model",
+  "title": "Meta's Muse Wonder breaks into the frontier tier, at a cost",
+  "word_count": 764,
+  "source_urls": [
+    "https://research.meta.ai/blog/muse-wonder",
+    "https://latent.space/p/ainews-meta-muse-wonder-and-wonder",
+    "https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier",
+    "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 18
 }

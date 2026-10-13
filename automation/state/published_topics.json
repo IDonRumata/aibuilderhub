@@ -232,5 +232,19 @@
     ],
     "content_hash": "36f178049150c31df7be4f811f7549ad",
     "published_at": "2026-10-11T13:21:19.785307Z"
+  },
+  {
+    "slug": "meta-muse-wonder-frontier-model",
+    "canonical_topic": "breaks cost frontier into meta's muse tier wonder",
+    "title": "Meta's Muse Wonder breaks into the frontier tier, at a cost",
+    "source_urls": [
+      "https://research.meta.ai/blog/muse-wonder",
+      "https://latent.space/p/ainews-meta-muse-wonder-and-wonder",
+      "https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier",
+      "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder",
+      "https://vercel.com/changelog/muse-wonder-now-available-on-ai-gateway"
+    ],
+    "content_hash": "a20e9b4cf5ce13e1a821ff32e226d909",
+    "published_at": "2026-10-13T14:30:59.866416Z"
   }
 ]
