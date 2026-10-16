@@ -352,5 +352,55 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-10-11T13:19:09.014245+00:00"
+  },
+  {
+    "key": "muse open spark",
+    "title": "Muse Spark Open",
+    "source_urls": [
+      "https://research.meta.ai/blog/muse-spark-open",
+      "https://machinelearning.apple.com/research/mlx-distributed-inference",
+      "https://marktechpost.com/2026/10/15/meta-muse-spark-open-816b-open-weight-model",
+      "https://the-decoder.com/muse-spark-open-is-metas-answer-to-qwen-glm-and-kimi-in-the-open-weight-race",
+      "https://vercel.com/changelog/muse-spark-open-now-available-on-ai-gateway",
+      "https://huggingface.co/blog/meta-muse-spark-open"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-16T18:56:46.372587+00:00"
+  },
+  {
+    "key": "adversarial agent forced into lies mine tier tribunal",
+    "title": "Why Your AI Agent Lies to You (And How I Forced Mine into a 3-Tier Adversarial Tribunal)",
+    "source_urls": [
+      "https://dev.to/reigen/why-your-ai-agent-lies-to-you-and-how-i-forced-mine-into-a-3-tier-adversarial-tribunal-5aba"
+    ],
+    "reason": "final dedup check: title trigram overlap 0.41 > 0.4 (vs claude-code-goal-judge-false-positives)",
+    "failed_at": "2026-10-16T18:58:43.049350+00:00"
+  },
+  {
+    "key": "ai's available beam free gateway reflection",
+    "title": "Reflection AI's Beam now available on AI Gateway for free",
+    "source_urls": [
+      "https://vercel.com/changelog/reflection-ai-beam-now-available-on-ai-gateway-for-free"
+    ],
+    "reason": "final dedup check: title trigram overlap 0.49 > 0.4 (vs step-5-preview-vercel-ai-gateway)",
+    "failed_at": "2026-10-16T19:00:25.899259+00:00"
+  },
+  {
+    "key": "available cat free gateway jam stealth",
+    "title": "Cat Jam is now available in stealth for free on AI Gateway",
+    "source_urls": [
+      "https://vercel.com/changelog/cat-jam-is-now-available-in-stealth-for-free-on-ai-gateway"
+    ],
+    "reason": "banned patterns survived the rewrite: dated-language",
+    "failed_at": "2026-10-16T19:02:51.185903+00:00"
+  },
+  {
+    "key": "2026 recap ship vercel",
+    "title": "Vercel Ship 2026 recap",
+    "source_urls": [
+      "https://vercel.com/blog/vercel-ship-2026-recap"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-16T19:05:11.080086+00:00"
   }
 ]

@@ -1,7 +1,35 @@
 {
-  "finished_at": "2026-10-16T11:45:01.324121+00:00",
+  "finished_at": "2026-10-16T19:05:11.093008+00:00",
   "published": false,
   "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "reason": "all 5 topic(s) failed review",
+  "failed_attempts": [
+    {
+      "topic": "Muse Spark Open",
+      "reason": "critics returned REJECT after 3 rounds"
+    },
+    {
+      "topic": "Why Your AI Agent Lies to You (And How I Forced Mine into a 3-Tier Adversarial Tribunal)",
+      "reason": "final dedup check: title trigram overlap 0.41 > 0.4 (vs claude-code-goal-judge-false-positives)"
+    },
+    {
+      "topic": "Reflection AI's Beam now available on AI Gateway for free",
+      "reason": "final dedup check: title trigram overlap 0.49 > 0.4 (vs step-5-preview-vercel-ai-gateway)"
+    },
+    {
+      "topic": "Cat Jam is now available in stealth for free on AI Gateway",
+      "reason": "banned patterns survived the rewrite: dated-language"
+    },
+    {
+      "topic": "Vercel Ship 2026 recap",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "usage": {
+    "calls": 80,
+    "input_tokens": 320808,
+    "output_tokens": 57037,
+    "cache_read_tokens": 165601,
+    "cache_write_tokens": 6027
+  }
 }
