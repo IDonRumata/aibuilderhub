@@ -246,5 +246,15 @@
     ],
     "content_hash": "a20e9b4cf5ce13e1a821ff32e226d909",
     "published_at": "2026-10-13T14:30:59.866416Z"
+  },
+  {
+    "slug": "glimpse-vercel-ai-gateway-visual-reasoning",
+    "canonical_topic": "glimpse lands model reasoning vercel visual",
+    "title": "Glimpse lands on Vercel: a visual reasoning model",
+    "source_urls": [
+      "https://vercel.com/changelog/elorian-ai-glimpse-now-available-on-ai-gateway"
+    ],
+    "content_hash": "665557df77d85bd33cdc567cce4ceaf5",
+    "published_at": "2026-10-17T11:08:00.287045Z"
   }
 ]

@@ -1,35 +1,43 @@
 {
-  "finished_at": "2026-10-16T19:05:11.093008+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "all 5 topic(s) failed review",
+  "finished_at": "2026-10-17T11:08:00.304455+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/glimpse-vercel-ai-gateway-visual-reasoning.md",
+      "slug": "glimpse-vercel-ai-gateway-visual-reasoning",
+      "title": "Glimpse lands on Vercel: a visual reasoning model",
+      "word_count": 717,
+      "source_urls": [
+        "https://vercel.com/changelog/elorian-ai-glimpse-now-available-on-ai-gateway"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 19
+    }
+  ],
   "failed_attempts": [
     {
-      "topic": "Muse Spark Open",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "Why Your AI Agent Lies to You (And How I Forced Mine into a 3-Tier Adversarial Tribunal)",
-      "reason": "final dedup check: title trigram overlap 0.41 > 0.4 (vs claude-code-goal-judge-false-positives)"
-    },
-    {
-      "topic": "Reflection AI's Beam now available on AI Gateway for free",
-      "reason": "final dedup check: title trigram overlap 0.49 > 0.4 (vs step-5-preview-vercel-ai-gateway)"
-    },
-    {
-      "topic": "Cat Jam is now available in stealth for free on AI Gateway",
-      "reason": "banned patterns survived the rewrite: dated-language"
-    },
-    {
-      "topic": "Vercel Ship 2026 recap",
+      "topic": "DeepSeek-v4.1-Flash-1017",
       "reason": "critics returned REJECT after 3 rounds"
     }
   ],
+  "published_last_week": 3,
+  "weekly_target": 3,
   "usage": {
-    "calls": 80,
-    "input_tokens": 320808,
-    "output_tokens": 57037,
-    "cache_read_tokens": 165601,
+    "calls": 35,
+    "input_tokens": 143186,
+    "output_tokens": 28185,
+    "cache_read_tokens": 68406,
     "cache_write_tokens": 6027
-  }
+  },
+  "path": "src/content/blog/glimpse-vercel-ai-gateway-visual-reasoning.md",
+  "slug": "glimpse-vercel-ai-gateway-visual-reasoning",
+  "title": "Glimpse lands on Vercel: a visual reasoning model",
+  "word_count": 717,
+  "source_urls": [
+    "https://vercel.com/changelog/elorian-ai-glimpse-now-available-on-ai-gateway"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 19
 }

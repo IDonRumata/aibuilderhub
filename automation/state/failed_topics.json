@@ -402,5 +402,18 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-10-16T19:05:11.080086+00:00"
+  },
+  {
+    "key": "1017 deepseek flash",
+    "title": "DeepSeek-v4.1-Flash-1017",
+    "source_urls": [
+      "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "https://openrouter.ai/deepseek/deepseek-v4.1-flash-1017",
+      "https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs",
+      "https://marktechpost.com/2026/10/17/deepseek-just-released-v4-1-flash-1017-scores-77-0-on-deepswe-opens-search-api",
+      "https://vercel.com/changelog/deepseek-v4-1-flash-1017-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-10-17T11:05:33.589291+00:00"
   }
 ]
