@@ -1,43 +1,7 @@
 {
-  "finished_at": "2026-10-17T11:08:00.304455+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/glimpse-vercel-ai-gateway-visual-reasoning.md",
-      "slug": "glimpse-vercel-ai-gateway-visual-reasoning",
-      "title": "Glimpse lands on Vercel: a visual reasoning model",
-      "word_count": 717,
-      "source_urls": [
-        "https://vercel.com/changelog/elorian-ai-glimpse-now-available-on-ai-gateway"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 19
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "DeepSeek-v4.1-Flash-1017",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 35,
-    "input_tokens": 143186,
-    "output_tokens": 28185,
-    "cache_read_tokens": 68406,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/glimpse-vercel-ai-gateway-visual-reasoning.md",
-  "slug": "glimpse-vercel-ai-gateway-visual-reasoning",
-  "title": "Glimpse lands on Vercel: a visual reasoning model",
-  "word_count": 717,
-  "source_urls": [
-    "https://vercel.com/changelog/elorian-ai-glimpse-now-available-on-ai-gateway"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 19
+  "finished_at": "2026-10-17T17:53:21.547801+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
