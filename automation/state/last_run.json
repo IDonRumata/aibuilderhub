@@ -1,43 +1,7 @@
 {
-  "finished_at": "2026-10-19T13:52:36.724567+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/vercel-ai-gateway-session-affinity-logs.md",
-      "slug": "vercel-ai-gateway-session-affinity-logs",
-      "title": "Vercel AI Gateway shows where your agent's money goes",
-      "word_count": 883,
-      "source_urls": [
-        "https://vercel.com/changelog/ai-gateway-logs-now-show-session-affinity"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 18
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "MiniMax M3.1 Flash now available on AI Gateway for free",
-      "reason": "banned patterns survived the rewrite: dated-language, uniform-paragraphs"
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 36,
-    "input_tokens": 132843,
-    "output_tokens": 28205,
-    "cache_read_tokens": 69591,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/vercel-ai-gateway-session-affinity-logs.md",
-  "slug": "vercel-ai-gateway-session-affinity-logs",
-  "title": "Vercel AI Gateway shows where your agent's money goes",
-  "word_count": 883,
-  "source_urls": [
-    "https://vercel.com/changelog/ai-gateway-logs-now-show-session-affinity"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 18
+  "finished_at": "2026-10-19T20:40:17.419154+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
