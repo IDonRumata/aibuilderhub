@@ -415,5 +415,14 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-10-17T11:05:33.589291+00:00"
+  },
+  {
+    "key": "available flash free gateway minimax",
+    "title": "MiniMax M3.1 Flash now available on AI Gateway for free",
+    "source_urls": [
+      "https://vercel.com/changelog/minimax-m3-1-flash-now-available-on-ai-gateway-for-free"
+    ],
+    "reason": "banned patterns survived the rewrite: dated-language, uniform-paragraphs",
+    "failed_at": "2026-10-19T13:50:06.144902+00:00"
   }
 ]

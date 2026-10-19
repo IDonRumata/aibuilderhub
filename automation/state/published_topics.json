@@ -256,5 +256,15 @@
     ],
     "content_hash": "665557df77d85bd33cdc567cce4ceaf5",
     "published_at": "2026-10-17T11:08:00.287045Z"
+  },
+  {
+    "slug": "vercel-ai-gateway-session-affinity-logs",
+    "canonical_topic": "agent's gateway goes money shows vercel where",
+    "title": "Vercel AI Gateway shows where your agent's money goes",
+    "source_urls": [
+      "https://vercel.com/changelog/ai-gateway-logs-now-show-session-affinity"
+    ],
+    "content_hash": "5183c5b6daa12fbc3ef04474274b1fee",
+    "published_at": "2026-10-19T13:52:36.717211Z"
   }
 ]
