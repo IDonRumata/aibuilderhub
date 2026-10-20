@@ -1,7 +1,7 @@
 {
-  "finished_at": "2026-10-20T11:56:37.546385+00:00",
+  "finished_at": "2026-10-20T19:28:46.501914+00:00",
   "published": false,
   "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "reason": "on schedule: last post was 30h ago, below the 36h spacing",
+  "published_last_week": 2
 }
