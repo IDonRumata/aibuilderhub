@@ -266,5 +266,15 @@
     ],
     "content_hash": "5183c5b6daa12fbc3ef04474274b1fee",
     "published_at": "2026-10-19T13:52:36.717211Z"
+  },
+  {
+    "slug": "vibe-coded-rts-audio-multiplayer",
+    "canonical_topic": "ceiling coded game real rts shows simon vibe willison's",
+    "title": "Simon Willison's vibe coded RTS game shows the real ceiling",
+    "source_urls": [
+      "https://simonwillison.net/2026/Oct/20/battledrones"
+    ],
+    "content_hash": "f0750db46beff3f30cb59d314dbb1848",
+    "published_at": "2026-10-21T12:17:20.433759Z"
   }
 ]

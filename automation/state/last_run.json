@@ -1,7 +1,47 @@
 {
-  "finished_at": "2026-10-20T19:28:46.501914+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: last post was 30h ago, below the 36h spacing",
-  "published_last_week": 2
+  "finished_at": "2026-10-21T12:17:20.440327+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/vibe-coded-rts-audio-multiplayer.md",
+      "slug": "vibe-coded-rts-audio-multiplayer",
+      "title": "Simon Willison's vibe coded RTS game shows the real ceiling",
+      "word_count": 841,
+      "source_urls": [
+        "https://simonwillison.net/2026/Oct/20/battledrones"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 18
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "Automating Network Exposure: Managing Secure Tunnels via AI Agents with zrok",
+      "reason": "critics returned REJECT after 3 rounds"
+    },
+    {
+      "topic": "Mercury 3 now available on AI Gateway",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 50,
+    "input_tokens": 194605,
+    "output_tokens": 34999,
+    "cache_read_tokens": 100902,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/vibe-coded-rts-audio-multiplayer.md",
+  "slug": "vibe-coded-rts-audio-multiplayer",
+  "title": "Simon Willison's vibe coded RTS game shows the real ceiling",
+  "word_count": 841,
+  "source_urls": [
+    "https://simonwillison.net/2026/Oct/20/battledrones"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 18
 }
