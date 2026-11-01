@@ -442,5 +442,25 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-10-21T12:14:54.098511+00:00"
+  },
+  {
+    "key": "backdoor claude code cursor extension marketplace",
+    "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+    "source_urls": [
+      "https://phorion.io/blog/offical-claude-code-vsx-compromise",
+      "https://dev.to/sarantoon/claude-code-21314-khuueaair-tangkhaakanaimaih-ai-ekhiiynaiflnkofledrngaan-aidphlaekhaihn-566a",
+      "https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-01T13:43:50.205701+00:00"
+  },
+  {
+    "key": "1019 available flash free gateway ling",
+    "title": "Ling 3.1 Flash 1019 now available on AI Gateway for free",
+    "source_urls": [
+      "https://vercel.com/changelog/ling-3-1-flash-1019-now-available-on-ai-gateway-for-free"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-01T13:48:08.380312+00:00"
   }
 ]

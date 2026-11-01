@@ -276,5 +276,26 @@
     ],
     "content_hash": "f0750db46beff3f30cb59d314dbb1848",
     "published_at": "2026-10-21T12:17:20.433759Z"
+  },
+  {
+    "slug": "chatgpt-artifacts-account-takeover-exploit",
+    "canonical_topic": "accounts artifacts chatgpt hijacked researchers via",
+    "title": "How researchers hijacked ChatGPT accounts via artifacts",
+    "source_urls": [
+      "https://parameter.ai/labs/we-found-a-gap-at-openai",
+      "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts"
+    ],
+    "content_hash": "79136280e20d9fe441033c95523decdf",
+    "published_at": "2026-11-01T13:46:24.156956Z"
+  },
+  {
+    "slug": "ai-agent-code-execution-sandboxes",
+    "canonical_topic": "agent needs not sandbox server",
+    "title": "Why your AI agent needs a sandbox, not your server",
+    "source_urls": [
+      "https://dev.to/tensorlake/7-best-code-execution-apis-for-ai-agents-in-2026-33bd"
+    ],
+    "content_hash": "9db49a5fab2804d9f35aa8cfc042458b",
+    "published_at": "2026-11-01T13:50:35.247942Z"
   }
 ]

@@ -16,5 +16,11 @@
     "runs": 28,
     "input_tokens": 1911754,
     "output_tokens": 358948
+  },
+  "2026-11": {
+    "estimated_usd": 1.640108,
+    "runs": 1,
+    "input_tokens": 264855,
+    "output_tokens": 52006
   }
 }
