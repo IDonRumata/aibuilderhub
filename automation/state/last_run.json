@@ -1,60 +1,7 @@
 {
-  "finished_at": "2026-11-01T13:50:35.253273+00:00",
-  "published": true,
-  "count": 2,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/chatgpt-artifacts-account-takeover-exploit.md",
-      "slug": "chatgpt-artifacts-account-takeover-exploit",
-      "title": "How researchers hijacked ChatGPT accounts via artifacts",
-      "word_count": 675,
-      "source_urls": [
-        "https://parameter.ai/labs/we-found-a-gap-at-openai",
-        "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 19
-    },
-    {
-      "path": "src/content/blog/ai-agent-code-execution-sandboxes.md",
-      "slug": "ai-agent-code-execution-sandboxes",
-      "title": "Why your AI agent needs a sandbox, not your server",
-      "word_count": 633,
-      "source_urls": [
-        "https://dev.to/tensorlake/7-best-code-execution-apis-for-ai-agents-in-2026-33bd"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 19
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "Ling 3.1 Flash 1019 now available on AI Gateway for free",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 2,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 70,
-    "input_tokens": 264855,
-    "output_tokens": 52006,
-    "cache_read_tokens": 142839,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/chatgpt-artifacts-account-takeover-exploit.md",
-  "slug": "chatgpt-artifacts-account-takeover-exploit",
-  "title": "How researchers hijacked ChatGPT accounts via artifacts",
-  "word_count": 675,
-  "source_urls": [
-    "https://parameter.ai/labs/we-found-a-gap-at-openai",
-    "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 19
+  "finished_at": "2026-11-01T19:50:43.811679+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: last post was 6h ago, below the 36h spacing",
+  "published_last_week": 2
 }
