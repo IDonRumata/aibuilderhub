@@ -1,38 +1,7 @@
 {
-  "finished_at": "2026-11-03T14:34:39.133947+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/momentic-qa-agents-launch.md",
-      "slug": "momentic-qa-agents-launch",
-      "title": "Momentic wants AI agents to QA-test your app for you",
-      "word_count": 836,
-      "source_urls": [
-        "https://momentic.ai/"
-      ],
-      "critic_rounds": 2,
-      "llm_calls": 14
-    }
-  ],
-  "failed_attempts": [],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 14,
-    "input_tokens": 50529,
-    "output_tokens": 12453,
-    "cache_read_tokens": 23014,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/momentic-qa-agents-launch.md",
-  "slug": "momentic-qa-agents-launch",
-  "title": "Momentic wants AI agents to QA-test your app for you",
-  "word_count": 836,
-  "source_urls": [
-    "https://momentic.ai/"
-  ],
-  "critic_rounds": 2,
-  "llm_calls": 14
+  "finished_at": "2026-11-03T21:11:31.024561+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
