@@ -297,5 +297,15 @@
     ],
     "content_hash": "9db49a5fab2804d9f35aa8cfc042458b",
     "published_at": "2026-11-01T13:50:35.247942Z"
+  },
+  {
+    "slug": "momentic-qa-agents-launch",
+    "canonical_topic": "agents app momentic test wants",
+    "title": "Momentic wants AI agents to QA-test your app for you",
+    "source_urls": [
+      "https://momentic.ai/"
+    ],
+    "content_hash": "7f494ee226ce219611bd13a6871a4e7d",
+    "published_at": "2026-11-03T14:34:39.126082Z"
   }
 ]
