@@ -307,5 +307,25 @@
     ],
     "content_hash": "7f494ee226ce219611bd13a6871a4e7d",
     "published_at": "2026-11-03T14:34:39.126082Z"
+  },
+  {
+    "slug": "deepseek-v4-1-flash-ultrafast-vercel",
+    "canonical_topic": "000 deepseek flash hits sec tok ultrafast vercel",
+    "title": "DeepSeek V4.1 Flash Ultrafast hits 1,000 tok/sec on Vercel",
+    "source_urls": [
+      "https://vercel.com/changelog/deepseek-v4-1-flash-1017-ultrafast-now-available-on-ai-gateway"
+    ],
+    "content_hash": "40ca614f808b4e4ff11f657d13975f2b",
+    "published_at": "2026-11-08T19:54:32.266245Z"
+  },
+  {
+    "slug": "mythos-fable-5-pulled-national-security",
+    "canonical_topic": "account fable mythos one pulled",
+    "title": "Mythos 5 and Fable 5 pulled: one account of why",
+    "source_urls": [
+      "https://dev.to/joor0x/the-mythosfable-blockade-how-us-ai-exceptionalism-builds-its-own-rivals-1a9f"
+    ],
+    "content_hash": "ec7b197cf3f9b64b474b301d17254000",
+    "published_at": "2026-11-08T20:01:25.698276Z"
   }
 ]

@@ -462,5 +462,23 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-11-01T13:48:08.380312+00:00"
+  },
+  {
+    "key": "agents cleanup coding four human nearly need out real still tasks test three world",
+    "title": "AI coding agents still need human cleanup on nearly three out of four tasks in a real-world test",
+    "source_urls": [
+      "https://the-decoder.com/ai-coding-agents-still-need-human-cleanup-on-nearly-three-out-of-four-tasks-in-a-real-world-test"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-08T19:56:56.096521+00:00"
+  },
+  {
+    "key": "agent build coding contract doctor first give not prose scripts tool",
+    "title": "Give Your Coding Agent Scripts, Not Prose: Build a Tool-Contract Doctor First",
+    "source_urls": [
+      "https://dev.to/aiio_8140/give-your-coding-agent-scripts-not-prose-build-a-tool-contract-doctor-first-213p"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-08T19:58:39.908461+00:00"
   }
 ]

@@ -1,7 +1,58 @@
 {
-  "finished_at": "2026-11-08T13:44:23.726973+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-11-08T20:01:25.706411+00:00",
+  "published": true,
+  "count": 2,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/deepseek-v4-1-flash-ultrafast-vercel.md",
+      "slug": "deepseek-v4-1-flash-ultrafast-vercel",
+      "title": "DeepSeek V4.1 Flash Ultrafast hits 1,000 tok/sec on Vercel",
+      "word_count": 655,
+      "source_urls": [
+        "https://vercel.com/changelog/deepseek-v4-1-flash-1017-ultrafast-now-available-on-ai-gateway"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 17
+    },
+    {
+      "path": "src/content/blog/mythos-fable-5-pulled-national-security.md",
+      "slug": "mythos-fable-5-pulled-national-security",
+      "title": "Mythos 5 and Fable 5 pulled: one account of why",
+      "word_count": 715,
+      "source_urls": [
+        "https://dev.to/joor0x/the-mythosfable-blockade-how-us-ai-exceptionalism-builds-its-own-rivals-1a9f"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 19
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "AI coding agents still need human cleanup on nearly three out of four tasks in a real-world test",
+      "reason": "critics returned REJECT after 3 rounds"
+    },
+    {
+      "topic": "Give Your Coding Agent Scripts, Not Prose: Build a Tool-Contract Doctor First",
+      "reason": "critics returned REJECT after 3 rounds"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 67,
+    "input_tokens": 262711,
+    "output_tokens": 51938,
+    "cache_read_tokens": 135462,
+    "cache_write_tokens": 7798
+  },
+  "path": "src/content/blog/deepseek-v4-1-flash-ultrafast-vercel.md",
+  "slug": "deepseek-v4-1-flash-ultrafast-vercel",
+  "title": "DeepSeek V4.1 Flash Ultrafast hits 1,000 tok/sec on Vercel",
+  "word_count": 655,
+  "source_urls": [
+    "https://vercel.com/changelog/deepseek-v4-1-flash-1017-ultrafast-now-available-on-ai-gateway"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 17
 }
