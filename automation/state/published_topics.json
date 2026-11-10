@@ -327,5 +327,15 @@
     ],
     "content_hash": "ec7b197cf3f9b64b474b301d17254000",
     "published_at": "2026-11-08T20:01:25.698276Z"
+  },
+  {
+    "slug": "ai-agents-security-bugs-nextjs-supabase",
+    "canonical_topic": "agent bugs coding purpose security writes",
+    "title": "The security bugs your AI coding agent writes on purpose",
+    "source_urls": [
+      "https://dev.to/avivgerzhue/four-security-bugs-ai-coding-agents-keep-writing-in-nextjs-supabase-apps-and-4-false-positives-28pk"
+    ],
+    "content_hash": "56fd4e6312e907e177a48ff5d821fa39",
+    "published_at": "2026-11-10T15:10:11.903225Z"
   }
 ]
