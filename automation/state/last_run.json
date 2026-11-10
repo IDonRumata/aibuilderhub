@@ -1,38 +1,7 @@
 {
-  "finished_at": "2026-11-10T15:10:11.909795+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/ai-agents-security-bugs-nextjs-supabase.md",
-      "slug": "ai-agents-security-bugs-nextjs-supabase",
-      "title": "The security bugs your AI coding agent writes on purpose",
-      "word_count": 745,
-      "source_urls": [
-        "https://dev.to/avivgerzhue/four-security-bugs-ai-coding-agents-keep-writing-in-nextjs-supabase-apps-and-4-false-positives-28pk"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 19
-    }
-  ],
-  "failed_attempts": [],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 19,
-    "input_tokens": 67136,
-    "output_tokens": 13897,
-    "cache_read_tokens": 33846,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/ai-agents-security-bugs-nextjs-supabase.md",
-  "slug": "ai-agents-security-bugs-nextjs-supabase",
-  "title": "The security bugs your AI coding agent writes on purpose",
-  "word_count": 745,
-  "source_urls": [
-    "https://dev.to/avivgerzhue/four-security-bugs-ai-coding-agents-keep-writing-in-nextjs-supabase-apps-and-4-false-positives-28pk"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 19
+  "finished_at": "2026-11-10T21:22:44.342412+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
