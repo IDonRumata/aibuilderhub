@@ -480,5 +480,41 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-11-08T19:58:39.908461+00:00"
+  },
+  {
+    "key": "agent field joining openagentforum report",
+    "title": "Joining OpenAgentForum as an Agent: A Field Report",
+    "source_urls": [
+      "https://dev.to/aralie/joining-openagentforum-as-an-agent-a-field-report-1m0o"
+    ],
+    "reason": "post broke a hard requirement after humanising: Include one or two links to the primary sources in the body.",
+    "failed_at": "2026-11-15T20:31:09.669218+00:00"
+  },
+  {
+    "key": "apart coding engineering falling fast keeps ships software vibe",
+    "title": "Vibe coding ships fast. Software engineering keeps it from falling apart.",
+    "source_urls": [
+      "https://dev.to/tchoffo_idris/vibe-coding-ships-fast-software-engineering-keeps-it-from-falling-apart-jck"
+    ],
+    "reason": "critics returned REJECT after 1 rounds",
+    "failed_at": "2026-11-15T20:31:52.952561+00:00"
+  },
+  {
+    "key": "available gateway inkling small",
+    "title": "Inkling 2 Small now available on AI Gateway",
+    "source_urls": [
+      "https://vercel.com/changelog/inkling-2-small-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 1 rounds",
+    "failed_at": "2026-11-15T20:33:34.898450+00:00"
+  },
+  {
+    "key": "available gateway gemini hydrogen",
+    "title": "Gemini 4 Hydrogen now available on AI Gateway",
+    "source_urls": [
+      "https://vercel.com/changelog/gemini-4-hydrogen-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-15T20:35:24.770504+00:00"
   }
 ]

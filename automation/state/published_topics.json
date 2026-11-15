@@ -337,5 +337,15 @@
     ],
     "content_hash": "56fd4e6312e907e177a48ff5d821fa39",
     "published_at": "2026-11-10T15:10:11.903225Z"
+  },
+  {
+    "slug": "vet-mcp-server-before-install",
+    "canonical_topic": "everything like mcp servers touch vet",
+    "title": "MCP servers can touch everything. Vet them like it",
+    "source_urls": [
+      "https://dev.to/stackregistry/how-to-vet-an-mcp-server-before-you-install-it-a-10-minute-checklist-29gn"
+    ],
+    "content_hash": "c7a87fdec86f27b802149a6b2e4aec37",
+    "published_at": "2026-11-15T20:32:55.027883Z"
   }
 ]
