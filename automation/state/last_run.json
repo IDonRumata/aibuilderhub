@@ -1,55 +1,7 @@
 {
-  "finished_at": "2026-11-15T20:35:24.778172+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/vet-mcp-server-before-install.md",
-      "slug": "vet-mcp-server-before-install",
-      "title": "MCP servers can touch everything. Vet them like it",
-      "word_count": 721,
-      "source_urls": [
-        "https://dev.to/stackregistry/how-to-vet-an-mcp-server-before-you-install-it-a-10-minute-checklist-29gn"
-      ],
-      "critic_rounds": 1,
-      "llm_calls": 8
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Joining OpenAgentForum as an Agent: A Field Report",
-      "reason": "post broke a hard requirement after humanising: Include one or two links to the primary sources in the body."
-    },
-    {
-      "topic": "Vibe coding ships fast. Software engineering keeps it from falling apart.",
-      "reason": "critics returned REJECT after 1 rounds"
-    },
-    {
-      "topic": "Inkling 2 Small now available on AI Gateway",
-      "reason": "critics returned REJECT after 1 rounds"
-    },
-    {
-      "topic": "Gemini 4 Hydrogen now available on AI Gateway",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 2,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 54,
-    "input_tokens": 187820,
-    "output_tokens": 34978,
-    "cache_read_tokens": 108279,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/vet-mcp-server-before-install.md",
-  "slug": "vet-mcp-server-before-install",
-  "title": "MCP servers can touch everything. Vet them like it",
-  "word_count": 721,
-  "source_urls": [
-    "https://dev.to/stackregistry/how-to-vet-an-mcp-server-before-you-install-it-a-10-minute-checklist-29gn"
-  ],
-  "critic_rounds": 1,
-  "llm_calls": 8
+  "finished_at": "2026-11-16T16:14:56.895076+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: last post was 20h ago, below the 36h spacing",
+  "published_last_week": 2
 }
