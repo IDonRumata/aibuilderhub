@@ -516,5 +516,14 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-11-15T20:35:24.770504+00:00"
+  },
+  {
+    "key": "available flash gateway hy4 off",
+    "title": "Hy4 Flash now available on AI Gateway for 50% off",
+    "source_urls": [
+      "https://vercel.com/changelog/hy4-flash-now-available-on-ai-gateway-for-50-off"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-17T16:23:50.539692+00:00"
   }
 ]

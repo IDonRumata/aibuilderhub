@@ -347,5 +347,15 @@
     ],
     "content_hash": "c7a87fdec86f27b802149a6b2e4aec37",
     "published_at": "2026-11-15T20:32:55.027883Z"
+  },
+  {
+    "slug": "vercel-ai-gateway-private-inference",
+    "canonical_topic": "call gateway models own private vercel's",
+    "title": "Vercel's AI Gateway can now call your own private models",
+    "source_urls": [
+      "https://vercel.com/changelog/ai-gateway-now-supports-private-inference"
+    ],
+    "content_hash": "2a9662916160f4219b3c30e216e99cbf",
+    "published_at": "2026-11-17T16:25:37.765992Z"
   }
 ]
