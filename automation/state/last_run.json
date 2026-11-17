@@ -1,43 +1,7 @@
 {
-  "finished_at": "2026-11-17T16:25:37.774664+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/vercel-ai-gateway-private-inference.md",
-      "slug": "vercel-ai-gateway-private-inference",
-      "title": "Vercel's AI Gateway can now call your own private models",
-      "word_count": 768,
-      "source_urls": [
-        "https://vercel.com/changelog/ai-gateway-now-supports-private-inference"
-      ],
-      "critic_rounds": 2,
-      "llm_calls": 13
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "Hy4 Flash now available on AI Gateway for 50% off",
-      "reason": "critics returned REJECT after 3 rounds"
-    }
-  ],
-  "published_last_week": 2,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 29,
-    "input_tokens": 112876,
-    "output_tokens": 23047,
-    "cache_read_tokens": 55510,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/vercel-ai-gateway-private-inference.md",
-  "slug": "vercel-ai-gateway-private-inference",
-  "title": "Vercel's AI Gateway can now call your own private models",
-  "word_count": 768,
-  "source_urls": [
-    "https://vercel.com/changelog/ai-gateway-now-supports-private-inference"
-  ],
-  "critic_rounds": 2,
-  "llm_calls": 13
+  "finished_at": "2026-11-17T23:03:24.865328+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: last post was 7h ago, below the 36h spacing",
+  "published_last_week": 2
 }
