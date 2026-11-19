@@ -1,35 +1,40 @@
 {
-  "finished_at": "2026-11-19T16:07:49.645217+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "all 5 topic(s) failed review",
-  "failed_attempts": [
+  "finished_at": "2026-11-19T22:45:58.358058+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
     {
-      "topic": "[AINews] GPT-6.2 Astra, the #2 Frontier Model is better and 20%-600% cheaper, but has mixed reviews; 6.2 Sol likely main workhorse",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "I tested the idea behind Claude Code's new Code Mode. The AI read 11x fewer tokens and stopped miscounting",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "Show HN: Mastra Factory, the open-source software factory we use to build Mastra",
-      "reason": "critics returned REJECT after 3 rounds"
-    },
-    {
-      "topic": "Introducing Vercel Board",
-      "reason": "banned patterns survived the rewrite: uniform-paragraphs"
-    },
-    {
-      "topic": "Qwen4-Max now available on AI Gateway",
-      "reason": "critics returned REJECT after 3 rounds"
+      "path": "src/content/blog/zapier-ai-agent-forms-drive-automation.md",
+      "slug": "zapier-ai-agent-forms-drive-automation",
+      "title": "Zapier now lets your AI agent automate Forms and Drive",
+      "word_count": 783,
+      "source_urls": [
+        "https://zapier.com/blog/automate-google-forms",
+        "https://zapier.com/blog/automate-google-drive"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 19
     }
   ],
+  "failed_attempts": [],
+  "published_last_week": 3,
+  "weekly_target": 3,
   "usage": {
-    "calls": 70,
-    "input_tokens": 283696,
-    "output_tokens": 52612,
-    "cache_read_tokens": 144230,
+    "calls": 19,
+    "input_tokens": 67232,
+    "output_tokens": 14348,
+    "cache_read_tokens": 33846,
     "cache_write_tokens": 6027
-  }
+  },
+  "path": "src/content/blog/zapier-ai-agent-forms-drive-automation.md",
+  "slug": "zapier-ai-agent-forms-drive-automation",
+  "title": "Zapier now lets your AI agent automate Forms and Drive",
+  "word_count": 783,
+  "source_urls": [
+    "https://zapier.com/blog/automate-google-forms",
+    "https://zapier.com/blog/automate-google-drive"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 19
 }
