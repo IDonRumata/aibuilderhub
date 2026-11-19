@@ -525,5 +525,57 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-11-17T16:23:50.539692+00:00"
+  },
+  {
+    "key": "600 ainews astra better cheaper frontier gpt has likely main mixed model reviews sol workhorse",
+    "title": "[AINews] GPT-6.2 Astra, the #2 Frontier Model is better and 20%-600% cheaper, but has mixed reviews; 6.2 Sol likely main workhorse",
+    "source_urls": [
+      "https://latent.space/p/ainews-gpt-6-2-astra-the-2-frontier-model-is-better-and-20-600-cheaper-but-has-mixed-reviews-6-2-sol",
+      "https://simonwillison.net/2026/Nov/17/gpt62-astra-and-sol",
+      "https://marktechpost.com/2026/11/17/openai-gpt-6-2-astra-sol-release",
+      "https://github.blog/changelog/2026-11-17-openais-gpt-6-2-astra-and-gpt-6-2-sol-now-available",
+      "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+      "https://vercel.com/changelog/gpt-6-2-astra-and-sol-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-19T16:00:19.527868+00:00"
+  },
+  {
+    "key": "11x behind claude code code's fewer idea miscounting mode read stopped tested tokens",
+    "title": "I tested the idea behind Claude Code's new Code Mode. The AI read 11x fewer tokens and stopped miscounting",
+    "source_urls": [
+      "https://dev.to/tabishhassan5121472/i-tested-the-idea-behind-claude-codes-new-code-mode-the-ai-read-11x-fewer-tokens-and-stopped-2f7c"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-19T16:02:36.598258+00:00"
+  },
+  {
+    "key": "build factory mastra open show software source use",
+    "title": "Show HN: Mastra Factory, the open-source software factory we use to build Mastra",
+    "source_urls": [
+      "https://news.ycombinator.com/item?id=50548660"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-19T16:04:51.227291+00:00"
+  },
+  {
+    "key": "board introducing vercel",
+    "title": "Introducing Vercel Board",
+    "source_urls": [
+      "https://vercel.com/blog/introducing-vercel-board",
+      "https://vercel.com/changelog/vercel-board-is-now-available",
+      "https://vercel.com/blog/vercel-x"
+    ],
+    "reason": "banned patterns survived the rewrite: uniform-paragraphs",
+    "failed_at": "2026-11-19T16:06:08.398579+00:00"
+  },
+  {
+    "key": "available gateway max qwen4",
+    "title": "Qwen4-Max now available on AI Gateway",
+    "source_urls": [
+      "https://vercel.com/changelog/qwen4-max-now-available-on-ai-gateway"
+    ],
+    "reason": "critics returned REJECT after 3 rounds",
+    "failed_at": "2026-11-19T16:07:49.636091+00:00"
   }
 ]
