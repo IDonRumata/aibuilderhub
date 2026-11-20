@@ -1,40 +1,7 @@
 {
-  "finished_at": "2026-11-19T22:45:58.358058+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/zapier-ai-agent-forms-drive-automation.md",
-      "slug": "zapier-ai-agent-forms-drive-automation",
-      "title": "Zapier now lets your AI agent automate Forms and Drive",
-      "word_count": 783,
-      "source_urls": [
-        "https://zapier.com/blog/automate-google-forms",
-        "https://zapier.com/blog/automate-google-drive"
-      ],
-      "critic_rounds": 3,
-      "llm_calls": 19
-    }
-  ],
-  "failed_attempts": [],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 19,
-    "input_tokens": 67232,
-    "output_tokens": 14348,
-    "cache_read_tokens": 33846,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/zapier-ai-agent-forms-drive-automation.md",
-  "slug": "zapier-ai-agent-forms-drive-automation",
-  "title": "Zapier now lets your AI agent automate Forms and Drive",
-  "word_count": 783,
-  "source_urls": [
-    "https://zapier.com/blog/automate-google-forms",
-    "https://zapier.com/blog/automate-google-drive"
-  ],
-  "critic_rounds": 3,
-  "llm_calls": 19
+  "finished_at": "2026-11-20T15:40:42.628695+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
