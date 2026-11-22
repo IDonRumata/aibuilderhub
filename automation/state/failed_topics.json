@@ -577,5 +577,23 @@
     ],
     "reason": "critics returned REJECT after 3 rounds",
     "failed_at": "2026-11-19T16:07:49.636091+00:00"
+  },
+  {
+    "key": "account agent aws coding did see",
+    "title": "How to see what your AI coding agent did in your AWS account",
+    "source_urls": [
+      "https://dev.to/ritompuzari/how-to-see-what-your-ai-coding-agent-did-in-your-aws-account-7j0"
+    ],
+    "reason": "critics returned REJECT after 1 rounds",
+    "failed_at": "2026-11-22T21:10:00.403646+00:00"
+  },
+  {
+    "key": "agents files mac side sit where workspace",
+    "title": "A Mac workspace where your files and your AI agents sit side by side",
+    "source_urls": [
+      "https://dev.to/joexk1/a-mac-workspace-where-your-files-and-your-ai-agents-sit-side-by-side-flf"
+    ],
+    "reason": "post broke a hard requirement after humanising: Include one or two links to the primary sources in the body.",
+    "failed_at": "2026-11-22T21:12:03.311725+00:00"
   }
 ]

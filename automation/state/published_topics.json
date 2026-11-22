@@ -368,5 +368,15 @@
     ],
     "content_hash": "9a3073edfc0f39ac91fac9232b3dc2ab",
     "published_at": "2026-11-19T22:45:58.349507Z"
+  },
+  {
+    "slug": "parlup-least-privilege-agent-keys",
+    "canonical_topic": "agent handling keys parlup raw stop wants",
+    "title": "Parlup wants your AI agent to stop handling raw keys",
+    "source_urls": [
+      "https://dev.to/parlup/least-privilege-agent-messaging-os-keyring-keys-ed25519-scope-read-tokens-5cg9"
+    ],
+    "content_hash": "55754fec4bd462cc2e35b629e2c655c5",
+    "published_at": "2026-11-22T21:13:23.909567Z"
   }
 ]
