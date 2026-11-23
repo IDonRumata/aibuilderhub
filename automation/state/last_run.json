@@ -1,47 +1,7 @@
 {
-  "finished_at": "2026-11-22T21:13:23.915010+00:00",
-  "published": true,
-  "count": 1,
-  "draft": false,
-  "posts": [
-    {
-      "path": "src/content/blog/parlup-least-privilege-agent-keys.md",
-      "slug": "parlup-least-privilege-agent-keys",
-      "title": "Parlup wants your AI agent to stop handling raw keys",
-      "word_count": 866,
-      "source_urls": [
-        "https://dev.to/parlup/least-privilege-agent-messaging-os-keyring-keys-ed25519-scope-read-tokens-5cg9"
-      ],
-      "critic_rounds": 1,
-      "llm_calls": 9
-    }
-  ],
-  "failed_attempts": [
-    {
-      "topic": "How to see what your AI coding agent did in your AWS account",
-      "reason": "critics returned REJECT after 1 rounds"
-    },
-    {
-      "topic": "A Mac workspace where your files and your AI agents sit side by side",
-      "reason": "post broke a hard requirement after humanising: Include one or two links to the primary sources in the body."
-    }
-  ],
-  "published_last_week": 3,
-  "weekly_target": 3,
-  "usage": {
-    "calls": 33,
-    "input_tokens": 112752,
-    "output_tokens": 24192,
-    "cache_read_tokens": 62887,
-    "cache_write_tokens": 6027
-  },
-  "path": "src/content/blog/parlup-least-privilege-agent-keys.md",
-  "slug": "parlup-least-privilege-agent-keys",
-  "title": "Parlup wants your AI agent to stop handling raw keys",
-  "word_count": 866,
-  "source_urls": [
-    "https://dev.to/parlup/least-privilege-agent-messaging-os-keyring-keys-ed25519-scope-read-tokens-5cg9"
-  ],
-  "critic_rounds": 1,
-  "llm_calls": 9
+  "finished_at": "2026-11-23T18:36:03.969036+00:00",
+  "published": false,
+  "count": 0,
+  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
+  "published_last_week": 3
 }
