@@ -1,7 +1,43 @@
 {
-  "finished_at": "2026-11-24T02:28:04.884459+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-11-24T18:10:18.742054+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/nariq-3bit-qwen-quantization.md",
+      "slug": "nariq-3bit-qwen-quantization",
+      "title": "NariQ claims a 10 GB file holds a 27B model's full quality",
+      "word_count": 745,
+      "source_urls": [
+        "https://huggingface.co/nari-labs/Qwen3.8-27B-NariQ-GGUF"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 15
+    }
+  ],
+  "failed_attempts": [
+    {
+      "topic": "GLM-5.4: Toward generalized coding with our first loop transformer",
+      "reason": "banned patterns survived the rewrite: dated-language"
+    }
+  ],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 33,
+    "input_tokens": 130201,
+    "output_tokens": 24012,
+    "cache_read_tokens": 64278,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/nariq-3bit-qwen-quantization.md",
+  "slug": "nariq-3bit-qwen-quantization",
+  "title": "NariQ claims a 10 GB file holds a 27B model's full quality",
+  "word_count": 745,
+  "source_urls": [
+    "https://huggingface.co/nari-labs/Qwen3.8-27B-NariQ-GGUF"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 15
 }

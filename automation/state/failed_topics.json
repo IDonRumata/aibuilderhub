@@ -595,5 +595,15 @@
     ],
     "reason": "post broke a hard requirement after humanising: Include one or two links to the primary sources in the body.",
     "failed_at": "2026-11-22T21:12:03.311725+00:00"
+  },
+  {
+    "key": "coding first generalized glm loop toward transformer",
+    "title": "GLM-5.4: Toward generalized coding with our first loop transformer",
+    "source_urls": [
+      "https://z.ai/blog/glm-5.4",
+      "https://simonwillison.net/2026/Nov/23/glm-54"
+    ],
+    "reason": "banned patterns survived the rewrite: dated-language",
+    "failed_at": "2026-11-24T18:08:21.619048+00:00"
   }
 ]

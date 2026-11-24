@@ -378,5 +378,15 @@
     ],
     "content_hash": "55754fec4bd462cc2e35b629e2c655c5",
     "published_at": "2026-11-22T21:13:23.909567Z"
+  },
+  {
+    "slug": "nariq-3bit-qwen-quantization",
+    "canonical_topic": "27b claims file full holds model's nariq quality",
+    "title": "NariQ claims a 10 GB file holds a 27B model's full quality",
+    "source_urls": [
+      "https://huggingface.co/nari-labs/Qwen3.8-27B-NariQ-GGUF"
+    ],
+    "content_hash": "619c2b55e9194e0b17f24d5742df1a46",
+    "published_at": "2026-11-24T18:10:18.735676Z"
   }
 ]
