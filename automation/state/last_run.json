@@ -1,7 +1,38 @@
 {
-  "finished_at": "2026-11-26T17:11:45.844635+00:00",
-  "published": false,
-  "count": 0,
-  "reason": "on schedule: 3 posts in the last 7 days meets the target of 3",
-  "published_last_week": 3
+  "finished_at": "2026-11-26T23:59:15.464399+00:00",
+  "published": true,
+  "count": 1,
+  "draft": false,
+  "posts": [
+    {
+      "path": "src/content/blog/ai-agent-context-file-quality.md",
+      "slug": "ai-agent-context-file-quality",
+      "title": "Your AI coding agent is only as good as its context file",
+      "word_count": 816,
+      "source_urls": [
+        "https://dev.to/vachi/your-agent-is-only-as-good-as-its-context-4dl"
+      ],
+      "critic_rounds": 3,
+      "llm_calls": 18
+    }
+  ],
+  "failed_attempts": [],
+  "published_last_week": 3,
+  "weekly_target": 3,
+  "usage": {
+    "calls": 18,
+    "input_tokens": 66847,
+    "output_tokens": 13971,
+    "cache_read_tokens": 31782,
+    "cache_write_tokens": 6027
+  },
+  "path": "src/content/blog/ai-agent-context-file-quality.md",
+  "slug": "ai-agent-context-file-quality",
+  "title": "Your AI coding agent is only as good as its context file",
+  "word_count": 816,
+  "source_urls": [
+    "https://dev.to/vachi/your-agent-is-only-as-good-as-its-context-4dl"
+  ],
+  "critic_rounds": 3,
+  "llm_calls": 18
 }

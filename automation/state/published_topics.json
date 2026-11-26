@@ -388,5 +388,15 @@
     ],
     "content_hash": "619c2b55e9194e0b17f24d5742df1a46",
     "published_at": "2026-11-24T18:10:18.735676Z"
+  },
+  {
+    "slug": "ai-agent-context-file-quality",
+    "canonical_topic": "agent coding context file good only",
+    "title": "Your AI coding agent is only as good as its context file",
+    "source_urls": [
+      "https://dev.to/vachi/your-agent-is-only-as-good-as-its-context-4dl"
+    ],
+    "content_hash": "cfd4b8ba330581f6f4d31669e39796eb",
+    "published_at": "2026-11-26T23:59:15.458284Z"
   }
 ]
